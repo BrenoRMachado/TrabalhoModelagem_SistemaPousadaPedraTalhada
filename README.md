@@ -1,9 +1,10 @@
-# **Sistema Gestor da Pousada Pedra Talhada*
+# **Sistema Gestor da Pousada Pedra Talhada**
 
 # **Trabalho de Modelagem de Sistemas - 2025**
 
-| ** Sumário ** |
-| [Desenvolvedores](desenvolvedores) |
+| **Sumário** |
+|-------------|
+| [Desenvolvedores](#desenvolvedores) |
 | [Descrição do Projeto](#descrição-do-projeto) |
 | [Como Executar o Projeto](#como-executar-o-projeto) |
 
