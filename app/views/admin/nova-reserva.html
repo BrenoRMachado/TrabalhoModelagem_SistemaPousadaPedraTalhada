@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Reserva - Pousada Pedra Talhada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/styles.css">
+    <script src="../../public/js/room-manager.js"></script>
+    <style>
+        /* Estilos específicos da página de nova reserva */
+        .sidebar { position: fixed; left: 0; top: 0; width: 260px; height: 100vh; background: #FFFFFF; padding: 20px; box-shadow: 2px 0 8px rgba(0,0,0,0.1); overflow-y: auto; }
+        .sidebar-logo { font-size: 24px; font-weight: 700; color: #5D4037; margin-bottom: 30px; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 10px; }
+        .sidebar-menu a { display: flex; align-items: center; padding: 12px 16px; color: #666; text-decoration: none; border-radius: 8px; transition: all 0.3s ease; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: #F5F5F5; color: #5D4037; font-weight: 600; }
+        .sidebar-menu .material-icons-round { margin-right: 12px; font-size: 20px; }
+
+        main { margin-left: 260px; padding: 30px; background: #F5F7FA; min-height: 100vh; }
+        
+        .page-header { margin-bottom: 30px; }
+        .page-header h1 { margin: 0; font-size: 28px; color: #333; margin-bottom: 10px; }
+        .breadcrumb { display: flex; gap: 10px; font-size: 12px; color: #666; }
+        .breadcrumb a { color: #5D4037; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 800px; }
+        
+        .form-section { margin-bottom: 30px; }
+        .form-section h2 { font-size: 18px; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #E0E0E0; }
+        
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 8px; font-weight: 600; color: #333; font-size: 14px; }
+        .form-group label .required { color: #FF3D00; margin-left: 3px; }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #5D4037;
+            box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.1);
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .calculation-box { background: #F5F5F5; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .calculation-box h3 { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 15px; }
+        .calculation-item { display: flex; justify-content: space-between; margin-bottom: 10px; padding: 8px 0; border-bottom: 1px solid #E0E0E0; }
+        .calculation-item span:first-child { color: #666; }
+        .calculation-item span:last-child { font-weight: 600; color: #333; }
+        .calculation-total { display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 2px solid #5D4037; font-size: 16px; font-weight: 700; }
+        .calculation-total span:last-child { color: #00C853; }
+
+        .form-actions { display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px; padding-top: 20px; border-top: 2px solid #E0E0E0; }
+        
+        .btn { padding: 12px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .btn-primary { background: #5D4037; color: white; }
+        .btn-primary:hover { background: #4E342E; }
+        .btn-secondary { background: #BDBDBD; color: white; }
+        .btn-secondary:hover { background: #9E9E9E; }
+
+        .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none; }
+        .alert-success { background: #E8F5E9; color: #00C853; border-left: 4px solid #00C853; }
+        .alert-error { background: #FFEBEE; color: #FF3D00; border-left: 4px solid #FF3D00; }
+
+        .form-error { color: #FF3D00; font-size: 12px; margin-top: 5px; display: none; }
+        .form-group.error input, .form-group.error select { border-color: #FF3D00; background: #FFEBEE; }
+        .form-group.error .form-error { display: block; }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: auto; position: relative; margin-bottom: 20px; }
+            main { margin-left: 0; padding: 15px; }
+            .form-row { grid-template-columns: 1fr; }
+            .form-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">🏡 Pousada</div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html" class="menu-link"><span class="material-icons-round">dashboard</span> Dashboard</a></li>
+            <li><a href="reservas.html" class="menu-link active"><span class="material-icons-round">description</span> Reservas</a></li>
+            <li><a href="hospedes.html" class="menu-link"><span class="material-icons-round">people</span> Hóspedes</a></li>
+            <li><a href="financeiro.html" class="menu-link"><span class="material-icons-round">assessment</span> Financeiro</a></li>
+            <li><a href="usuarios.html" class="menu-link"><span class="material-icons-round">security</span> Equipe e Acessos</a></li>
+            <li style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #E0E0E0;"><a href="login.html" class="menu-link"><span class="material-icons-round">logout</span> Sair</a></li>
+        </ul>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="page-header">
+            <h1>Nova Reserva</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Dashboard</a>
+                <span>/</span>
+                <a href="reservas.html">Reservas</a>
+                <span>/</span>
+                <span>Nova Reserva</span>
+            </div>
+        </div>
+
+        <div class="alert alert-success" id="successAlert">
+            <span class="material-icons-round">check_circle</span>
+            <span id="successMessage">Reserva criada com sucesso!</span>
+        </div>
+
+        <div class="alert alert-error" id="errorAlert">
+            <span class="material-icons-round">error</span>
+            <span id="errorMessage">Erro ao processar a reserva. Verifique os dados.</span>
+        </div>
+
+        <form class="form-container" id="reservationForm" onsubmit="submitForm(event)">
+            <!-- SEÇÃO DE SELEÇÃO DE QUARTO -->
+            <div class="form-section">
+                <h2>Seleção de Quarto</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data de Entrada <span class="required">*</span></label>
+                        <input type="date" id="checkInDate" required onchange="updateAvailableRooms()">
+                        <span class="form-error">Data de entrada é obrigatória</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Data de Saída <span class="required">*</span></label>
+                        <input type="date" id="checkOutDate" required onchange="calculateDays()">
+                        <span class="form-error">Data de saída é obrigatória</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Quarto <span class="required">*</span></label>
+                    <select id="roomSelect" required onchange="updateRoomPrice()">
+                        <option value="">-- Selecione um quarto --</option>
+                        <option value="101" data-price="200">Quarto 101 - Solteiro (R$ 200,00/noite)</option>
+                        <option value="102" data-price="200">Quarto 102 - Solteiro (R$ 200,00/noite)</option>
+                        <option value="201" data-price="250">Quarto 201 - Duplo (R$ 250,00/noite)</option>
+                        <option value="202" data-price="250">Quarto 202 - Duplo (R$ 250,00/noite)</option>
+                        <option value="301" data-price="350">Quarto 301 - Suite (R$ 350,00/noite)</option>
+                        <option value="302" data-price="350">Quarto 302 - Suite (R$ 350,00/noite)</option>
+                    </select>
+                    <span class="form-error">Selecione um quarto</span>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DE DADOS DO HÓSPEDE -->
+            <div class="form-section">
+                <h2>Dados do Hóspede</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo <span class="required">*</span></label>
+                        <input type="text" id="guestName" required placeholder="Ex: João Silva">
+                        <span class="form-error">Nome é obrigatório</span>
+                    </div>
+                    <div class="form-group">
+                        <label>CPF / RG <span class="required">*</span></label>
+                        <input type="text" id="guestDocument" required placeholder="Ex: 123.456.789-00">
+                        <span class="form-error">CPF/RG é obrigatório</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>E-mail <span class="required">*</span></label>
+                        <input type="email" id="guestEmail" required placeholder="Ex: joao@email.com">
+                        <span class="form-error">E-mail inválido</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone <span class="required">*</span></label>
+                        <input type="tel" id="guestPhone" required placeholder="Ex: (11) 99999-9999">
+                        <span class="form-error">Telefone é obrigatório</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input type="text" id="guestAddress" placeholder="Ex: Rua das Flores, 123">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <input type="text" id="guestCity" placeholder="Ex: São Paulo">
+                    </div>
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" id="guestState" placeholder="Ex: SP" maxlength="2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEÇÃO DE OBSERVAÇÕES -->
+            <div class="form-section">
+                <h2>Informações Adicionais</h2>
+                
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea id="observations" placeholder="Notas especiais, requisições, alergias, etc..."></textarea>
+                </div>
+            </div>
+
+            <!-- CÁLCULO DE TOTAL -->
+            <div class="calculation-box">
+                <h3>Resumo da Reserva</h3>
+                <div class="calculation-item">
+                    <span>Valor da Diária:</span>
+                    <span id="dailyPrice">R$ 0,00</span>
+                </div>
+                <div class="calculation-item">
+                    <span>Quantidade de Diárias:</span>
+                    <span id="daysCount">0</span>
+                </div>
+                <div class="calculation-item">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="calculation-item">
+                    <span>Taxa de Serviço (10%):</span>
+                    <span id="serviceFee">R$ 0,00</span>
+                </div>
+                <div class="calculation-total">
+                    <span>Total:</span>
+                    <span id="totalPrice">R$ 0,00</span>
+                </div>
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="window.history.back();">
+                    <span class="material-icons-round">arrow_back</span> Cancelar
+                </button>
+                <button type="submit" class="btn btn-blue">
+                    <span class="material-icons-round">save</span> Salvar Reserva
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        function updateAvailableRooms() {
+            const checkInDate = document.getElementById('checkInDate').value;
+            if (!checkInDate) {
+                alert('Por favor, selecione uma data de entrada');
+            }
+        }
+
+        function calculateDays() {
+            const checkInDate = document.getElementById('checkInDate').value;
+            const checkOutDate = document.getElementById('checkOutDate').value;
+            
+            if (checkInDate && checkOutDate) {
+                const start = new Date(checkInDate);
+                const end = new Date(checkOutDate);
+                const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+                
+                if (days > 0) {
+                    document.getElementById('daysCount').textContent = days;
+                    updateRoomPrice();
+                } else {
+                    alert('Data de saída deve ser após a data de entrada');
+                }
+            }
+        }
+
+        function updateRoomPrice() {
+            const roomSelect = document.getElementById('roomSelect');
+            const selectedOption = roomSelect.options[roomSelect.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            const days = parseInt(document.getElementById('daysCount').textContent) || 0;
+            
+            if (price && days > 0) {
+                const priceValue = parseFloat(price);
+                const subtotal = priceValue * days;
+                const serviceFee = subtotal * 0.10;
+                const total = subtotal + serviceFee;
+                
+                document.getElementById('dailyPrice').textContent = 'R$ ' + priceValue.toFixed(2).replace('.', ',');
+                document.getElementById('subtotal').textContent = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
+                document.getElementById('serviceFee').textContent = 'R$ ' + serviceFee.toFixed(2).replace('.', ',');
+                document.getElementById('totalPrice').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+            const form = document.getElementById('reservationForm');
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                const parent = field.parentElement;
+                if (!field.value.trim()) {
+                    parent.classList.add('error');
+                    isValid = false;
+                } else {
+                    parent.classList.remove('error');
+                }
+            });
+            
+            return isValid;
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            
+            if (!validateForm()) {
+                showAlert('errorAlert', 'Por favor, preencha todos os campos obrigatórios');
+                return;
+            }
+            
+            // 🔑 OCUPAR O QUARTO NO GERENCIADOR
+            const roomNumber = document.getElementById('roomSelect').value;
+            const guestName = document.getElementById('guestName').value;
+            if (window.RoomManager && typeof RoomManager.occupyRoom === 'function') {
+                RoomManager.occupyRoom(roomNumber, guestName);
+            }
+
+            // Notificar janela pai (quando aberto em modal iframe) para atualizar dashboard
+            try {
+                if (window.top !== window.self && window.parent && window.parent.postMessage) {
+                    window.parent.postMessage({ type: 'roomUpdated', room: roomNumber }, '*');
+                    window.parent.postMessage({ type: 'closeRoomModal', room: roomNumber }, '*');
+                }
+            } catch (e) {}
+
+            // Simular envio do formulário
+            showAlert('successAlert', `Reserva criada com sucesso!\nQuarto ${roomNumber} marcado como OCUPADO.`);
+
+            setTimeout(() => {
+                window.location.href = 'reservas.html';
+            }, 1200);
+        }
+
+        function showAlert(alertId, message) {
+            const alert = document.getElementById(alertId);
+            const messageSpan = alert.querySelector('span:last-child');
+            messageSpan.textContent = message;
+            alert.style.display = 'flex';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        // Adicionar validação em tempo real
+        document.querySelectorAll('[required]').forEach(field => {
+            field.addEventListener('change', function() {
+                if (this.value.trim()) {
+                    this.parentElement.classList.remove('error');
+                }
+            });
+        });
+        
+        // Se a página foi aberta com query param ?room=XYZ, pré-selecionar o quarto
+        (function prefillRoomFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const room = params.get('room');
+            if (room) {
+                const select = document.getElementById('roomSelect');
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === room) {
+                        select.selectedIndex = i;
+                        // Forçar cálculo (se dias já preenchidos)
+                        updateRoomPrice();
+                        break;
+                    }
+                }
+                // scroll to form
+                document.getElementById('checkInDate')?.scrollIntoView({ behavior: 'smooth' });
+            }
+        })();
+    </script>
+    <script>
+        // Se a página estiver dentro de um iframe (modal), remover o sidebar e ajustar layout
+        (function adaptForIframe() {
+            try {
+                if (window.top !== window.self) {
+                    const aside = document.querySelector('aside.sidebar');
+                    if (aside) aside.style.display = 'none';
+                    const main = document.querySelector('main');
+                    if (main) {
+                        main.style.marginLeft = '0';
+                        main.style.padding = '20px';
+                        main.style.background = '#ffffff';
+                    }
+                    // Ajustar container para ocupar largura do modal
+                    const form = document.querySelector('.form-container');
+                    if (form) form.style.maxWidth = '900px';
+                }
+            } catch (e) {}
+        })();
+    </script>
+</body>
+</html>
