@@ -12,7 +12,7 @@
 * [Ana Carolina Junqueira e Silva](https://github.com/AnaCarolinaJunqueira)
 * [Breno Reis Machado](https://github.com/BrenoRMachado)
 * [Lipe Nunes Cordeiro de Morais](colocar o link do github)
-* [Maria Fernanda Couri Biazollo](colocar o link do github)
+* [Maria Fernanda Couri Biazollo](https://github.com/fercouri)
 * [Rodrigo da Silva Soares](colocar o link do github)
 
 ## Descrição do Projeto
