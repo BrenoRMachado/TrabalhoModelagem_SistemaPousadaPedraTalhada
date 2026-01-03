@@ -25,9 +25,9 @@
 ## Como Executar o Projeto
 
 * É necessário ter **PHP 8.0+** instalado;
-* É necessário ter um servidor local (Apache/XAMPP/Laragon);
+* É necessário ter um servidor local XAMPP 8.2.12 / PHP 8.2.12 for Windows;
 
-1. Clone o repositório;
+1. Clone o repositório na pasta C:/xampp/htdocs;
 2. Configure o banco de dados MySQL;
 3. Ajuste as credenciais de acesso ao banco no arquivo de configuração do projeto;
 4. Inicie o servidor local;
