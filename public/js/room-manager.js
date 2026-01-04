@@ -18,33 +18,41 @@ const RoomManager = {
     initializeRooms() {
         const existing = localStorage.getItem('pousada_rooms');
         
-        // Esperamos exatamente estes quartos por padrão (15 quartos: 101..115)
+        // Esperamos exatamente estes quartos por padrão (15 quartos: 101-105, 201-205, 301-305)
         const expectedRooms = [];
-        for (let i = 101; i <= 115; i++) expectedRooms.push(String(i));
+        for (let andar = 1; andar <= 3; andar++) {
+            for (let num = 1; num <= 5; num++) {
+                expectedRooms.push(String(andar * 100 + num));
+            }
+        }
 
         if (!existing) {
-            // Gerar 15 quartos (101..115) com alguns estados iniciais
+            // Gerar 15 quartos (101-105, 201-205, 301-305) com alguns estados iniciais
             const defaultRooms = {};
-            const occupied = ['102','107','110','113','302'];
-            const maintenance = ['103','108','114'];
-            for (let i = 101; i <= 115; i++) {
-                const key = String(i);
-                let status = this.STATUS.AVAILABLE;
-                let guest = null;
-                let type = 'Standard';
+            const occupied = ['102','104','202','204','303'];
+            const maintenance = ['103','205','304'];
+            
+            for (let andar = 1; andar <= 3; andar++) {
+                for (let num = 1; num <= 5; num++) {
+                    const key = String(andar * 100 + num);
+                    let status = this.STATUS.AVAILABLE;
+                    let guest = null;
+                    let type = 'Standard';
 
-                if (occupied.includes(key)) {
-                    status = this.STATUS.OCCUPIED;
-                    guest = 'Hóspede Exemplo';
-                } else if (maintenance.includes(key)) {
-                    status = this.STATUS.MAINTENANCE;
+                    if (occupied.includes(key)) {
+                        status = this.STATUS.OCCUPIED;
+                        guest = 'Hóspede Exemplo';
+                    } else if (maintenance.includes(key)) {
+                        status = this.STATUS.MAINTENANCE;
+                    }
+
+                    // Tipo por andar
+                    if (andar === 1) type = 'Standard';
+                    if (andar === 2) type = 'Duplo';
+                    if (andar === 3) type = 'Suíte';
+
+                    defaultRooms[key] = { status, type, guest };
                 }
-
-                // Simple type heuristic by floor
-                if (i >= 201 && i < 300) type = 'Duplo';
-                if (i >= 300) type = 'Suíte';
-
-                defaultRooms[key] = { status, type, guest };
             }
 
             localStorage.setItem('pousada_rooms', JSON.stringify(defaultRooms));
@@ -61,25 +69,29 @@ const RoomManager = {
             if (!hasAllExpected || keys.length !== expectedRooms.length) {
                 // Recriar defaultRooms (mesma lógica acima)
                 const defaultRooms = {};
-                const occupied = ['102','107','110','113','302'];
-                const maintenance = ['103','108','114'];
-                for (let i = 101; i <= 115; i++) {
-                    const key = String(i);
-                    let status = this.STATUS.AVAILABLE;
-                    let guest = null;
-                    let type = 'Standard';
+                const occupied = ['102','104','202','204','303'];
+                const maintenance = ['103','205','304'];
+                
+                for (let andar = 1; andar <= 3; andar++) {
+                    for (let num = 1; num <= 5; num++) {
+                        const key = String(andar * 100 + num);
+                        let status = this.STATUS.AVAILABLE;
+                        let guest = null;
+                        let type = 'Standard';
 
-                    if (occupied.includes(key)) {
-                        status = this.STATUS.OCCUPIED;
-                        guest = 'Hóspede Exemplo';
-                    } else if (maintenance.includes(key)) {
-                        status = this.STATUS.MAINTENANCE;
+                        if (occupied.includes(key)) {
+                            status = this.STATUS.OCCUPIED;
+                            guest = 'Hóspede Exemplo';
+                        } else if (maintenance.includes(key)) {
+                            status = this.STATUS.MAINTENANCE;
+                        }
+
+                        if (andar === 1) type = 'Standard';
+                        if (andar === 2) type = 'Duplo';
+                        if (andar === 3) type = 'Suíte';
+
+                        defaultRooms[key] = { status, type, guest };
                     }
-
-                    if (i >= 201 && i < 300) type = 'Duplo';
-                    if (i >= 300) type = 'Suíte';
-
-                    defaultRooms[key] = { status, type, guest };
                 }
 
                 localStorage.setItem('pousada_rooms', JSON.stringify(defaultRooms));
@@ -91,25 +103,29 @@ const RoomManager = {
         } catch (e) {
             // Se parse falhar, recriar defaults
             const defaultRooms = {};
-            const occupied = ['102','107','110','113','302'];
-            const maintenance = ['103','108','114'];
-            for (let i = 101; i <= 115; i++) {
-                const key = String(i);
-                let status = this.STATUS.AVAILABLE;
-                let guest = null;
-                let type = 'Standard';
+            const occupied = ['102','104','202','204','303'];
+            const maintenance = ['103','205','304'];
+            
+            for (let andar = 1; andar <= 3; andar++) {
+                for (let num = 1; num <= 5; num++) {
+                    const key = String(andar * 100 + num);
+                    let status = this.STATUS.AVAILABLE;
+                    let guest = null;
+                    let type = 'Standard';
 
-                if (occupied.includes(key)) {
-                    status = this.STATUS.OCCUPIED;
-                    guest = 'Hóspede Exemplo';
-                } else if (maintenance.includes(key)) {
-                    status = this.STATUS.MAINTENANCE;
+                    if (occupied.includes(key)) {
+                        status = this.STATUS.OCCUPIED;
+                        guest = 'Hóspede Exemplo';
+                    } else if (maintenance.includes(key)) {
+                        status = this.STATUS.MAINTENANCE;
+                    }
+
+                    if (andar === 1) type = 'Standard';
+                    if (andar === 2) type = 'Duplo';
+                    if (andar === 3) type = 'Suíte';
+
+                    defaultRooms[key] = { status, type, guest };
                 }
-
-                if (i >= 201 && i < 300) type = 'Duplo';
-                if (i >= 300) type = 'Suíte';
-
-                defaultRooms[key] = { status, type, guest };
             }
 
             localStorage.setItem('pousada_rooms', JSON.stringify(defaultRooms));

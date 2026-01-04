@@ -50,29 +50,8 @@ main, .app-container main {
   background: var(--color-light);
 }
 
-/* Responsividade: sidebar vira topo em telas pequenas */
-@media (max-width: 768px) {
-  aside.sidebar {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-    box-shadow: none;
-  }
-  main, .app-container main { margin-left: 0 !important; padding: var(--spacing-md) !important; }
-}
-
 /* Grid de quartos padronizado para dashboard (15 quartos se necessário) */
-.room-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: var(--spacing-md);
-}
 
-.card.available { border-left: 4px solid var(--color-success); }
-.card.occupied { border-left: 4px solid var(--color-danger); }
-.card.maintenance { border-left: 4px solid var(--color-warning); }
-
-.card .room-num { font-size: 28px; font-weight: 700; color: var(--color-dark); margin-top: 12px; }
 .card .guest-info { color: var(--color-text); margin-top: 6px; white-space: normal; overflow-wrap: break-word; word-break: break-word; }
 
 /* Ensure card text inherits color so dashboard colored cards keep readable text */

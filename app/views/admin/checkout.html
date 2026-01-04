@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Pousada Pedra Talhada</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../public/css/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/styles.css">
-    <script src="../../public/js/room-manager.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../../../public/js/room-manager.js"></script>
     <style>
         /* Estilos específicos da página de checkout */
         .sidebar { position: fixed; left: 0; top: 0; width: 260px; height: 100vh; background: #FFFFFF; padding: 20px; box-shadow: 2px 0 8px rgba(0,0,0,0.1); overflow-y: auto; }
-        .sidebar-logo { font-size: 24px; font-weight: 700; color: #5D4037; margin-bottom: 30px; }
-        .sidebar-menu { list-style: none; }
-        .sidebar-menu li { margin-bottom: 10px; }
-        .sidebar-menu a { display: flex; align-items: center; padding: 12px 16px; color: #666; text-decoration: none; border-radius: 8px; transition: all 0.3s ease; }
-        .sidebar-menu a:hover, .sidebar-menu a.active { background: #F5F5F5; color: #5D4037; font-weight: 600; }
-        .sidebar-menu .material-icons-round { margin-right: 12px; font-size: 20px; }
+        .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+        .logo-icon { font-size: 28px; color: #5D4037; }
+        .sidebar nav a { display: flex; align-items: center; padding: 12px 16px; color: #666; text-decoration: none; border-radius: 8px; transition: all 0.3s ease; margin-bottom: 10px; }
+        .sidebar nav a:hover, .sidebar nav a.active { background: #F5F5F5; color: #5D4037; font-weight: 600; }
+        .sidebar nav .material-icons-round { margin-right: 12px; font-size: 20px; }
+        .logout-link { margin-top: 30px; border-top: 1px solid #E0E0E0; padding-top: 20px; color: #D32F2F; }    
 
         main { margin-left: 260px; padding: 30px; background: #F5F7FA; min-height: 100vh; }
         
@@ -63,9 +61,9 @@
         .summaryItem span:last-child { font-weight: 600; }
 
         .checkoutActions { display: flex; gap: 15px; margin-top: 20px; }
-        .btn { padding: 12px 24px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; }
+        .btn { padding: 14px 28px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .btn-primary { background: #5D4037; color: white; flex: 1; }
+        .btn-blue { background: #1976D2; color: white; flex: 1; }
         .btn-primary:hover { background: #4E342E; }
         .btn-secondary { background: #BDBDBD; color: white; flex: 1; }
         .btn-secondary:hover { background: #9E9E9E; }
@@ -84,6 +82,19 @@
         .changeItem label { display: block; font-size: 12px; color: #666; margin-bottom: 8px; }
         .changeItem input { width: 100%; padding: 8px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 14px; font-weight: 600; }
 
+        /* Quando exibido em iframe no modal, esconda sidebar e remova margem esquerda */
+        body.in-iframe .sidebar { display: none !important; }
+        body.in-iframe .app-container { display: block; width: 100%; padding: 0; }
+        body.in-iframe main { width: 100% !important; margin: 0 !important; padding: 20px !important; background: white !important; min-height: auto; box-sizing: border-box; display: block; }
+        body.in-iframe .checkout-container { width: 100%; margin: 0; grid-template-columns: 1fr; gap: 20px; }
+        body.in-iframe .checkout-content, body.in-iframe .checkout-sidebar { width: 100%; }
+        body.in-iframe .checkout-sidebar { position: static; height: auto; }
+        body.in-iframe .btn { font-size: 14px; padding: 12px 20px; }
+        body.in-iframe .checkoutActions { display: flex; gap: 10px; margin-top: 15px; }
+        body.in-iframe .page-header { margin-bottom: 15px; }
+        body.in-iframe .page-header h1 { font-size: 20px; margin-bottom: 5px; }
+        body.in-iframe .checkout-content, body.in-iframe .checkout-sidebar { padding: 20px; }
+
         @media (max-width: 768px) {
             .sidebar { width: 100%; height: auto; position: relative; margin-bottom: 20px; }
             main { margin-left: 0; padding: 15px; }
@@ -94,20 +105,37 @@
             .changeBox { grid-template-columns: 1fr; }
         }
     </style>
+    <script>
+        // Detecta se está dentro de iframe (modal) e aplica classe para esconder a sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.self !== window.top) {
+                document.body.classList.add('in-iframe');
+            }
+        });
+    </script>
 </head>
 <body>
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-logo">🏡 Pousada</div>
-        <ul class="sidebar-menu">
-            <li><a href="index.html" class="menu-link"><span class="material-icons-round">dashboard</span> Dashboard</a></li>
-            <li><a href="reservas.html" class="menu-link active"><span class="material-icons-round">description</span> Reservas</a></li>
-            <li><a href="hospedes.html" class="menu-link"><span class="material-icons-round">people</span> Hóspedes</a></li>
-            <li><a href="financeiro.html" class="menu-link"><span class="material-icons-round">assessment</span> Financeiro</a></li>
-            <li><a href="usuarios.html" class="menu-link"><span class="material-icons-round">security</span> Equipe e Acessos</a></li>
-            <li style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #E0E0E0;"><a href="login.html" class="menu-link"><span class="material-icons-round">logout</span> Sair</a></li>
-        </ul>
-    </aside>
+    
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon"><span class="material-icons-round">apartment</span></div>
+                <div>
+                    <strong>Pousada Pedra</strong><br>Talhada
+                </div>
+            </div>
+
+            <nav>
+                <a href="index.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
+                <a href="reservas.html" class="active"><span class="material-icons-round">description</span> Reservas</a>
+                <a href="hospedes.html"><span class="material-icons-round">people</span> Hóspedes</a>
+                <a href="financeiro.html"><span class="material-icons-round">assessment</span> Financeiro</a>
+                <a href="usuarios.html"><span class="material-icons-round">security</span> Equipe e Acessos</a>           
+                <a href="login.html" class="logout-link">
+                    <span class="material-icons-round">logout</span> Sair
+                </a>
+            </nav>
+        </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main>
@@ -427,26 +455,11 @@
         })();
     </script>
     <script>
-        // Se a página estiver dentro de um iframe (modal), remover o sidebar e ajustar layout
+        // Ajuste de fallback para iframe
         (function adaptForIframe() {
             try {
                 if (window.top !== window.self) {
-                    const aside = document.querySelector('aside.sidebar');
-                    if (aside) aside.style.display = 'none';
-                    const main = document.querySelector('main');
-                    if (main) {
-                        main.style.marginLeft = '0';
-                        main.style.padding = '20px';
-                        main.style.background = '#ffffff';
-                    }
-                    // Ajustar containers para modal
-                    const checkoutContent = document.querySelector('.checkout-content');
-                    const checkoutSidebar = document.querySelector('.checkout-sidebar');
-                    if (checkoutContent) checkoutContent.style.maxWidth = '900px';
-                    if (checkoutSidebar) checkoutSidebar.style.display = 'none';
-                    // Ajustar grid quando estiver em modal (remover coluna vazia)
-                    const checkoutContainer = document.querySelector('.checkout-container');
-                    if (checkoutContainer) checkoutContainer.style.gridTemplateColumns = '1fr';
+                    document.body.classList.add('in-iframe');
                 }
             } catch (e) {}
         })();

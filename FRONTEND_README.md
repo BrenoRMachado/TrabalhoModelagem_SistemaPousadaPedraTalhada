@@ -23,7 +23,7 @@ Um arquivo centralizado `public/css/components.css` foi criado contendo estilos 
 
 - ✅ **Tabelas** — headers, rows, hover, responsividade
 - ✅ **Formulários** — inputs, labels, validação visual, erros
-- ✅ **Botões** — primary, secondary, icon, danger, success, warning
+- ✅ **Botões** — blue, secondary, icon, danger, success, warning
 - ✅ **Modais** — estrutura, animações, overlay
 - ✅ **Alertas** — success, danger, warning, info
 - ✅ **Cards** — containers genéricos com shadow e hover
@@ -158,7 +158,6 @@ pousada/
 ## 🎨 Paleta de Cores (CSS Variables)
 
 ```css
---color-primary: #5D4037;      /* Marrom - Cor principal */
 --color-success: #00C853;       /* Verde - Disponível/Confirmado */
 --color-danger: #FF3D00;        /* Vermelho - Ocupado/Erro */
 --color-warning: #FFAB00;       /* Amarelo - Manutenção/Aviso */

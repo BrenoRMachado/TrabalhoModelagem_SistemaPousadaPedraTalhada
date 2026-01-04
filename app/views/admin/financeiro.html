@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financeiro - Pousada Pedra Talhada</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../public/css/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link rel="stylesheet" href="../../public/css/styles.css">
-    <script src="../../public/js/room-manager.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="../../../public/js/room-manager.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Estilos específicos da página de financeiro */
@@ -78,24 +76,35 @@
     </style>
 </head>
 <body>
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-logo">🏡 Pousada</div>
-        <ul class="sidebar-menu">
-            <li><a href="index.html" class="menu-link"><span class="material-icons-round">dashboard</span> Dashboard</a></li>
-            <li><a href="reservas.html" class="menu-link"><span class="material-icons-round">description</span> Reservas</a></li>
-            <li><a href="hospedes.html" class="menu-link"><span class="material-icons-round">people</span> Hóspedes</a></li>
-            <li><a href="financeiro.html" class="menu-link active"><span class="material-icons-round">assessment</span> Financeiro</a></li>
-            <li><a href="usuarios.html" class="menu-link"><span class="material-icons-round">security</span> Equipe e Acessos</a></li>
-            <li style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #E0E0E0;"><a href="login.html" class="menu-link"><span class="material-icons-round">logout</span> Sair</a></li>
-        </ul>
-    </aside>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon"><span class="material-icons-round">apartment</span></div>
+                <div>
+                    <strong>Pousada Pedra</strong><br>Talhada
+                </div>
+            </div>
+
+            <nav>
+                <a href="index.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
+                <a href="reservas.html"><span class="material-icons-round">description</span> Reservas</a>
+                <a href="hospedes.html"><span class="material-icons-round">people</span> Hóspedes</a>
+                <a href="financeiro.html" class="active"><span class="material-icons-round">assessment</span> Financeiro</a>
+                <a href="usuarios.html"><span class="material-icons-round">security</span> Equipe e Acessos</a>               
+                <a href="login.html" class="logout-link">
+                    <span class="material-icons-round">logout</span> Sair
+                </a>
+            </nav>
+        </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <div class="page-header">
-            <h1>Controle de Caixa</h1>
-            <p style="margin:6px 0 0 0; color:#666;">Gerencie as movimentações financeiras</p>
+            <div>
+                <h1>Controle de Caixa</h1>
+                <p style="margin:6px 0 0 0; color:#666;">Gerencie as movimentações financeiras</p>
+            </div>
         </div>
 
         <!-- KPIs -->
@@ -179,10 +188,10 @@
 
         <!-- BOTÕES DE EXPORTAÇÃO -->
         <div class="export-section">
-            <button class="btn btn-primary" onclick="exportReport('pdf')">
+            <button class="btn btn-blue" onclick="exportReport('pdf')">
                 <span class="material-icons-round">picture_as_pdf</span> Exportar PDF
             </button>
-            <button class="btn btn-primary" onclick="exportReport('excel')">
+            <button class="btn btn-blue" onclick="exportReport('excel')">
                 <span class="material-icons-round">table_chart</span> Exportar Excel
             </button>
         </div>
