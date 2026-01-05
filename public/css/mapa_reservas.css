@@ -1,0 +1,78 @@
+/*---------- Variáveis ----------*/
+
+:root{
+    --verde: #A1A67D;
+    --laranja-claro: #E9A33B;
+    --laranja-escuro: #CA643C;
+    --cinza: #EEEEEE;
+    --texto: #1E2939;
+}
+
+/*---------- Reset ----------*/
+
+* { margin: 0; 
+    box-sizing: border-box; 
+    font-family: 'Inter', sans-serif; 
+}
+
+body{
+    padding: 24px;
+    background: var(--cinza);
+    color: var(--texto);
+}
+
+/*---------- Cabeçalho ----------*/
+.cabecalho{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.cabecalho .textos{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cabecalho .textos .titulo {
+    margin: 0;
+    font-size: 28px;
+}
+
+.cabecalho .textos .legenda{
+    display: flex;
+    gap: 20px;
+}
+
+.cabecalho .textos .legenda div{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legenda-item{
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+}
+
+.pago{
+    background: var(--verde);
+}
+.esperando{
+    background: var(--laranja-escuro);
+}
+.processando{
+    background: var(--laranja-claro);
+}
+
+.btn-adicionar{
+    background: #70845F;
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
