@@ -4,216 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hóspedes - Pousada Pedra Talhada</title>
-    <link rel="stylesheet" href="../../../public/css/styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/public/css/hospedes.css"> 
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="../../../public/js/room-manager.js"></script>
-    <style>
-        /* Estilos específicos da página de hóspedes */
-
-        main { margin-left: 260px; padding: 30px; background: #F5F7FA; min-height: 100vh; }
-        
-        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #E0E0E0; }
-        .page-header h1 { margin: 0; font-size: 28px; color: #333; }
-        .page-header-actions { display: flex; gap: 15px; }
-
-        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .btn-primary { background: #5D4037; color: white; }
-        .btn-primary:hover { background: #4E342E; }
-        .btn-blue { background: #2563EB; color: white; }
-        .btn-blue:hover { background: #1E4ED8; }
-        .btn-icon { background: transparent; color: #5D4037; padding: 8px; }
-        .btn-icon:hover { background: #F5F5F5; }
-
-        .filter-container { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
-        .filter-group { flex: 1; min-width: 150px; }
-        .filter-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 12px; color: #333; text-transform: uppercase; }
-        .filter-group input, .filter-group select { width: 100%; padding: 10px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 14px; }
-        .filter-group input:focus, .filter-group select:focus { outline: none; border-color: #5D4037; }
-
-        .table-container { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
-        table { width: 100%; border-collapse: collapse; }
-        table thead { background: #F5F5F5; border-bottom: 2px solid #E0E0E0; }
-        table thead th { padding: 16px; text-align: left; font-weight: 600; color: #333; }
-        table tbody td { padding: 16px; border-bottom: 1px solid #E0E0E0; color: #666; }
-        table tbody tr:hover { background: #FAFAFA; }
-
-        .action-buttons { display: flex; gap: 8px; }
-        .action-buttons .btn-small { padding: 6px 12px; font-size: 12px; }
-        .btn-success { background: #00C853; color: white; }
-        .btn-success:hover { background: #00AA4F; }
-        .btn-warning { background: #FFAB00; color: white; }
-        .btn-warning:hover { background: #FF9500; }
-        .btn-danger { background: #FF3D00; color: white; }
-        .btn-danger:hover { background: #E63200; }
-
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); animation: fadeIn 0.3s ease; }
-        .modal.show { display: flex; align-items: center; justify-content: center; }
-        .modal-content { background: white; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 20px rgba(0,0,0,0.25); animation: slideUp 0.3s ease; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #E0E0E0; padding-bottom: 15px; }
-        .modal-header h2 { margin: 0; font-size: 20px; color: #333; }
-        .modal-close { background: none; border: none; font-size: 24px; color: #666; cursor: pointer; }
-
-        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
-        .form-group label { margin-bottom: 8px; font-weight: 600; color: #333; }
-        .form-group input { padding: 10px; border: 1px solid #E0E0E0; border-radius: 8px; font-size: 14px; }
-        .form-group input:focus { outline: none; border-color: #5D4037; }
-
-        .modal-footer { display: flex; gap: 15px; justify-content: flex-end; padding-top: 20px; border-top: 1px solid #E0E0E0; margin-top: 20px; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        @media (max-width: 768px) {
-            .sidebar { width: 100%; height: auto; position: relative; margin-bottom: 20px; }
-            main { margin-left: 0; padding: 15px; }
-            .filter-container { flex-direction: column; }
-            .filter-group { min-width: 100%; }
-            .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
-            table { font-size: 12px; }
-            table thead th, table tbody td { padding: 8px; }
-        }
-    </style>
 </head>
 <body>
  
     <div class="app-container">
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="logo-icon"><span class="material-icons-round">apartment</span></div>
+
+        <main>
+            <div class="page-header">
                 <div>
-                    <strong>Pousada Pedra</strong><br>Talhada
+                    <h1>Lista de Hóspedes</h1>
+                    <p class="subtitle">Gerencie os hóspedes cadastrados</p>
+                </div>
+                <div class="page-header-actions">
+                    <button class="btn btn-blue" onclick="openModal('guestModal')">
+                        <span class="material-icons-round">add</span> Novo Hóspede
+                    </button>
                 </div>
             </div>
 
-            <nav>
-                <a href="index.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
-                <a href="reservas.html"><span class="material-icons-round">description</span> Reservas</a>
-                <a href="hospedes.html" class="active"><span class="material-icons-round">people</span> Hóspedes</a>
-                <a href="financeiro.html"><span class="material-icons-round">assessment</span> Financeiro</a>
-                <a href="usuarios.html"><span class="material-icons-round">security</span> Equipe e Acessos</a>               
-                <a href="login.html" class="logout-link">
-                    <span class="material-icons-round">logout</span> Sair
-                </a>
-            </nav>
-        </aside>
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main>
-        <div class="page-header">
-            <div>
-                <h1>Lista de Hóspedes</h1>
-                <p style="margin:6px 0 0 0; color:#666;">Gerencie os hóspedes cadastrados</p>
-            </div>
-            <div class="page-header-actions">
-                <button class="btn btn-blue" onclick="openModal('guestModal')">
-                    <span class="material-icons-round">add</span> Novo Hóspede
-                </button>
-            </div>
-        </div>
-
-        <!-- BARRA DE BUSCA -->
-        <div class="filter-container" style="align-items: center;">
-            <div class="filter-group" style="flex: 1;">
-                <label>Buscar</label>
-                <div class="search-box" style="position: relative;">
-                    <span class="material-icons-round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color:#999;">search</span>
-                    <input type="text" id="searchGuest" placeholder="Buscar por nome ou CPF" onkeyup="filterTable()" style="padding-left:40px; width:100%;" />
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label>Buscar</label>
+                    <div class="search-box">
+                        <span class="material-icons-round search-icon">search</span>
+                        <input type="text" id="searchGuest" placeholder="Buscar por nome ou CPF" onkeyup="filterTable()" />
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- TABELA DE HÓSPEDES -->
-        <div class="table-container">
-            <table id="guestsTable">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>E-mail</th>
-                        <th>Última Estadia</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ana Costa</td>
-                        <td>123.456.789-01</td>
-                        <td>(11) 98765-4321</td>
-                        <td>ana.costa@email.com</td>
-                        <td>15/11/2024</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn btn-small" onclick="editGuest(1)" title="Editar"><span class="material-icons-round" style="color:#2563EB;">edit</span></button>
-                                <button class="btn btn-small" onclick="deleteGuest(1)" title="Excluir"><span class="material-icons-round" style="color:#FF3D00;">delete</span></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Carlos Lima</td>
-                        <td>234.567.890-12</td>
-                        <td>(21) 97654-3210</td>
-                        <td>carlos.lima@email.com</td>
-                        <td>20/11/2024</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn btn-small" onclick="editGuest(2)" title="Editar"><span class="material-icons-round" style="color:#2563EB;">edit</span></button>
-                                <button class="btn btn-small" onclick="deleteGuest(2)" title="Excluir"><span class="material-icons-round" style="color:#FF3D00;">delete</span></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Maria Silva</td>
-                        <td>345.678.901-23</td>
-                        <td>(11) 96543-2109</td>
-                        <td>maria.silva@email.com</td>
-                        <td>25/11/2024</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn btn-small" onclick="editGuest(3)" title="Editar"><span class="material-icons-round" style="color:#2563EB;">edit</span></button>
-                                <button class="btn btn-small" onclick="deleteGuest(3)" title="Excluir"><span class="material-icons-round" style="color:#FF3D00;">delete</span></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>João Santos</td>
-                        <td>456.789.012-34</td>
-                        <td>(85) 95432-1098</td>
-                        <td>joao.santos@email.com</td>
-                        <td>28/11/2024</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn btn-small" onclick="editGuest(4)" title="Editar"><span class="material-icons-round" style="color:#2563EB;">edit</span></button>
-                                <button class="btn btn-small" onclick="deleteGuest(4)" title="Excluir"><span class="material-icons-round" style="color:#FF3D00;">delete</span></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Beatriz Souza</td>
-                        <td>567.890.123-45</td>
-                        <td>(11) 94321-0987</td>
-                        <td>beatriz.souza@email.com</td>
-                        <td>01/12/2024</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn btn-small" onclick="editGuest(5)" title="Editar"><span class="material-icons-round" style="color:#2563EB;">edit</span></button>
-                                <button class="btn btn-small" onclick="deleteGuest(5)" title="Excluir"><span class="material-icons-round" style="color:#FF3D00;">delete</span></button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+            <div class="table-container">
+                <table id="guestsTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Última Estadia</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ana Costa</td>
+                            <td>123.456.789-01</td>
+                            <td>(11) 98765-4321</td>
+                            <td>ana.costa@email.com</td>
+                            <td>15/11/2024</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-small" onclick="editGuest(1)" title="Editar"><span class="material-icons-round edit-color">edit</span></button>
+                                    <button class="btn btn-small" onclick="deleteGuest(1)" title="Excluir"><span class="material-icons-round delete-color">delete</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
 
-    <!-- MODAL DE NOVO/EDITAR HÓSPEDE -->
     <div id="guestModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle">Novo Hóspede</h2>
-                <button class="modal-close" onclick="closeModal('guestModal')">×</button>
             </div>
             <form id="guestForm" onsubmit="submitGuestForm(event)">
                 <div class="form-group">
@@ -244,63 +102,6 @@
         </div>
     </div>
 
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('show');
-            if (modalId === 'guestModal') {
-                document.getElementById('modalTitle').textContent = 'Novo Hóspede';
-                document.getElementById('guestForm').reset();
-            }
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('show');
-        }
-
-        function filterTable() {
-            const searchText = document.getElementById('searchGuest').value.toLowerCase();
-            const statusFilter = document.getElementById('filterStatus').value;
-            const table = document.getElementById('guestsTable');
-            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-            
-            for (let row of rows) {
-                let name = row.cells[1].textContent.toLowerCase();
-                let status = row.cells[6].textContent.trim();
-                
-                let nameMatch = name.includes(searchText);
-                let statusMatch = !statusFilter || status.includes(statusFilter);
-                
-                row.style.display = (nameMatch && statusMatch) ? '' : 'none';
-            }
-        }
-
-        function editGuest(id) {
-            openModal('guestModal');
-            document.getElementById('modalTitle').textContent = 'Editar Hóspede';
-            // Preencher dados do hóspede (simulado)
-            document.getElementById('modalGuestName').value = 'Nome do Hóspede';
-        }
-
-        function deleteGuest(id) {
-            if (confirm('Tem certeza que deseja deletar este hóspede?')) {
-                alert('Hóspede deletado com sucesso!');
-            }
-        }
-
-        function submitGuestForm(event) {
-            event.preventDefault();
-            alert('Hóspede salvo com sucesso!');
-            closeModal('guestModal');
-            location.reload();
-        }
-
-        // Fechar modal ao clicar fora
-        window.onclick = function(event) {
-            const modal = document.getElementById('guestModal');
-            if (event.target === modal) {
-                closeModal('guestModal');
-            }
-        }
-    </script>
-</body>
+    <script src="../../../public/js/room-manager.js"></script>
+    <script src="/public/js/hospedes.js"></script> </body>
 </html>

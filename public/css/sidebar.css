@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+.sidebar{
+    width: 12.7vw;
+    height: 100vh;
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    padding-top: 1vh;
+
+    box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.192);
+    z-index: 10;
+}
+
+.sidebar .logo{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    padding-left: 0.5vw;
+    padding-top: 1vh;
+}
+
+.sidebar .logo img{
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.sidebar .logo .nome_pousada{
+    color: #CA643C;
+    font-size: 18px;
+    text-align: center;
+}
+
+.nome_pousada span{
+    display: block;
+}
+
+.sidebar_itens{
+    margin-top: 4vh;
+}
+
+.sidebar_itens ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-right: 0.5vw;
+    margin-left: 0.5vw;
+}
+
+.sidebar_itens li a {
+    display: flex;
+    align-items: center;
+
+    padding: 1.8vh 1.2vw;
+    border-radius: 0.8vw;
+    text-decoration: none;
+    color: #000000;
+    transition: background 0.3s ease;
+    font-size: 16px;
+}
+
+.sidebar_itens li a i {
+    width: 1.5vw;       
+    display: flex;      
+    justify-content: center; 
+    margin-right: 1vw;  
+    font-size: 1.1rem;  
+}
+
+.sidebar_itens li.active a{
+    background-color: #DB864D;
+    color: #FFFFFF;
+}
+
+.sidebar_itens li:not(.active) a:hover{
+    background-color: #d6d6d6;
+}
+
+.sidebar_itens li a.btn-sair {
+    color: #CA643C; 
+}
+
+.sidebar_itens li a.btn-sair:hover {
+    background-color: #CA643C; 
+    color: white
+}

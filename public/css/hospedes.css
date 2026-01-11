@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+}
+
+main { 
+    margin-left: 260px; 
+    padding: 30px; 
+    background: #EEEEEE; 
+    min-height: 100vh; 
+}
+
+.subtitle {
+    margin: 6px 0 0 0; 
+    color: #666;
+}
+
+.page-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+    padding-bottom: 20px; 
+    border-bottom: 2px solid #E0E0E0; 
+}
+
+.page-header h1 { 
+    margin: 0; 
+    font-size: 28px; 
+    color: #333; 
+}
+
+.page-header-actions { 
+    display: flex; 
+    gap: 15px; 
+}
+
+.btn { 
+    padding: 10px 10px; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    font-weight: 400; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    text-decoration: none;
+    background-color: transparent;
+    justify-content: center;
+}
+
+.btn:hover { 
+    transform: translateY(-2px);  
+}
+
+.btn-primary { 
+    background: #5E8F34; 
+    color: white; 
+}
+
+.btn-primary:hover { 
+    background: #4C732A; 
+}
+
+.btn-blue { 
+    background: #70845F; 
+    color: white; 
+}
+
+.btn-blue:hover { 
+    background: #5D6E4F;
+}
+
+.filter-container { 
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+    flex-wrap: wrap; 
+    align-items: center;
+}
+
+.filter-group { flex: 1; min-width: 150px; }
+.filter-group label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    font-size: 12px; 
+    color: #0A0A0A; 
+    text-transform: uppercase; 
+}
+
+.search-box { 
+    position: relative;
+ }
+.search-icon { 
+    position: absolute; 
+    left: 12px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    color: #99A1AF; 
+}
+
+.search-box input { 
+    padding: 10px 10px 10px 40px; 
+    width: 100%; 
+    border: 1px solid #998D8E; 
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.table-container { 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    overflow: hidden; 
+}
+
+table { width: 100%; border-collapse: collapse; }
+table thead { background: #F9FAFB; border-bottom: 2px solid #E0E0E0; }
+table thead th { padding: 16px; text-align: left; font-weight: 600; color: #333; text-align: center;}
+table tbody td { padding: 16px; border-bottom: 1px solid #E0E0E0; color: #666; text-align: center; }
+table tbody tr:hover { background: #FFFFFF; }
+
+table thead th:last-child,
+table tbody td:last-child {
+    text-align: center;
+}
+
+.edit-color { color: #A1A67D; }
+.delete-color { color: #CA643C; }
+
+.modal { 
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.4); 
+}
+
+.modal.show { display: flex; align-items: center; justify-content: center; }
+
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.modal-footer .btn {
+    flex: 1; 
+}
+
+
+.modal-content { 
+    background: white; 
+    padding: 30px;
+    border-radius: 8px; 
+    width: 90%; 
+    max-width: 500px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25); 
+    animation: slideUp 0.3s ease; 
+}
+
+.form-group { margin-bottom: 20px; display: flex; flex-direction: column; margin-top: 20px; }
+.form-group label { margin-bottom: 8px; font-weight: 400; color: #333; margin-top: 8px; }
+.form-group input { padding: 10px; border: 1px solid #E0E0E0; border-radius: 8px; }
+
+.filter-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    flex: 1;
+    width: 100%;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: solid 1px #374151;
+    color: #374151;
+}
+
+.btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+@keyframes slideUp { 
+    from { transform: translateY(30px); opacity: 0; } 
+    to { transform: translateY(0); opacity: 1; } 
+}
+
+@media (max-width: 768px) {
+    main { margin-left: 0; padding: 15px; }
+    .page-header { flex-direction: column; align-items: flex-start; }
+}

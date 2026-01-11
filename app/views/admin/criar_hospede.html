@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/public/css/modais_hospedes.css">
+
+<div id="createGuestModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Novo Hóspede</h2>
+        </div>
+        <form id="createGuestForm" onsubmit="handleCreateGuest(event)">
+            <div class="form-group">
+                <label>Nome Completo *</label>
+                <input type="text" placeholder="Ex: Maria Silva" required>
+            </div>
+            <div class="form-group">
+                <label>CPF/RG *</label>
+                <input type="text" placeholder="000.000.000-00" required>
+            </div>
+            <div class="form-group">
+                <label>Email *</label>
+                <input type="email" placeholder="email@exemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label>Telefone *</label>
+                <input type="tel" placeholder="(00) 00000-0000" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('createGuestModal')">Cancelar</button>
+                <button type="submit" class="btn btn-blue">Cadastrar Hóspede</button>
+            </div>
+        </form>
+    </div>
+</div>

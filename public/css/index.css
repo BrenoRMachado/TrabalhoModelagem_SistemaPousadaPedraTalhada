@@ -1,0 +1,18 @@
+/*! Reset do CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif; 
+}
+/*! Variáveis de cores */
+:root {
+    --brown-btn: #5D4037; /* Cor do botão de login */
+    --green-card: #A1A67D; /* Cor do card do quarto disponível */
+    --red-card: #CA643C; /* Cor do card do quarto ocupado */
+    --yellow-card: #E9A33B; /* Cor do card do quarto em manutenção */
+    --bg-light: #EEEEEE; /* Cor de fundo clara */
+    --text-dark: #334155; /* Cor do texto escuro */
+    --color-border: #E0E0E0; /* Cor da borda */
+    --color-active: #c0c0c0; /* Cor para elementos brancos quando clicados */
+}
