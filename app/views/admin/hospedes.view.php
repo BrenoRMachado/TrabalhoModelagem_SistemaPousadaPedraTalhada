@@ -6,13 +6,13 @@
     <title>Hóspedes - Pousada Pedra Talhada</title>
     
     <link rel="stylesheet" href="/public/css/hospedes.css"> 
-    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
  
     <div class="app-container">
-
+        <?php require 'app\views\admin\sidebar.html'; ?>
         <main>
             <div class="page-header">
                 <div>

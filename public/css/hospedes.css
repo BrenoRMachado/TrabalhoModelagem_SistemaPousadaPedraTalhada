@@ -5,15 +5,18 @@
   font-family: Inter, sans-serif;
 }
 
-main { 
-    margin-left: 260px; 
-    padding: 30px; 
+.app-container {
+    display: flex; 
     background: #EEEEEE; 
-    min-height: 100vh; 
+}
+
+.app-container main{
+    width: 87.3vw;
+    padding: 4vh 3vw;
 }
 
 .subtitle {
-    margin: 6px 0 0 0; 
+    margin: 6px 0 0 0;
     color: #666;
 }
 
