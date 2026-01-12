@@ -94,11 +94,14 @@ table thead th {
     text-align: left; 
     font-weight: 600; 
     color: #333; 
+    text-align: center;
 }
 table tbody td { 
     padding: 16px; 
     border-bottom: 1px solid #E0E0E0; 
-    color: #666; }
+    color: #666;
+    text-align: center; 
+}
 table tbody tr:hover { 
     background: #FAFAFA; 
 }
@@ -118,17 +121,13 @@ table tbody tr:hover {
     font-weight: 600; 
     text-transform: uppercase; 
 }
-.status-confirmada { 
-    background: #E8F5E9; 
-    color: #00C853; 
-}
-.status-cancelada { 
-    background: #FFEBEE; 
-    color: #FF3D00; 
+.status-ativa  { 
+    background: #ccd1a0; 
+    color: #70845F; 
 }
 .status-checkout { 
-    background: #E3F2FD; 
-    color: #1976D2; 
+    background: #F7E1BC; 
+    color: #b36837; 
 }
 
 /*! Paginação */
