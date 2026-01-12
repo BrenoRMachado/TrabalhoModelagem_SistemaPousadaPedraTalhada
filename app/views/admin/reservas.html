@@ -41,7 +41,68 @@
                     <input type="date" id="filterDate">
                 </div>
             </div>
-            
+
+            <div class="table-container">
+                <table id="reservasTable">
+                    <thead>
+                        <tr>
+                            <th>ID Reserva</th>
+                            <th>Hóspede</th>
+                            <th>Quarto</th>
+                            <th>Entrada</th>
+                            <th>Saída</th>
+                            <th>Diárias</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#RES001</td>
+                            <td>João Silva</td>
+                            <td>101</td>
+                            <td>03/01/2026</td>
+                            <td>05/01/2026</td>
+                            <td>2</td>
+                            <td>R$ 400,00</td>
+                            <td><span class="status-badge status-confirmada">Confirmada</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-success btn-small">
+                                        <span class="material-icons-round" style="font-size: 16px;">check_circle</span> Check-in
+                                    </button>
+                                    <button class="btn btn-warning btn-small">
+                                        <span class="material-icons-round" style="font-size: 16px;">edit</span> Editar
+                                    </button>
+                                    <button class="btn btn-danger btn-small">
+                                        <span class="material-icons-round" style="font-size: 16px;">delete</span> Cancelar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#RES002</td>
+                            <td>Maria Santos</td>
+                            <td>201</td>
+                            <td>04/01/2026</td>
+                            <td>07/01/2026</td>
+                            <td>3</td>
+                            <td>R$ 600,00</td>
+                            <td><span class="status-badge status-checkout">Check-out</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary btn-small">
+                                        <span class="material-icons-round" style="font-size: 16px;">exit_to_app</span> Checkout
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
         </main>
     </div>
 </body>

@@ -73,3 +73,32 @@ main{
     border-radius: 8px; 
     font-size: 14px; 
 }
+
+/*! Tabela de reservas */
+.table-container { 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    overflow: hidden; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+table thead { 
+    background: #F5F5F5; 
+    border-bottom: 2px solid #E0E0E0; 
+}
+table thead th { 
+    padding: 16px; 
+    text-align: left; 
+    font-weight: 600; 
+    color: #333; 
+}
+table tbody td { 
+    padding: 16px; 
+    border-bottom: 1px solid #E0E0E0; 
+    color: #666; }
+table tbody tr:hover { 
+    background: #FAFAFA; 
+}
