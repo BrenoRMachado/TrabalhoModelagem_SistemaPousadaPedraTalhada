@@ -5,10 +5,10 @@ namespace App\Controllers;
 use App\Core\App;
 use Exception;
 
-class EquipeController
+class FinanceiroController
 {
     public function index()
     {
-        return view('admin/equipe');
+        return view('admin/financeiro');
     }
 }

@@ -6,3 +6,4 @@ use App\Core\Router;
 
 $router->get('', 'ExampleController@index');
 $router->get('admin/equipe', 'EquipeController@index');
+$router->get('admin/financeiro', 'FinanceiroController@index');
