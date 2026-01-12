@@ -131,6 +131,10 @@ table tbody tr:hover {
     background-color: #5f8f36; 
     color: white; 
 }
+.btn-view {
+    background-color: #A1A67D; 
+    color: white; 
+}
 .btn-edit {
     background-color: #dfad62; 
     color: white; 
