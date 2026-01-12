@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="app-container">
-        <aside class="sidebar"></aside>
+        <?php require 'app\views\admin\sidebar.html'; ?>
         <main class="conteudo">
             <header class="cabecalho">
                 <div class="titulo">

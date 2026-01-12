@@ -5,12 +5,6 @@
     box-sizing: border-box;
     font-family: Inter, sans-serif;
 }
-/*! Sidebar Fantasma (guia temporario) */ 
-.sidebar {
-    border: 1px solid red;
-    width: 12.7vw;
-    height: 100vh;
-}
 /*!Código adaptado*/
 .app-container{
     display: flex;
