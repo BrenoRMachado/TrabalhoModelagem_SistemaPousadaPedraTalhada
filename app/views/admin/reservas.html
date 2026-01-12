@@ -31,9 +31,8 @@
                     <label>Status</label>
                     <select id="filterStatus">
                         <option value="">Todos</option>
-                        <option value="Confirmada">Confirmada</option>
-                        <option value="Cancelada">Cancelada</option>
-                        <option value="Check-out">Check-out</option>
+                        <option value="Ativa">Ativa</option>
+                        <option value="Hospedado">Hospedado</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -67,13 +66,13 @@
                             <td><span class="status-badge status-ativa">Ativa</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn btn-success btn-small">
+                                    <button class="btn btn-checkin btn-small">
                                         <span class="material-icons-round" style="font-size: 16px;">check_circle</span> Check-in
                                     </button>
-                                    <button class="btn btn-warning btn-small">
+                                    <button class="btn btn-edit btn-small">
                                         <span class="material-icons-round" style="font-size: 16px;">edit</span> Editar
                                     </button>
-                                    <button class="btn btn-danger btn-small">
+                                    <button class="btn btn-cancel btn-small">
                                         <span class="material-icons-round" style="font-size: 16px;">delete</span> Cancelar
                                     </button>
                                 </div>
@@ -89,7 +88,7 @@
                             <td><span class="status-badge status-checkout">Hospedado</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn btn-primary btn-small">
+                                    <button class="btn btn-checkout btn-small">
                                         <span class="material-icons-round" style="font-size: 16px;">exit_to_app</span> Checkout
                                     </button>
                                 </div>

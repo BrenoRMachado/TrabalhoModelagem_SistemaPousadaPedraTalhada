@@ -41,7 +41,8 @@ main{
     transition: all 0.3s ease; 
     display: inline-flex; 
     align-items: center; 
-    gap: 8px; text-decoration: none; 
+    gap: 8px; 
+    text-decoration: none; 
 }
 .btn-primary { 
     background: var(--stronger-green); 
@@ -110,6 +111,22 @@ table tbody tr:hover {
 .action-buttons { 
     display: flex; 
     gap: 8px; 
+}
+.btn-checkin{
+    background-color: #5f8f36; 
+    color: white; 
+}
+.btn-edit {
+    background-color: #dfad62; 
+    color: white; 
+}
+.btn-cancel {
+    background-color: #CA643C; 
+    color: white; 
+}
+.btn-checkout {
+    background-color: #DB864D; 
+    color: white; 
 }
 
 /*! Status */
