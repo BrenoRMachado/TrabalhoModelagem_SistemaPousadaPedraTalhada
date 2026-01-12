@@ -102,3 +102,25 @@ table tbody td {
 table tbody tr:hover { 
     background: #FAFAFA; 
 }
+
+/*! Status */
+.status-badge { 
+    display: inline-block; 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+}
+.status-confirmada { 
+    background: #E8F5E9; 
+    color: #00C853; 
+}
+.status-cancelada { 
+    background: #FFEBEE; 
+    color: #FF3D00; 
+}
+.status-checkout { 
+    background: #E3F2FD; 
+    color: #1976D2; 
+}
