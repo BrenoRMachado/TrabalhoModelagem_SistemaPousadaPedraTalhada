@@ -103,6 +103,12 @@ table tbody tr:hover {
     background: #FAFAFA; 
 }
 
+/* botoes de ação na tabela */
+.action-buttons { 
+    display: flex; 
+    gap: 8px; 
+}
+
 /*! Status */
 .status-badge { 
     display: inline-block; 
@@ -124,3 +130,4 @@ table tbody tr:hover {
     background: #E3F2FD; 
     color: #1976D2; 
 }
+
