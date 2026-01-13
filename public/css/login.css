@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --brown-btn: #5D4037; /* Cor do botão de login */
+    --green-card: #00C853;
+    --red-card: #FF3D00;
+    --yellow-card: #FFAB00;
+    --sidebar-bg: #FFFFFF;
+    --bg-light: #F5F7FA;
+    --text-dark: #333;
+}
+
+/* --- ESTILO DO LOGIN --- */
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../Assets/BackgroundLogin.png') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Efeito de vidro escuro no fundo */
+.login-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.login-container {
+    position: relative;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.login-container p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.login-container form {
+    text-align: left;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.login-container input:focus {
+    border-color: var(--brown-btn);
+}
+
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--brown-btn);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+
+
+.input-senha {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    
+}
+ .input-senha .botao-ver {
+    position: absolute;
+    color: black;
+    background-color: transparent;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 16px;
+
+    border: none;   
+    right: 1em;
+    
+    cursor: pointer;
+
+
+}
+
+.login-container button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
