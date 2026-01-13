@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="app-container">
-        <aside class="sidebar"></aside>
+        <?php require 'app\views\admin\sidebar.html'; ?>
         <main>
             <header class="header">
                 <h1>Gerenciamento de Quartos</h1>

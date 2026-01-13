@@ -1,16 +1,16 @@
-/*! Sidebar Fantasma (guia temporario) */ 
-.sidebar {
-    border: 1px solid red;
-    width: 12.7vw;
-    height: 100vh;
-}
 /*! Estilo da pagina de quartos */
 /*geral*/
 .app-container {
     display: flex;
     height: 100vh;
+    width: 100vw;
     background-color: var(--bg-light);
 }
+
+.app-container main{
+    width: 87.3vw;
+}
+
 /*header*/
 .header {
     display: flex;
