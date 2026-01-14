@@ -13,7 +13,7 @@ body{
 }
 /* estilo da caixa do modal */
 .modal-status{
-    height: 30%;
+    height: 20%;
     width: 35%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -22,3 +22,14 @@ body{
     flex-direction: column;
     padding: 2rem;
 }
+/* estilo do conteúdo do modal */
+/* título */
+.modal-status-header{
+    display: flex;
+}
+.modal-status h2{ 
+    border-bottom: 2px solid var(--color-border2);
+    padding-bottom: 1rem;
+}
+/* estilo de botões */
+
