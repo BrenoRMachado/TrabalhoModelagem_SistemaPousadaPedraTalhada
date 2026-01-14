@@ -16,6 +16,7 @@
     --text-dark: #334155; /* Cor do texto escuro */
     --color-border: #E0E0E0; /* Cor da borda */
     --color-border2: #b8b8b8; /* Cor da borda */
+    --color-border3: #cecece; /* Cor da borda */
     --color-active: #c0c0c0; /* Cor para elementos brancos quando clicados */
     --stronger-green: #70845F; /* Cor verde mais forte */
 }
