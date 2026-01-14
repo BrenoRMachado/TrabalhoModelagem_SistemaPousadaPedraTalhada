@@ -23,13 +23,50 @@ body{
     padding: 2rem;
 }
 /* estilo do conteúdo do modal */
-/* título */
+/* header */
 .modal-status-header{
     display: flex;
-}
-.modal-status h2{ 
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 2px solid var(--color-border2);
     padding-bottom: 1rem;
 }
-/* estilo de botões */
-
+.status-exit{
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--color-exit);
+}
+.status-exit:hover{
+    transform: scale(1.2);
+}
+.status-exit:active{
+    color: var(--color-active);
+}
+/* botões */
+.btn-container-status{
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+    padding-top: 1rem;
+}
+.btn-disponivel, .btn-manutencao{
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+}
+.btn-disponivel{
+    background-color: var(--stronger-green);
+    color: white;
+    padding: 1rem 2rem;
+}
+.btn-manutencao{
+    background-color: var(--yellow-card);
+    color:white;
+    padding: 1rem 2rem;
+}
+.btn-disponivel:active, .btn-manutencao:active{
+    transform: scale(0.95);
+}
