@@ -1,12 +1,8 @@
-/*! Sidebar Fantasma (guia temporario) */ 
-.sidebar {
-    border: 1px solid red;
-    width: 12.7vw;
-    height: 100vh;
-}
+
 /*! Ajuste do fundo da página de reservas */
 .app-container{
     display: flex;
+    width: 100%;
 }
 main{
     background-color: var(--bg-light);

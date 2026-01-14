@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="app-container">
-        <aside class="sidebar"></aside>
+        <?php require 'app\views\admin\sidebar.html'; ?>
         <main>
             <div class="page-header">
                 <h1>Gerenciamento de reservas</h1>
