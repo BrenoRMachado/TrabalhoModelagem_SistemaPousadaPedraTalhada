@@ -1,0 +1,185 @@
+/*! Sidebar Fantasma (guia temporario) */ 
+.sidebar {
+    border: 1px solid red;
+    width: 12.7vw;
+    height: 100vh;
+}
+/*! Ajuste do fundo da página de reservas */
+.app-container{
+    display: flex;
+}
+main{
+    background-color: var(--bg-light);
+    width: 87.3vw;
+    height: 100vh;
+    padding: 4vh 3vw;
+}
+/*! Cabeçalho da página de reservas */
+.page-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 30px; 
+    padding-bottom: 20px; 
+    border-bottom: 2px solid #E0E0E0; 
+}
+.page-header h1 {
+    margin: 0; 
+    font-size: 28px; 
+    color: var(--text-dark); 
+}
+.page-header-actions { 
+    display: flex; gap: 15px; 
+}
+.btn { 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px; 
+    text-decoration: none; 
+}
+.btn-primary { 
+    background: var(--stronger-green); 
+    color: white; 
+}
+/*! Guia de filtros */
+.filter-container { 
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+    flex-wrap: wrap; 
+}
+.filter-group { 
+    flex: 1; 
+    min-width: 150px; 
+}
+.filter-group label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    font-size: 12px;
+    color: #333; 
+    text-transform: uppercase; 
+}
+.filter-group input, .filter-group select { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #E0E0E0; 
+    border-radius: 8px; 
+    font-size: 14px; 
+    outline: none;
+}
+.filter-group select {
+    -webkit-appearance: none; 
+    -moz-appearance: none;    
+    appearance: none;         
+    
+    padding-right: 35px;      
+    
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center; 
+    background-size: 16px;
+    background-color: white;
+}
+
+/*! Tabela de reservas */
+.table-container { 
+    background: white; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    overflow: hidden; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+table thead { 
+    background: #F5F5F5; 
+    border-bottom: 2px solid #E0E0E0; 
+}
+table thead th { 
+    padding: 16px; 
+    text-align: left; 
+    font-weight: 600; 
+    color: #333; 
+    text-align: center;
+}
+table tbody td { 
+    padding: 16px; 
+    border-bottom: 1px solid #E0E0E0; 
+    color: #666;
+    text-align: center; 
+}
+table tbody tr:hover { 
+    background: #FAFAFA; 
+}
+
+/* botoes de ação na tabela */
+.action-buttons { 
+    display: flex; 
+    gap: 8px; 
+}
+.btn-checkin{
+    background-color: #5f8f36; 
+    color: white; 
+}
+.btn-view {
+    background-color: #A1A67D; 
+    color: white; 
+}
+.btn-edit {
+    background-color: #dfad62; 
+    color: white; 
+}
+.btn-cancel {
+    background-color: #CA643C; 
+    color: white; 
+}
+.btn-checkout {
+    background-color: #DB864D; 
+    color: white; 
+}
+
+/*! Status */
+.status-badge { 
+    display: inline-block; 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    font-size: 12px; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+}
+.status-ativa  { 
+    background: #ccd1a0; 
+    color: #70845F; 
+}
+.status-checkout { 
+    background: #F7E1BC; 
+    color: #b36837; 
+}
+
+/*! Paginação */
+.pagination { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 8px; 
+    margin-top: 20px; 
+}
+.pagination-btn { 
+    padding: 6px 12px; 
+    border: 1px solid #E0E0E0; 
+    background: white; 
+    color: var(--text-dark); 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600; 
+}
