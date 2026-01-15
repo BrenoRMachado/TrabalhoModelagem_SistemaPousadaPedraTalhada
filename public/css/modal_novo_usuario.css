@@ -13,7 +13,7 @@ body{
 }
 /* estilo da caixa do modal */
 .modal-novo-usuario{
-    height: 63%;
+    height: 65%;
     width: 35%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
