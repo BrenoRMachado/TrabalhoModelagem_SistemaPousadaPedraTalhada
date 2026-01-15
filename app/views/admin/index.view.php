@@ -1,0 +1,1 @@
+<?php require 'app\views\admin\sidebar.html'; ?>

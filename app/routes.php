@@ -12,5 +12,6 @@ $router->get('admin/financeiro', 'FinanceiroController@index');
 $router->get('admin/hospedes', 'HospedesController@index');
 $router->get('admin/quartos', 'QuartosController@index');
 $router->get('admin/reservas', 'ReservasController@index');
+$router->get('admin/index', 'IndexController@index');
 
 
