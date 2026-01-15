@@ -13,7 +13,7 @@ body{
 }
 /* estilo da caixa do modal */
 .modal-novo-hospede{
-    height: 70%;
+    height: 65%;
     width: 30%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -26,7 +26,10 @@ body{
 /* título */
 .modal-novo-hospede h2{ 
     border-bottom: 2px solid var(--color-border2);
+    padding-top: 0.5rem;
     padding-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 /* container dos inputs */
 .novo-hospede-input-container{
@@ -36,13 +39,13 @@ body{
     align-items: center;
     height: 80%;
     gap: 1rem;
+    padding: 1rem;
 }
 .novo-hospede-input{
     display: flex;
     flex-direction: column;
     width: 100%;
     justify-content: center;
-    padding-right: 2rem;
 }
 .novo-hospede-input label{
     margin-top: 1rem;
@@ -65,21 +68,35 @@ body{
 }
 /* estilo dos botões */
 .novo-hospede-btn-container{
-    border: 1px solid orangered;
+    /* border: 1px solid orangered; */
     display: flex;
     align-items: end;
     justify-content: center;
     height: 20%;
 }
 .novo-hospede-btn-container button{
-    margin-top: 1rem;
-    width: 50%;
+    width: 44%;
     padding: 0.9rem;
-    background-color: var(--brown-btn);
     color: white;
     font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    margin-bottom: 1rem;
+}
+.btn-cancelar-novo-hospede{
+    background-color: var(--red-card);
+    margin-right: 1rem;
+}
+.btn-salvar-novo-hospede{
+    background-color: var(--stronger-green);
+    margin-left: 1rem;
+}
+
+.btn-cancelar-novo-hospede:active{
+    background-color: var(--red-card2);
+}
+.btn-salvar-novo-hospede:active{
+    background-color: var(--green-card2);
 }
