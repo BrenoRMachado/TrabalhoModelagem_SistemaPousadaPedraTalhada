@@ -4,23 +4,16 @@ namespace App\Core;
 
 class Request
 {
-    /**
-     * Fetch the request URI.
-     *
-     * @return string
-     */
-    public static function uri()
+      public static function uri()
     {
-        return trim(
-            parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'
-        );
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+        // remove a pasta do projeto
+        $uri = str_replace('/TrabalhoModelagem_SistemaPousadaPedraTalhada', '', $uri);
+
+        return trim($uri, '/');
     }
 
-    /**
-     * Fetch the request method.
-     *
-     * @return string
-     */
     public static function method()
     {
         return $_SERVER['REQUEST_METHOD'];

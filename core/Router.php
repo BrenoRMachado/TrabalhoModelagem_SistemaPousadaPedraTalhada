@@ -73,17 +73,20 @@ class Router
      * @param string $controller
      * @param string $action
      */
+   
+    
+
     protected function callAction($controller, $action)
-    {
-        $controller = "App\\Controllers\\{$controller}";
-        $controller = new $controller;
+{
+    $controllerClass = "App\\Controllers\\{$controller}";
+    $controllerObject = new $controllerClass;
 
-        if (! method_exists($controller, $action)) {
-            throw new Exception(
-                "{$controller} does not respond to the {$action} action."
-            );
-        }
-
-        return $controller->$action();
+    if (!method_exists($controllerObject, $action)) {
+        throw new Exception(
+            "{$controllerClass} does not respond to the {$action} action."
+        );
     }
+
+    return $controllerObject->$action();
+}
 }

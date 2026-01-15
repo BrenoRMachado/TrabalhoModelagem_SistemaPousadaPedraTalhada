@@ -15,13 +15,15 @@
         <p>Faça login para continuar</p>
 
         <form action="/login" method="POST">
+            <div class="input-name">
             <label>Usuário</label>
-            <input type="email" placeholder="Digite seu usuário" required>
+            <input type="text" name="login" id="login" placeholder="Digite seu usuário" required>
+            </div>
 
             <label>Senha</label>
             <div class="input-senha">
 
-            <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
             <button class="botao-ver" type="button" id="toggleSenha"><i class="fa-regular fa-eye-slash"></i></button>
 
             </div>
@@ -43,7 +45,7 @@
     <script>
 
         // 1. Seleciona os elementos pelo ID
-const campoSenha = document.getElementById('password');
+const campoSenha = document.getElementById('senha');
 const botaoToggle = document.getElementById('toggleSenha');
 const icone = botaoToggle.querySelector('i'); // Seleciona o ícone dentro do botão
 
