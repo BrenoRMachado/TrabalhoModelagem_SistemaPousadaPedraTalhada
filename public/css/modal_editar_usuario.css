@@ -1,0 +1,104 @@
+/*! fundo ilustrativo */
+body{
+    background-image: url(../assets/fundoIlustrativo.png);
+}
+/*! estilo do modal */
+/* conteiner do modal */
+.editar-usuario-container{
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    display: flex; /*mudar aqui para o backend*/
+    align-items: center;
+    justify-content: center;
+}
+/* estilo da caixa do modal */
+.modal-editar-usuario{
+    height: 65%;
+    width: 35%;
+    background-color: var(--bg-light);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+/* estilo do conteúdo do modal */
+/* título */
+.modal-editar-usuario h2{ 
+    border-bottom: 2px solid var(--color-border2);
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* container dos inputs */
+.editar-usuario-input-container{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    gap: 1rem;
+    padding: 1rem;
+}
+.editar-usuario-input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+.editar-usuario-input label{
+    margin-top: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+.required{
+    color: rgb(187, 27, 27);
+    font-size: 24px;
+}
+.editar-usuario-input input , select{
+    margin-top: 0.5rem;
+    height: 3rem;
+    width: 100%;
+    border: 1.5px solid var(--color-border3);
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 16px;
+    background-color: var(--bg-light);
+}
+
+/* estilo dos botões */
+.editar-usuario-btn-container{
+    /* border: 1px solid orangered; */
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 20%;
+}
+.editar-usuario-btn-container button{
+    width: 44%;
+    padding: 0.9rem;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+.btn-cancelar-editar-usuario{
+    background-color: var(--red-card);
+    margin-right: 1rem;
+}
+.btn-salvar-editar-usuario{
+    background-color: var(--stronger-green);
+    margin-left: 1rem;
+}
+
+.btn-cancelar-editar-usuario:active{
+    background-color: var(--red-card2);
+}
+.btn-salvar-editar-usuario:active{
+    background-color: var(--green-card2);
+}
