@@ -13,7 +13,7 @@ body{
 }
 /* estilo da caixa do modal */
 .modal-novo-usuario{
-    height: 60%;
+    height: 63%;
     width: 35%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -27,4 +27,78 @@ body{
 .modal-novo-usuario h2{ 
     border-bottom: 2px solid var(--color-border2);
     padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+/* container dos inputs */
+.novo-usuario-input-container{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    gap: 1rem;
+    padding: 1rem;
+}
+.novo-usuario-input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+.novo-usuario-input label{
+    margin-top: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+.required{
+    color: rgb(187, 27, 27);
+    font-size: 24px;
+}
+.novo-usuario-input input , select{
+    margin-top: 0.5rem;
+    height: 3rem;
+    width: 100%;
+    border: 1.5px solid var(--color-border3);
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 16px;
+    background-color: var(--bg-light);
+}
+
+/* estilo dos botões */
+.novo-usuario-btn-container{
+    /* border: 1px solid orangered; */
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 20%;
+}
+.novo-usuario-btn-container button{
+    width: 44%;
+    padding: 0.9rem;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+.btn-cancelar-novo-usuario{
+    background-color: var(--red-card);
+    margin-right: 1rem;
+}
+.btn-salvar-novo-usuario{
+    background-color: var(--stronger-green);
+    margin-left: 1rem;
+}
+
+.btn-cancelar-novo-usuario:active{
+    background-color: var(--red-card2);
+}
+.btn-salvar-novo-usuario:active{
+    background-color: var(--green-card2);
 }

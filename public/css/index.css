@@ -9,13 +9,16 @@
 :root {
     --brown-btn: #5D4037; /* Cor do botão de login */
     --green-card: #A1A67D; /* Cor do card do quarto disponível */
+    --green-card2: #869c72;
     --red-card: #CA643C; /* Cor do card do quarto ocupado */
+    --red-card2: #D97461; /* Cor do card do quarto reservado */
     --yellow-card: #E9A33B; /* Cor do card do quarto em manutenção */
     --yellow-card2:rgb(241, 183, 95);
     --bg-light: #EEEEEE; /* Cor de fundo clara */
     --text-dark: #334155; /* Cor do texto escuro */
     --color-border: #E0E0E0; /* Cor da borda */
     --color-border2: #b8b8b8; /* Cor da borda */
+    --color-border3: #cecece; /* Cor da borda */
     --color-active: #c0c0c0; /* Cor para elementos brancos quando clicados */
     --stronger-green: #70845F; /* Cor verde mais forte */
 }
