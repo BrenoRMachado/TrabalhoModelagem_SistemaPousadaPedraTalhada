@@ -13,7 +13,7 @@ body{
 }
 /* estilo da caixa do modal */
 .modal-nova-reserva{
-    height: 90%;
+    max-height: 90%;
     width: 46%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -21,7 +21,14 @@ body{
     display: flex;
     flex-direction: column;
     padding: 2rem;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin; 
+    scrollbar-color: var(--color-border2) transparent;
 }
+
+
 /* estilo do conteúdo do modal */
 /* título */
 .modal-nova-reserva h2{ 
@@ -105,7 +112,7 @@ body{
 /* Estilização da área de texto */
 .nova-reserva-input-quarto textarea {
     width: 100%;
-    height: 100px; /* Altura maior para observações */
+    height: 100px; 
     padding: 12px;
     border: 1px solid var(--color-border3);
     border-radius: 8px;
@@ -113,7 +120,46 @@ body{
     color: #555;
     background-color: #fff;
     outline: none;
-    resize: vertical; /* Permite ao usuário aumentar apenas a altura */
+    resize: vertical; 
     font-family: 'Inter', sans-serif;
 }
 
+/* Container principal do resumo */
+.resumo-reserva-container {
+    background-color: #f5f5f5; 
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    border: 1px solid var(--color-border3);
+}
+
+.resumo-reserva-container h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #e0e0e0; 
+}
+
+.resumo-item:nth-last-child(2) {
+    border-bottom: 2px solid var(--text-dark);
+}
+
+/* Estilo do Total */
+.resumo-item.total {
+    border-bottom: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.resumo-item.total strong:last-child {
+    color: #27ae60; 
+}
