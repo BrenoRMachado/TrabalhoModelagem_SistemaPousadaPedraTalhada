@@ -1,0 +1,209 @@
+/*! fundo ilustrativo */
+body{
+    background-image: url(../../../assets/fundoIlustrativo.png);
+}
+/*! estilo do modal */
+/* conteiner do modal */
+.editar-reserva-container{
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    display: flex; /*mudar aqui para o backend*/
+    align-items: center;
+    justify-content: center;
+}
+/* estilo da caixa do modal */
+.modal-editar-reserva{
+    max-height: 90%;
+    width: 46%;
+    background-color: var(--bg-light);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    overflow-y: auto;
+
+    /* Oculta a barra de scroll no Chrome, Safari e novas versões do Edge */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Oculta a barra no Firefox */
+    scrollbar-width: none;
+
+    /* Oculta a barra no IE e Edge antigo */
+    -ms-overflow-style: none;
+}
+
+
+/* estilo do conteúdo do modal */
+/* título */
+.modal-editar-reserva h2{ 
+    border-bottom: 2px solid var(--color-border2);
+    padding-bottom: 1rem;
+    margin-top: 1.5rem; /* Adiciona o espaço acima para novas seções */
+    margin-bottom: 0.5rem;
+}
+/*Estilo do required*/
+.required{
+    font-size: 23px;
+    color:red;
+}
+/*estilo da caixa de inputs*/
+.editar-reserva-input-container{
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px;                      
+    width: 100%;
+    margin-top: 1rem;
+}
+/*cada bloco de Data + Input)*/
+.editar-reserva-input {
+    display: flex;
+    flex-direction: column;         
+    flex: 1;                        
+}
+/*estilização do Label */
+.editar-reserva-input label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;             
+    display: flex;
+    align-items: center;
+}
+/*estilização do Input de data*/
+.editar-reserva-input input {
+    height: 45px;                   
+    padding: 0 12px;
+    border: 1px solid var(--color-border3);
+    border-radius: 8px;             
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    outline: none;
+    width: 100%;                    
+}
+
+/*input dos quartos*/
+.editar-reserva-input-quarto{
+    width: 100%;
+    margin-top: 1.2rem;
+}
+.editar-reserva-input-quarto label{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;             
+    display: flex;
+    align-items: center;
+}
+.editar-reserva-input-quarto select {
+    height: 45px;
+    padding: 0 12px;
+    border: 1px solid var(--color-border3);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    appearance: none; 
+}
+
+.modal-editar-reserva h2:first-child {
+    margin-top: 0;
+}
+
+/* Estilização da área de texto */
+.editar-reserva-input-quarto textarea {
+    width: 100%;
+    height: 100px; 
+    padding: 12px;
+    border: 1px solid var(--color-border3);
+    border-radius: 8px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    outline: none;
+    resize: vertical; 
+    font-family: 'Inter', sans-serif;
+}
+
+/* Container principal do resumo */
+.resumo-reserva-container {
+    background-color: #f5f5f5; 
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    border: 1px solid var(--color-border3);
+}
+
+.resumo-reserva-container h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #e0e0e0; 
+}
+
+.resumo-item:nth-last-child(2) {
+    border-bottom: 2px solid var(--text-dark);
+}
+
+/* Estilo do Total */
+.resumo-item.total {
+    border-bottom: none;
+    font-size: 16px;
+    color: #000;
+}
+
+.resumo-item.total strong:last-child {
+    color: #27ae60; 
+}
+
+/* Container dos botões */
+.editar-reserva-acoes {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 15px;
+    margin-top: 2rem;
+    padding-bottom: 1rem; 
+}
+
+.editar-reserva-acoes button {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-cancelar {
+    background-color: var(--grey-btn);
+    color: white;
+}
+
+.btn-cancelar:active {
+    background-color: var(--grey-btn-active);
+}
+
+.btn-salvar {
+    background-color: var(--stronger-green); /* Usando sua variável marrom */
+    color: white;
+}
+
+.btn-salvar:active {
+    background-color: var(--green-card2);
+}
