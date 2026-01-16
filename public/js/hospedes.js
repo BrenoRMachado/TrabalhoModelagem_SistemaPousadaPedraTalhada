@@ -1,58 +1,46 @@
+/* public/js/hospedes.js */
+
+
 function openModal(modalId) {
-    document.getElementById(modalId).style.display = 'block';
-    document.getElementById('guestForm').reset(); // Limpa os campos
-    document.getElementById('guestId').value = ''; // Garante que o ID está vazio
-    document.getElementById('modalTitle').innerText = 'Novo Hóspede';
+   const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'flex';
+    }
 }
+
 
 function closeModal(modalId) {
-    document.getElementById(modalId).classList.remove('show');
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
-function filterTable() {
-    const searchText = document.getElementById('searchGuest').value.toLowerCase();
-    const table = document.getElementById('guestsTable');
-    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-    
-    for (let row of rows) {
-        let name = row.cells[0].textContent.toLowerCase();
-        let cpf = row.cells[1].textContent.toLowerCase();
-        
-        if (name.includes(searchText) || cpf.includes(searchText)) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
-    }
+function prepararNovoHospede() {
+
+    const form = document.getElementById('guestForm');
+    if (form) form.reset();
+
+  
+    const inputId = document.getElementById('guestId');
+    if (inputId) inputId.value = '';
+
+  
+    openModal('guestModal');
 }
 
 function editGuest(id, nome, cpf, email, telefone) {
+    console.log('editGuest chamada', id);
 
-    document.getElementById('guestModal').style.display = 'block';
-    
+    document.getElementById('editId').value = id;
+    document.getElementById('editNome').value = nome;
+    document.getElementById('editCpf').value = cpf;
+    document.getElementById('editEmail').value = email;
+    document.getElementById('editTelefone').value = telefone;
 
-    document.getElementById('modalTitle').innerText = 'Editar Hóspede';
-
-    document.getElementById('nome').value = nome;
-    document.getElementById('cpf').value = cpf;
-    document.getElementById('email').value = email;
-    document.getElementById('telefone').value = telefone;
-
-
-    document.getElementById('guestId').value = id;
+    document.getElementById('editModal').style.display = 'flex';
 }
 
-function deleteGuest(id) {
-    if (confirm('Tem certeza que deseja deletar este hóspede?')) {
-        alert('Hóspede deletado com sucesso!');
-    }
-}
-
-function submitGuestForm(event) {
-    event.preventDefault();
-    alert('Hóspede salvo com sucesso!');
-    closeModal('guestModal');
-}
 
 window.onclick = function(event) {
     const modal = document.getElementById('guestModal');

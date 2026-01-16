@@ -10,7 +10,7 @@ class LoginController
     {
        if (session_status() === PHP_SESSION_NONE) {
             session_start();
-        }
+        }   
 
         if (isset($_SESSION['id'])) {
             header('Location: /quartos');
@@ -49,32 +49,36 @@ class LoginController
         return view(name: 'admin/quartos');
     }
     
-   public function efetuaLogin()
-{
-    $login = $_POST['login'] ?? null;
-    $senha = $_POST['senha'] ?? null;
-
-    if ($login && $senha) {
-        
-        // CORREÇÃO AQUI:
-        // Em vez de $this->app->database, usamos App::get('database')
-        $usuario = App::get('database')->verificaLogin($login, $senha);
-
-        if ($usuario) {
-            // Login sucesso
-            // Recomendado: iniciar sessão aqui
-            session_start();
-            $_SESSION['usuario'] = $usuario;
-
-            header('Location: admin/quartos');
-            exit;
-        } else {
-            echo "Login ou senha incorretos.";
+  public function efetuaLogin()
+    {
+      
+        if (!isset($_POST['email']) || !isset($_POST['senha'])) {
+            return redirect('reservas');
         }
-    } else {
-        echo "Preencha todos os campos.";
+
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
+  
+        $user = App::get('database')->verificaLogin($email, $senha);
+
+        if ($user) {
+           
+        
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $_SESSION['usuario'] = $user;
+
+          
+            return redirect('admin/quartos'); 
+
+        } else {
+    
+            return redirect('login');
+        }
     }
-}
 
     public function logout(): void
     {
