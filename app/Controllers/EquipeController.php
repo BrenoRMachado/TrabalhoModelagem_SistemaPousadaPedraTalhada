@@ -20,7 +20,6 @@ public function edit()
     $idFuncionario = $_POST['id_funcionario'];
     $idUsuario     = $_POST['id_usuario'];
 
-    // Atualiza dados do Funcionário
     App::get('database')->update(
         'funcionario',
         [
@@ -31,23 +30,48 @@ public function edit()
         $idFuncionario
     );
 
-    // Prepara dados básicos do Usuário
     $dadosUsuario = [
         'login' => $_POST['login']
     ];
 
-    // Se uma nova senha foi digitada, adiciona o hash ao array de atualização
     if (!empty($_POST['senha'])) {
         $dadosUsuario['senha'] = password_hash($_POST['senha'], PASSWORD_DEFAULT);
     }
 
-    // Faz um único update no Usuário
     App::get('database')->update('usuario', $dadosUsuario, $idUsuario);
 
     header('Location: /admin/equipe');
     exit;
 }
 
+public function create()
+{
+    $idUsuario = App::get('database')->insert('usuario', [
+        'login' => $_POST['login'],
+        'senha' => password_hash($_POST['senha'], PASSWORD_DEFAULT)
+    ]);
 
+    App::get('database')->insert('funcionario', [
+        'nome'       => $_POST['nome'],
+        'email'      => $_POST['email'],
+        'cargo'      => $_POST['cargo'],
+        'id_usuario' => $idUsuario
+    ]);
+
+    header('Location: /admin/equipe');
+}
+
+public function delete()
+{
+    $idFuncionario = $_POST['id_funcionario'];
+    $idUsuario = $_POST['id_usuario'];
+
+    App::get('database')->delete('funcionario', $idFuncionario);
+    
+    App::get('database')->delete('usuario', $idUsuario);
+
+    header('Location: /admin/equipe');
+    exit;
+}
 
 }

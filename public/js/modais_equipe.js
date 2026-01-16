@@ -19,6 +19,33 @@ function fecharModalEditarUsuario(idModal) {
     }
 }
 
+function abrirModalNovoUsuario(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function fecharModalNovoUsuario(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+function abrirModalInativar(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function fecharModalInativar(idModal) {
+    const modal = document.getElementById(idModal);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
 function toggleSenha(inputId, icon) {
     const input = document.getElementById(inputId);
     

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="/public/js/modais_equipe.js"></script>
     <link rel="stylesheet" href="/public/css/modal_editar_usuario.css">
+    <link rel="stylesheet" href="/public/css/modal_novo_usuario.css">
     <link rel="stylesheet" href="/public/css/index.css">
 </head>
 <body>
@@ -46,17 +47,15 @@
                     </span>
 
                     <div class="acoes">
-    <!-- EDITAR -->
     <button
         class="btn-editar"
         onclick="abrirModalEditarUsuario('modal_editar_usuario_<?= $funcionario->id ?>')">
         Editar
     </button>
 
-    <!-- INATIVAR -->
     <button
         class="btn-inativar"
-        onclick="abrirModalInativarUsuario('modal_inativar_usuario_<?= $funcionario->id ?>')">
+        onclick="abrirModalInativar('modal_inativar_usuario_<?= $funcionario->id ?>')">
         Inativar
     </button>
 </div>
@@ -66,8 +65,10 @@
 
             </section>
              <?php foreach ($funcionarios as $funcionario):?>
-        <?php require 'app\views\admin\Modais\Equipe\modal_editar_usuario.view.php'; ?>
-    <?php endforeach;?>
+                <?php require 'app\views\admin\Modais\Equipe\modal_editar_usuario.view.php'; ?>
+                <?php require 'app\views\admin\Modais\Equipe\modal_inativar.view.php'; ?>
+            <?php endforeach;?>
+            <?php require 'app/views/admin/Modais/Equipe/modal_novo_usuario.view.php'; ?>
         <div id="filtro" style="display:none;"></div>
         </main>
     </div>
