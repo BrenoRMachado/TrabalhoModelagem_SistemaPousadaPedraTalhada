@@ -9,6 +9,9 @@ class EquipeController
 {
     public function index()
     {
-        return view('admin/equipe');
+        
+        $funcionarios = App::get('database')->selectAll('funcionario');
+
+        return view('admin/equipe', compact('funcionarios'));
     }
 }

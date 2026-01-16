@@ -23,88 +23,41 @@
                 </button>
             </header>
             <section class="time">
+                <?php foreach ($funcionarios as $funcionario): ?>
                 <article class="card">
                     <div class="avatar">
                         <img src="../../../public/Assets/icone_user.jpg" alt="">
                     </div>
-                    <h3>Roberto Alves</h3>
-                    <span class="email">roberto.alves@hotel.com</span>
-                    <span class="cargo gerente">
-                        <i class="fa-solid fa-shield"></i> Gerente
+                    <h3><?=htmlspecialchars($funcionario->nome)?></h3>
+                    <span class="email"><?=htmlspecialchars($funcionario->email)?></span>
+                    <span class="cargo <?= strtolower($funcionario->cargo)?>">
+                        <?php if($funcionario->cargo === 'Gerente'): ?>
+                            <i class="fa-solid fa-shield"></i>
+                        <?php else: ?>
+                            <i class="fa-solid fa-user"></i>
+                        <?php endif; ?>
+
+                        <?=htmlspecialchars($funcionario->cargo)?>
                     </span>
 
                     <div class="acoes">
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-inativar">Inativar</button>
+                        <button class="btn-editar" onclick="abrirModal('editar_funcionario<?= $funcionario->id ?>')">Editar</button>
+
+                        <button class="btn-inativar" onclick="abrirModal('inativar_funcionario<?= $funcionario->id ?>')">Inativar</button>
                     </div>
                 </article>
+            <?php endforeach;?>
 
-                <article class="card">
-                    <div class="avatar">
-                        <img src="../../../public/Assets/UsuarioPadrao.png" alt="">
-                    </div>
-                    <h3>Fernanda Costa</h3>
-                    <span class="email">fernanda.costa@hotel.com</span>
-                    <span class="cargo recepcionista">
-                        <i class="fa-solid fa-user"></i> Recepcionista
-                    </span>
-
-                    <div class="acoes">
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-inativar">Inativar</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="avatar">
-                        <img src="../../../public/Assets/UsuarioPadrao.png" alt="">
-                    </div>
-                    <h3>Roberto Alves</h3>
-                    <span class="email">roberto.alves@hotel.com</span>
-                    <span class="cargo gerente">
-                        <i class="fa-solid fa-shield"></i> Gerente
-                    </span>
-
-                    <div class="acoes">
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-inativar">Inativar</button>
-                    </div>
-                </article>
-                
-                <article class="card">
-                    <div class="avatar">
-                        <img src="../../../public/Assets/UsuarioPadrao.png" alt="">
-                    </div>
-                    <h3>Roberto Alves</h3>
-                    <span class="email">roberto.alves@hotel.com</span>
-                    <span class="cargo gerente">
-                        <i class="fa-solid fa-shield"></i> Gerente
-                    </span>
-
-                    <div class="acoes">
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-inativar">Inativar</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="avatar">
-                        <img src="../../../public/Assets/UsuarioPadrao.png" alt="">
-                    </div>
-                    <h3>Roberto Alves</h3>
-                    <span class="email">roberto.alves@hotel.com</span>
-                    <span class="cargo gerente">
-                        <i class="fa-solid fa-shield"></i> Gerente
-                    </span>
-
-                    <div class="acoes">
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-inativar">Inativar</button>
-                    </div>
-                </article>
             </section>
         </main>
     </div>
+    <?php foreach ($funcionarios as $funcionario):?>
+    <?php require 'app\views\admin\Modais\Equipe\modal_editar_usuario.html'; ?>
+    <?php require 'app\views\admin\Modais\Equipe\modal_inativar.html'; ?>
 
+    <?php endforeach;?>
+
+    <?php require 'app\views\admin\Modais\Equipe\modal_novo_usuario.html'; ?>
+    
 </body>
 </html>
