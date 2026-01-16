@@ -11,20 +11,59 @@
     <div class="nova-reserva-container">
         <div class="modal-nova-reserva">
             <h2>Seleção de Quarto</h2>
-            <div class="nova-reserva-input">
-                <label>Data de Entrada <span class="required">*</span></label>
-                <input type="date" required>
+            <div class="nova-reserva-input-container">
+                <div class="nova-reserva-input">
+                    <label>Data de Entrada <span class="required">*</span></label>
+                    <input type="date" required>
+                </div>
+                <div class="nova-reserva-input">
+                    <label>Data de Saída <span class="required">*</span></label>
+                    <input type="date" required>
+                </div>
             </div>
-            <div class="nova-reserva-input">
-                <label>Data de Saída <span class="required">*</span></label>
-                <input type="date" required>
+            <div class="nova-reserva-input-quarto">
+                <label>Quarto <span class="required">*</span></label>
+                <select name="quarto" id="quarto-select" required>
+                    <option value="" disabled selected>-- Selecione um quarto --</option>
+                    <option value="101">Quarto 101</option>
+                    <option value="102">Quarto 102</option>
+                    <option value="103">Quarto 103</option>
+                    <option value="104">Quarto 104</option>
+                    <option value="105">Quarto 105</option>
+                </select>
             </div>
 
+            <h2>Dados do Hóspede</h2>
 
-            <!--
-            <h2>Dados do Hospede</h2>
-            <h2>Informações adicionais</h2>
-            -->
+            <div class="nova-reserva-input-container">
+                <div class="nova-reserva-input">
+                    <label>Nome Completo <span class="required">*</span></label>
+                    <input type="text" placeholder="Ex: João Silva" required>
+                </div>
+                <div class="nova-reserva-input">
+                    <label>CPF <span class="required">*</span></label>
+                    <input type="text" placeholder="Ex: 123.456.789-00" required>
+                </div>
+            </div>
+
+            <div class="nova-reserva-input-container">
+                <div class="nova-reserva-input">
+                    <label>E-mail <span class="required">*</span></label>
+                    <input type="email" placeholder="Ex: joao@email.com" required>
+                </div>
+                <div class="nova-reserva-input">
+                    <label>Telefone <span class="required">*</span></label>
+                    <input type="tel" placeholder="Ex: (11) 99999-9999" required>
+                </div>
+            </div>
+
+            <h2>Informações Adicionais</h2>
+
+            <div class="nova-reserva-input-quarto">
+                <label>Observações</label>
+                <textarea placeholder="Notas especiais, requisições, alergias, etc..."></textarea>
+            </div>
+
             
         </div>
     </div>
