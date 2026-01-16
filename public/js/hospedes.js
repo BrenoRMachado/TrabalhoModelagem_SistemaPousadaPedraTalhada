@@ -1,11 +1,8 @@
 function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    modal.classList.add('show');
-    
-    if (modalId === 'guestModal') {
-        document.getElementById('modalTitle').textContent = 'Novo Hóspede';
-        document.getElementById('guestForm').reset();
-    }
+    document.getElementById(modalId).style.display = 'block';
+    document.getElementById('guestForm').reset(); // Limpa os campos
+    document.getElementById('guestId').value = ''; // Garante que o ID está vazio
+    document.getElementById('modalTitle').innerText = 'Novo Hóspede';
 }
 
 function closeModal(modalId) {
@@ -29,10 +26,20 @@ function filterTable() {
     }
 }
 
-function editGuest(id) {
-    openModal('guestModal');
-    document.getElementById('modalTitle').textContent = 'Editar Hóspede';
-    document.getElementById('modalGuestName').value = 'Exemplo Hóspede ' + id;
+function editGuest(id, nome, cpf, email, telefone) {
+
+    document.getElementById('guestModal').style.display = 'block';
+    
+
+    document.getElementById('modalTitle').innerText = 'Editar Hóspede';
+
+    document.getElementById('nome').value = nome;
+    document.getElementById('cpf').value = cpf;
+    document.getElementById('email').value = email;
+    document.getElementById('telefone').value = telefone;
+
+
+    document.getElementById('guestId').value = id;
 }
 
 function deleteGuest(id) {

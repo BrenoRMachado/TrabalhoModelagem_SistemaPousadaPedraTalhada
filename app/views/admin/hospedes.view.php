@@ -12,8 +12,7 @@
 <body>
  
     <div class="app-container">
-        <?php require 'app\views\admin\sidebar.html'; ?>
-        <main>
+        <?php require 'app/views/admin/sidebar.html'; ?> <main>
             <div class="page-header">
                 <div>
                     <h1>Lista de Hóspedes</h1>
@@ -40,6 +39,7 @@
                 <table id="guestsTable">
                     <thead>
                         <tr>
+                            <th>ID</th> 
                             <th>Nome</th>
                             <th>CPF</th>
                             <th>Telefone</th>
@@ -49,20 +49,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach($hospedes as $hospede): ?>
                         <tr>
-                            <td>Ana Costa</td>
-                            <td>123.456.789-01</td>
-                            <td>(11) 98765-4321</td>
-                            <td>ana.costa@email.com</td>
-                            <td>15/11/2024</td>
+                            <td><?= $hospede->id ?></td>
+                            <td><?= $hospede->nome ?></td>
+                            <td><?= $hospede->cpf ?></td>
+                            <td><?= $hospede->telefone ?></td>
+                            <td><?= $hospede->email ?></td>
+                            <td><?= $hospede->observacoes ?? 'N/A' ?></td>
+                            
+                            
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn btn-small" onclick="editGuest(1)" title="Editar"><span class="material-icons-round edit-color">edit</span></button>
-                                    <button class="btn btn-small" onclick="deleteGuest(1)" title="Excluir"><span class="material-icons-round delete-color">delete</span></button>
+                                    <button class="btn btn-small" onclick="editGuest(<?= $hospede->id ?>)" title="Editar">
+                                        <span class="material-icons-round edit-color">edit</span>
+                                    </button>
+                                    
+                                    <form action="/admin/hospedes/delete" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza?');">
+                                        <input type="hidden" name="id" value="<?= $hospede->id ?>">
+                                        <button type="submit" class="btn btn-small" title="Excluir">
+                                            <span class="material-icons-round delete-color">delete</span>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
-                        </tbody>
+                        <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
         </main>
@@ -73,27 +86,29 @@
             <div class="modal-header">
                 <h2 id="modalTitle">Novo Hóspede</h2>
             </div>
-            <form id="guestForm" onsubmit="submitGuestForm(event)">
+            
+            <form action="/admin/hospedes" method="POST" id="guestForm">
+                
                 <div class="form-group">
-                    <label>Nome Completo *</label>
-                    <input type="text" id="modalGuestName" required>
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" id="nome" name="nome" required>
                 </div>
+
                 <div class="form-group">
-                    <label>CPF/RG *</label>
-                    <input type="text" id="modalGuestDocument" required>
+                    <label for="cpf">CPF/RG *</label>
+                    <input type="text" id="cpf" name="cpf" required>
                 </div>
+
                 <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" id="modalGuestEmail" required>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
+
                 <div class="form-group">
-                    <label>Telefone *</label>
-                    <input type="tel" id="modalGuestPhone" required>
+                    <label for="telefone">Telefone *</label>
+                    <input type="tel" id="telefone" name="telefone" required>
                 </div>
-                <div class="form-group">
-                    <label>Cidade</label>
-                    <input type="text" id="modalGuestCity">
-                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('guestModal')">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -102,6 +117,36 @@
         </div>
     </div>
 
-    <script src="../../../public/js/room-manager.js"></script>
-    <script src="/public/js/hospedes.js"></script> </body>
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block'; // ou 'flex', dependendo do seu CSS
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        // Fecha o modal se clicar fora dele
+        window.onclick = function(event) {
+            var modal = document.getElementById('guestModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function editGuest(id, nome, cpf, email, telefone) {
+    // 1. Abre o modal
+    document.getElementById('guestModal').style.display = 'block'; // ou 'flex'
+    document.getElementById('modalTitle').innerText = 'Editar Hóspede';
+
+    // 2. Preenche os campos do formulário com os dados que vieram do PHP
+    document.getElementById('guestId').value = id; // O campo hidden importante!
+    document.getElementById('nome').value = nome;
+    document.getElementById('cpf').value = cpf;
+    document.getElementById('email').value = email;
+    document.getElementById('telefone').value = telefone;
+}
+    </script>
+
+    
+    <script src="/public/js/hospedes.js"></script> 
+</body>
 </html>
