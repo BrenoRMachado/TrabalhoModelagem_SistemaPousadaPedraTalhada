@@ -4,11 +4,7 @@ body{
 }
 /*! estilo do modal */
 /* conteiner do modal */
-<<<<<<<< HEAD:public/css/modal_sangria.css
 .sangria_container{
-========
-.mudar-status-container{
->>>>>>>> modais-quartos:public/css/modal_mudar_status.css
     height: 100vh;
     backdrop-filter: blur(3px);
     display: flex; /*mudar aqui para o backend*/
@@ -16,13 +12,8 @@ body{
     justify-content: center;
 }
 /* estilo da caixa do modal */
-<<<<<<<< HEAD:public/css/modal_sangria.css
 .modal-sangria{
     height: 25%;
-========
-.modal-status{
-    height: 20%;
->>>>>>>> modais-quartos:public/css/modal_mudar_status.css
     width: 35%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -31,7 +22,6 @@ body{
     flex-direction: column;
     padding: 2rem;
 }
-<<<<<<<< HEAD:public/css/modal_sangria.css
 /* título */
 .modal-sangria h2{ 
     border-bottom: 2px solid var(--color-border2);
@@ -63,36 +53,9 @@ body{
 
 .btn-container-sangria{
 
-========
-/* estilo do conteúdo do modal */
-/* header */
-.modal-status-header{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--color-border2);
-    padding-bottom: 1rem;
-}
-.status-exit{
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    color: var(--color-exit);
-}
-.status-exit:hover{
-    transform: scale(1.2);
-}
-.status-exit:active{
-    color: var(--color-active);
-}
-/* botões */
-.btn-container-status{
-    height: 70%;
->>>>>>>> modais-quartos:public/css/modal_mudar_status.css
-    display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: center;
-<<<<<<<< HEAD:public/css/modal_sangria.css
     height: 45%;
     gap: 3.6rem;
 }
@@ -122,26 +85,3 @@ body{
 .btn-sangria-confirmar:active{
     background-color: var(--red-card2);
 }
-========
-    gap:2rem;
-    padding-top: 1rem;
-}
-.btn-disponivel, .btn-manutencao{
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-}
-.btn-disponivel{
-    background-color: var(--stronger-green);
-    color: white;
-    padding: 1rem 2rem;
-}
-.btn-manutencao{
-    background-color: var(--yellow-card);
-    color:white;
-    padding: 1rem 2rem;
-}
-.btn-disponivel:active, .btn-manutencao:active{
-    transform: scale(0.95);
-}
->>>>>>>> modais-quartos:public/css/modal_mudar_status.css
