@@ -6,10 +6,13 @@
     <title>Equipe e Acessos</title>
     <link rel="stylesheet" href="/public/css/equipe.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/public/js/modais_equipe.js"></script>
+    <link rel="stylesheet" href="/public/css/modal_editar_usuario.css">
+    <link rel="stylesheet" href="/public/css/index.css">
 </head>
 <body>
     <div class="app-container">
-        <?php require 'app\views\admin\sidebar.html'; ?>
+        <?php require 'app/views/admin/sidebar.html'; ?>
         <main class="conteudo">
             <header class="cabecalho">
                 <div class="titulo">
@@ -17,10 +20,12 @@
                     <p>Gerencie os funcionários e suas permissões</p>
                 </div>
 
-                <button class="btn-adicionar">
-                    <i class="fa-solid fa-plus"></i>
-                    Cadastrar Funcionário
-                </button>
+                <button
+    class="btn-adicionar"
+    onclick="abrirModalNovoUsuario('modal_novo_usuario')">
+    <i class="fa-solid fa-plus"></i>
+    Cadastrar Funcionário
+</button>
             </header>
             <section class="time">
                 <?php foreach ($funcionarios as $funcionario): ?>
@@ -41,23 +46,31 @@
                     </span>
 
                     <div class="acoes">
-                        <button class="btn-editar" onclick="abrirModal('editar_funcionario<?= $funcionario->id ?>')">Editar</button>
+    <!-- EDITAR -->
+    <button
+        class="btn-editar"
+        onclick="abrirModalEditarUsuario('modal_editar_usuario_<?= $funcionario->id ?>')">
+        Editar
+    </button>
 
-                        <button class="btn-inativar" onclick="abrirModal('inativar_funcionario<?= $funcionario->id ?>')">Inativar</button>
-                    </div>
+    <!-- INATIVAR -->
+    <button
+        class="btn-inativar"
+        onclick="abrirModalInativarUsuario('modal_inativar_usuario_<?= $funcionario->id ?>')">
+        Inativar
+    </button>
+</div>
+
                 </article>
             <?php endforeach;?>
 
             </section>
+             <?php foreach ($funcionarios as $funcionario):?>
+        <?php require 'app\views\admin\Modais\Equipe\modal_editar_usuario.view.php'; ?>
+    <?php endforeach;?>
+        <div id="filtro" style="display:none;"></div>
         </main>
     </div>
-    <?php foreach ($funcionarios as $funcionario):?>
-    <?php require 'app\views\admin\Modais\Equipe\modal_editar_usuario.html'; ?>
-    <?php require 'app\views\admin\Modais\Equipe\modal_inativar.html'; ?>
 
-    <?php endforeach;?>
-
-    <?php require 'app\views\admin\Modais\Equipe\modal_novo_usuario.html'; ?>
-    
 </body>
 </html>

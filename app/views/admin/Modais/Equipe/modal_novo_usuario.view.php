@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../../../public/css/index.css">
-    <link rel="stylesheet" href="../../../../../public/css/modal_novo_usuario.css">
-</head>
-<body>
-    <div class="novo-usuario-container">
+    <div class="novo-usuario-container" id="modal_novo_usuario_<?= $funcionario->id ?>">
         <div class="modal-novo-usuario">
             <h2>Cadastrar Novo Usuário</h2>
             <div class="novo-usuario-input-container">
@@ -40,5 +30,3 @@
             </div>
         </div>
     </div>  
-</body>
-</html>
