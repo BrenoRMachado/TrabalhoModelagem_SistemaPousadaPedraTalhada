@@ -22,6 +22,6 @@
     --color-exit: #7C7C7C; /* Cor do ícone de sair */
     --color-active: #c0c0c0; /* Cor para elementos brancos quando clicados */
     --stronger-green: #70845F; /* Cor verde mais forte */
-    --grey-btn: #bebebe; /* Cor do botão cinza */
-    --grey-btn-active: #a0a0a0; /* Cor do botão cinza quando ativo */
+    --grey-btn: #a5a5a5; /* Cor do botão cinza */
+    --grey-btn-active: #b8b8b8; /* Cor do botão cinza quando ativo */
 }

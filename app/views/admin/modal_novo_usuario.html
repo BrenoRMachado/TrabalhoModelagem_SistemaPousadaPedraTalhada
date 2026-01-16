@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../public/css/index.css">
+    <link rel="stylesheet" href="../../../public/css/modal_novo_usuario.css">
+</head>
+<body>
+    <div class="novo-usuario-container">
+        <div class="modal-novo-usuario">
+            <h2>Cadastrar Novo Usuário</h2>
+            <div class="novo-usuario-input-container">
+                <div class="novo-usuario-input">
+                    <label>Nome Completo<span class="required">*</span></label>
+                    <input type="text" required>
+                </div>
+                <div class="novo-usuario-input">
+                    <label>Usuário<span class="required">*</span></label>
+                    <input type="text" required>
+                </div>
+                <div class="novo-usuario-input">
+                    <label>Senha<span class="required">*</span></label>
+                    <input type="text" required>
+                </div>
+                <div class="novo-usuario-input">
+                    <label>Cargo<span class="required">*</span></label>
+                    <select required>
+                        <option value="" disabled selected>Selecione um cargo</option>
+                        <option value="recepcionista">Recepcionista</option>
+                        <option value="gerente">Gerente</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="novo-usuario-btn-container">
+                <button class="btn-cancelar-novo-usuario">Cancelar</button>
+                <button class="btn-salvar-novo-usuario">Salvar</button>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
