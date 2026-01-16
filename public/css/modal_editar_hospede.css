@@ -86,7 +86,7 @@ body{
     margin-bottom: 1rem;
 }
 .btn-cancelar-editar-hospede{
-    background-color: var(--red-card);
+    background-color: var(--grey-btn);
     margin-right: 1rem;
 }
 .btn-salvar-editar-hospede{
@@ -95,7 +95,7 @@ body{
 }
 
 .btn-cancelar-editar-hospede:active{
-    background-color: var(--red-card2);
+    background-color: var(--grey-btn-active);
 }
 .btn-salvar-editar-hospede:active{
     background-color: var(--green-card2);
