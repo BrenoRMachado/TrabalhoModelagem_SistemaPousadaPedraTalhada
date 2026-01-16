@@ -69,9 +69,6 @@
                                     <button class="btn btn-checkin btn-small">
                                         <span class="material-icons-round" style="font-size: 16px;">check_circle</span> Check-in
                                     </button>
-                                    <button class="btn btn-view btn-small">
-                                        <span class="material-icons-round" style="font-size: 16px;">visibility</span> Visualizar
-                                    </button>
                                     <button class="btn btn-edit btn-small">
                                         <span class="material-icons-round" style="font-size: 16px;">edit</span> Editar
                                     </button>
