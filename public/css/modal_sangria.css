@@ -1,0 +1,87 @@
+/*! fundo ilustrativo */
+body{
+    background-image: url(../assets/fundoIlustrativo.png);
+}
+/*! estilo do modal */
+/* conteiner do modal */
+.sangria_container{
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    display: flex; /*mudar aqui para o backend*/
+    align-items: center;
+    justify-content: center;
+}
+/* estilo da caixa do modal */
+.modal-sangria{
+    height: 25%;
+    width: 35%;
+    background-color: var(--bg-light);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+/* título */
+.modal-sangria h2{ 
+    border-bottom: 2px solid var(--color-border2);
+    padding-bottom: 1rem;
+}
+/* caixa de texto */
+.modal-sangria label{
+    margin-top: 1rem;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.modal-sangria textarea{
+    margin-top: 1rem;
+    height: 23%;
+    border: 2px solid var(--color-border2);
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 16px;
+    resize: none;
+}
+
+.modal-sangria textarea:focus{
+    outline: none;
+    border: 2px solid var(--red-card);
+}
+
+/* botão de confirmar */
+
+.btn-container-sangria{
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 45%;
+    gap: 3.6rem;
+}
+
+.btn-container-sangria button{
+    margin-top: 1rem;
+    width: 45%;
+    padding: 0.9rem;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+.btn-sangria-cancelar{
+    background-color: var(--grey-btn);
+}
+.btn-sangria-confirmar{
+    background-color: var(--red-card);
+}
+
+.btn-sangria-cancelar:active{
+    background-color: var(--grey-btn-active);
+}
+.btn-sangria-confirmar:active{
+    background-color: var(--red-card2);
+}
