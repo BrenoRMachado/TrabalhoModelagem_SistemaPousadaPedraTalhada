@@ -4,11 +4,8 @@ body{
 }
 /*! estilo do modal */
 /* conteiner do modal */
-<<<<<<<< HEAD:public/css/modal_sangria.css
+
 .sangria_container{
-========
-.mudar-status-container{
->>>>>>>> modais-quartos:public/css/modal_mudar_status.css
     height: 100vh;
     backdrop-filter: blur(3px);
     display: flex; /*mudar aqui para o backend*/
@@ -16,13 +13,8 @@ body{
     justify-content: center;
 }
 /* estilo da caixa do modal */
-<<<<<<<< HEAD:public/css/modal_sangria.css
 .modal-sangria{
     height: 25%;
-========
-.modal-status{
-    height: 20%;
->>>>>>>> modais-quartos:public/css/modal_mudar_status.css
     width: 35%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -31,7 +23,6 @@ body{
     flex-direction: column;
     padding: 2rem;
 }
-<<<<<<<< HEAD:public/css/modal_sangria.css
 /* título */
 .modal-sangria h2{ 
     border-bottom: 2px solid var(--color-border2);
@@ -62,11 +53,6 @@ body{
 /* botão de confirmar */
 
 .btn-container-sangria{
-
-========
-/* estilo do conteúdo do modal */
-/* header */
-.modal-status-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
