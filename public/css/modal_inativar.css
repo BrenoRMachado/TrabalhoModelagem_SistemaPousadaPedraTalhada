@@ -52,17 +52,17 @@ body{
     margin-bottom: 1rem;
 }
 .btn-cancelar-inativar{
-    background-color: var(--red-card);
+    background-color: var(--grey-btn);
     margin-right: 1rem;
 }
 .btn-salvar-inativar{
-    background-color: var(--stronger-green);
+    background-color: var(--red-card);
     margin-left: 1rem;
 }
 
 .btn-cancelar-inativar:active{
-    background-color: var(--red-card2);
+    background-color: var(--grey-btn-active);
 }
 .btn-salvar-inativar:active{
-    background-color: var(--green-card2);
+    background-color: var(--red-card2);
 }

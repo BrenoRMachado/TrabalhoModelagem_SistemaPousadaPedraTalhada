@@ -88,7 +88,7 @@ body{
     margin-bottom: 1rem;
 }
 .btn-cancelar-editar-usuario{
-    background-color: var(--red-card);
+    background-color: var(--grey-btn);
     margin-right: 1rem;
 }
 .btn-salvar-editar-usuario{
@@ -97,7 +97,7 @@ body{
 }
 
 .btn-cancelar-editar-usuario:active{
-    background-color: var(--red-card2);
+    background-color: var(--grey-btn-active);
 }
 .btn-salvar-editar-usuario:active{
     background-color: var(--green-card2);

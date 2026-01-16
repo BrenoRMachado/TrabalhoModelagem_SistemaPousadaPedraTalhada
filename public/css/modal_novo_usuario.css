@@ -88,7 +88,7 @@ body{
     margin-bottom: 1rem;
 }
 .btn-cancelar-novo-usuario{
-    background-color: var(--red-card);
+    background-color: var(--grey-btn);
     margin-right: 1rem;
 }
 .btn-salvar-novo-usuario{
@@ -97,7 +97,7 @@ body{
 }
 
 .btn-cancelar-novo-usuario:active{
-    background-color: var(--red-card2);
+    background-color: var(--grey-btn-active);
 }
 .btn-salvar-novo-usuario:active{
     background-color: var(--green-card2);
