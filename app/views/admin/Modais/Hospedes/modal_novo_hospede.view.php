@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="../../../../../public/css/modal_novo_hospede.css">
+<link rel="stylesheet" href="../../../../../public/css/index.css">
+
+<div class="novo-hospede-container">
+    <div class="modal-novo-hospede">
+        <h2>Novo Hóspede</h2>
+        <div class="novo-hospede-input-container">
+            <div class="novo-hospede-input">
+                <label>Nome Completo<span class="required">*</span></label>
+                <input type="text" required>
+            </div>
+            <div class="novo-hospede-input">
+                <label>CPF<span class="required">*</span></label>
+                <input type="text" required>
+            </div>
+            <div class="novo-hospede-input">
+                <label>Email<span class="required">*</span></label>
+                <input type="text" required>
+            </div>
+            <div class="novo-hospede-input">
+                <label>Telefone<span class="required">*</span></label>
+                <input type="text" required>
+            </div>
+        </div>
+        <div class="novo-hospede-btn-container">
+            <button class="btn-cancelar-novo-hospede">Cancelar</button>
+            <button class="btn-salvar-novo-hospede">Salvar</button>
+        </div>
+    </div>
+</div>
