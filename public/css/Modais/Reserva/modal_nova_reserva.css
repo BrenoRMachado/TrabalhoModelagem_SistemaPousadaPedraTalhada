@@ -1,0 +1,35 @@
+/*! fundo ilustrativo */
+body{
+    background-image: url(../../../assets/fundoIlustrativo.png);
+}
+/*! estilo do modal */
+/* conteiner do modal */
+.nova-reserva-container{
+    height: 100vh;
+    backdrop-filter: blur(3px);
+    display: flex; /*mudar aqui para o backend*/
+    align-items: center;
+    justify-content: center;
+}
+/* estilo da caixa do modal */
+.modal-nova-reserva{
+    height: 90%;
+    width: 46%;
+    background-color: var(--bg-light);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+/* estilo do conteúdo do modal */
+/* título */
+.modal-nova-reserva h2{ 
+    border-bottom: 2px solid var(--color-border2);
+    padding-bottom: 1rem;
+}
+/*Estilo do required*/
+.required{
+    font-size: 23px;
+    color:red;
+}
