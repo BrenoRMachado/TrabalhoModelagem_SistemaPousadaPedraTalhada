@@ -9,7 +9,7 @@ class ReservasController
     public function index()
     {
       
-        $reservas = App::get('database')->selectAll('reservas');
+        $reservas = App::get('database')->selectAll('reserva');
 
         return view('admin/reservas', [
             'reservas' => $reservas
