@@ -3,12 +3,16 @@
 namespace App\Controllers;
 
 use App\Core\App;
-use Exception;
 
 class ReservasController
 {
     public function index()
     {
-        return view('admin/reservas');
+      
+        $reservas = App::get('database')->selectAll('reservas');
+
+        return view('admin/reservas', [
+            'reservas' => $reservas
+        ]);
     }
 }

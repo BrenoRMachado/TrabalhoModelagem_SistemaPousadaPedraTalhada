@@ -45,6 +45,25 @@ class HospedesController
         return redirect('admin/hospedes');
     }
 
+    public function update()
+{
+    
+    $id = $_POST['id']; 
+    
+    $dados = [
+        'nome' => $_POST['nome'],
+        'cpf' => $_POST['cpf'],
+        'email' => $_POST['email'],
+        'telefone' => $_POST['telefone']
+    ];
+
+  
+    App::get('database')->update('hospedes', $id, $dados);
+
+  
+    return redirect('admin/hospedes');
+}
+
     public function delete()
 {
 

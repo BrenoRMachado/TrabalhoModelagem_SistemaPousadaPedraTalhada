@@ -12,15 +12,18 @@
 <body>
  
     <div class="app-container">
-        <?php require 'app/views/admin/sidebar.html'; ?> <main>
+        <?php require 'app/views/admin/sidebar.html'; ?> 
+        
+        <main>
             <div class="page-header">
                 <div>
                     <h1>Lista de Hóspedes</h1>
                     <p class="subtitle">Gerencie os hóspedes cadastrados</p>
                 </div>
+                
                 <div class="page-header-actions">
-                    <button class="btn btn-blue" onclick="openModal('guestModal')">
-                        <span class="material-icons-round">add</span> Novo Hóspede
+                   <button class="btn btn-blue" onclick="prepararNovoHospede()">
+                     <span class="material-icons-round">add</span> Novo Hóspede
                     </button>
                 </div>
             </div>
@@ -44,7 +47,6 @@
                             <th>CPF</th>
                             <th>Telefone</th>
                             <th>E-mail</th>
-                            <th>Última Estadia</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -56,12 +58,18 @@
                             <td><?= $hospede->cpf ?></td>
                             <td><?= $hospede->telefone ?></td>
                             <td><?= $hospede->email ?></td>
-                            <td><?= $hospede->observacoes ?? 'N/A' ?></td>
-                            
                             
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn btn-small" onclick="editGuest(<?= $hospede->id ?>)" title="Editar">
+                                    <button class="btn btn-small" 
+                                        onclick="editGuest(
+                                            '<?= $hospede->id ?>',
+                                            '<?= $hospede->nome ?>',
+                                            '<?= $hospede->cpf ?>',
+                                            '<?= $hospede->email ?>',
+                                            '<?= $hospede->telefone ?>'
+                                        )" 
+                                        title="Editar">
                                         <span class="material-icons-round edit-color">edit</span>
                                     </button>
                                     
@@ -78,9 +86,14 @@
                     </tbody>
                 </table>
             </div>
-        </main>
+        </main> 
     </div>
-
+        
+        <?php
+         include 'app/views/admin/Modais/Hospedes/modal_novo_hospede.view.php'; 
+            include 'app/views/admin/Modais/Hospedes/modal_editar_hospede.view.php';
+         
+         ?>
     
     <script src="/public/js/hospedes.js"></script> 
 </body>
