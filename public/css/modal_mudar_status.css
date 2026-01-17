@@ -56,7 +56,7 @@
     align-items: center;
     justify-content: center;
     gap:2rem;
-    padding-top: 1rem;
+    padding-top: 3rem;
 }
 .btn-disponivel, .btn-manutencao{
     border: none;
@@ -73,6 +73,10 @@
     color:white;
     padding: 1rem 2rem;
 }
-.btn-disponivel:active, .btn-manutencao:active{
-    transform: scale(0.95);
+
+.btn-disponivel:active{
+    background-color: var(--green-card2);
+}
+.btn-manutencao:active{
+    background-color: var(--yellow-card2);
 }
