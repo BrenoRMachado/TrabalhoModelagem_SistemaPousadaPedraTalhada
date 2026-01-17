@@ -28,15 +28,6 @@
                 </div>
             </div>
 
-            <div class="filter-container">
-                <div class="filter-group">
-                    <label>Buscar</label>
-                    <div class="search-box">
-                        <span class="material-icons-round search-icon">search</span>
-                        <input type="text" id="searchGuest" placeholder="Buscar por nome ou CPF" onkeyup="filterTable()" />
-                    </div>
-                </div>
-            </div>
 
             <div class="table-container">
                 <table id="guestsTable">
