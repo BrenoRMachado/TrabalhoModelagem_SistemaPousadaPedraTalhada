@@ -9,10 +9,11 @@
     backdrop-filter: blur(3px);
     display: none;
     justify-content: center;
+    align-items: center;
 }
 /* estilo da caixa do modal */
 .modal-editar-hospede{
-    height: 85%;
+    height: 62%;
     width: 30%;
     background-color: var(--bg-light);
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
@@ -72,6 +73,7 @@
     align-items: end;
     justify-content: center;
     height: 20%;
+    padding-top: 1rem;
 }
 .editar-hospede-btn-container button{
     width: 44%;

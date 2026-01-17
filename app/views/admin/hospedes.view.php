@@ -42,7 +42,6 @@
                 <table id="guestsTable">
                     <thead>
                         <tr>
-                            <th>ID</th> 
                             <th>Nome</th>
                             <th>CPF</th>
                             <th>Telefone</th>
@@ -53,7 +52,6 @@
                     <tbody>
                         <?php foreach($hospedes as $hospede): ?>
                         <tr>
-                            <td><?= $hospede->id ?></td>
                             <td><?= $hospede->nome ?></td>
                             <td><?= $hospede->cpf ?></td>
                             <td><?= $hospede->telefone ?></td>
