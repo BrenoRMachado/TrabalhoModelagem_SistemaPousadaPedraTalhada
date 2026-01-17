@@ -29,7 +29,6 @@
     border-bottom: 2px solid var(--color-border2, #eee);
     padding-bottom: 1rem;
     margin-bottom: 1rem;
-    text-align: center;
 }
 
 .novo-usuario-input-container {
@@ -61,6 +60,17 @@
     border-radius: 10px;
     padding: 0 1rem;
     font-size: 15px;
+    background-color: white; /* Ou var(--bg-light) se quiser cinza claro */
+    color: var(--text-dark); /* Garante a cor do texto */
+    width: 100%;
+}
+
+.novo-usuario-input select {
+    appearance: none;          /* Remove a seta no Chrome, Firefox e Safari modernos */
+    -webkit-appearance: none;  /* Para Safari e Chrome mais antigos */
+    -moz-appearance: none;     /* Para Firefox antigo */
+    background-image: none;    /* Garante que nenhum background de imagem seja usado como seta */
+    cursor: pointer;
 }
 
 
@@ -78,26 +88,36 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 .btn-cancelar-novo-usuario {
-    background-color: #999;
+    background-color: var(--grey-btn);
     color: white;
+}
+
+.btn-cancelar-novo-usuario:active{
+    background-color: var(--grey-btn-active);
 }
 
 .btn-salvar-novo-usuario {
-    background-color: #28a745;
+    background-color: var(--stronger-green);
     color: white;
 }
 
-.btn-cancelar-novo-usuario:hover { background-color: #777; }
-.btn-salvar-novo-usuario:hover { background-color: #218838; }
+.btn-salvar-novo-usuario:active{
+    background-color: var(--green-card2);
+}
+
 
 .input-senha-wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%; /* Adicionado para ocupar toda a largura */
+}
+
+.input-senha-wrapper input {
+    width: 100%; /* Garante que o input preencha o wrapper */
 }
 
 .input-senha-wrapper i {
