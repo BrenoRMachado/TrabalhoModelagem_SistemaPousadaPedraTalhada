@@ -57,25 +57,26 @@ class QueryBuilder
         }
     }
 
-    public function update($table, $parameters, $id)
+    public function update($table, $parameters, $identifierColumn, $identifierValue)
     {
-        
-        $setPart = implode(', ', array_map(function ($param) {
-            return "{$param} = :{$param}";
-        }, array_keys($parameters)));
+    $setClause = implode(', ', array_map(function ($column) {
+        return "{$column} = :{$column}";
+    }, array_keys($parameters)));
 
-       
-        $sql = "UPDATE {$table} SET {$setPart} WHERE id = :id";
+    $sql = sprintf(
+        'update %s set %s where %s = :id_val',
+        $table,
+        $setClause,
+        $identifierColumn
+    );
 
-       
-        $parameters['id'] = $id;
-
-        try {
-            $statement = $this->pdo->prepare($sql);
-            $statement->execute($parameters);
-        } catch (Exception $e) {
-            die('Erro ao atualizar registro: ' . $e->getMessage());
-        }
+    try {
+        $statement = $this->pdo->prepare($sql);
+        $parameters['id_val'] = $identifierValue;
+        $statement->execute($parameters);
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
     }
 
     public function delete($table, $id)

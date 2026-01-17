@@ -18,7 +18,7 @@
             
             <input type="hidden" name="id" id="statusRoomId">
             <input type="hidden" name="status" id="inputStatusValue">
-
+            
             <div class="btn-container-status">
                 <button type="submit" class="btn-disponivel" onclick="setStatus('disponivel')" style="background-color: #22c55e; color: white; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500;">
                     Disponível

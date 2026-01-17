@@ -14,27 +14,27 @@ class QuartosController
         return view('admin/quartos', ['quarto' => $dados]);
     }
 
-    // SALVA NO BANCO (Esta é a parte que faltava)
     public function updateStatus()
-    {
-        // 1. Recebe os dados do JavaScript
-        $id = $_POST['id'];
-        $novoStatus = $_POST['status'];
+{
+    $numeroQuarto = $_POST['id'];
+    $novoStatus = $_POST['status'];
 
-        // 2. Validação simples de segurança
-        $statusPermitidos = ['disponivel', 'manutencao', 'ocupado', 'limpeza'];
+    $statusPermitidos = ['DISPONIVEL', 'MANUTENCAO', 'OCUPADO'];
 
-        if (in_array($novoStatus, $statusPermitidos)) {
-            
-            // 3. Manda o banco atualizar
-            // Assume que você tem uma função update() no seu QueryBuilder
-            App::get('database')->update('quarto', $id, [
-                'status' => $novoStatus
-            ]);
-            
-            // Retorna sucesso para o JavaScript não dar erro
-            echo json_encode(['sucesso' => true]);
+    if (in_array($novoStatus, $statusPermitidos)) {
+        try {
+            App::get('database')->update('quarto', [
+                'STATUS' => $novoStatus
+            ], 'numero', $numeroQuarto);
+
+            header('Location: /admin/quartos');
             exit;
+
+        } catch (Exception $e) {
+            die("Erro ao atualizar o status: " . $e->getMessage());
         }
+    } else {
+        die("Status inválido enviado.");
     }
+}
 }
