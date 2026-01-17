@@ -1,15 +1,21 @@
-/*! fundo ilustrativo */
-body{
-    background-image: url(../assets/fundoIlustrativo.png);
-}
+
 /*! estilo do modal */
 /* conteiner do modal */
 .mudar-status-container{
+   position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+
     backdrop-filter: blur(3px);
-    display: flex; /*mudar aqui para o backend*/
+    background-color: rgba(0, 0, 0, 0.3);
+
+    display: none;
     align-items: center;
     justify-content: center;
+
+    z-index: 1000;
 }
 /* estilo da caixa do modal */
 .modal-status{

@@ -16,12 +16,13 @@ $router->get('admin/financeiro', 'FinanceiroController@index');
 
 
 $router->post('admin/hospedes', 'HospedesController@store');
-$router->post('admin/update', 'HospedesController@update');
+$router->post('admin/hospedes/update', 'HospedesController@update');
 $router->get('admin/hospedes', 'HospedesController@index');
 
 
 
-$router->get('quartos', 'QuartosController@index');
+$router->get('admin/quartos', 'QuartosController@index');
+$router->post('admin/quartos/status', 'QuartosController@updateStatus');
 
 
 $router->get('admin/reservas', 'ReservasController@index');
