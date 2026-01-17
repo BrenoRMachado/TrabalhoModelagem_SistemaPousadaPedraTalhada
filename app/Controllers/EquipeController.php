@@ -67,8 +67,8 @@ class EquipeController
         $idFuncionario = $_POST['id_funcionario'];
         $idUsuario = $_POST['id_usuario'];
 
-        App::get('database')->delete('funcionario', 'id', $idFuncionario);
-        App::get('database')->delete('usuario', 'id', $idUsuario);
+        App::get('database')->delete('funcionario', $idFuncionario);
+        App::get('database')->delete('usuario', $idUsuario);
 
         header('Location: /admin/equipe');
         exit;
