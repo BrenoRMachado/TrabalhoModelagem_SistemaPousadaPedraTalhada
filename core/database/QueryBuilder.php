@@ -41,25 +41,6 @@ class QueryBuilder
     return false;
 }
 
-    public function verificaLogin($login, $senha)
-    {
-
-    $sql = "SELECT * FROM usuario WHERE login = :login";
-
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindValue(':login', $login);
-    $stmt->execute();
-
-    $dadosUsuario = $stmt->fetch(\PDO::FETCH_OBJ);
-
-    if ($dadosUsuario && $dadosUsuario->senha == $senha) {
-        return $dadosUsuario;
-    }
-
-    return false;
-}
-
-
     public function insert($table, $parameters)
     {
         $sql = sprintf(

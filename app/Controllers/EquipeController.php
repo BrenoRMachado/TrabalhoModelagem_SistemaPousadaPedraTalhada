@@ -15,63 +15,63 @@ class EquipeController
         return view('admin/equipe', compact('funcionarios', 'usuarios'));
     }
     
-public function edit()
-{
-    $idFuncionario = $_POST['id_funcionario'];
-    $idUsuario     = $_POST['id_usuario'];
+    public function edit()
+    {
+        $idFuncionario = $_POST['id_funcionario'];
+        $idUsuario     = $_POST['id_usuario'];
 
-    App::get('database')->update(
-        'funcionario',
-        [
-            'nome'  => $_POST['nome'],
-            'email' => $_POST['email'],
-            'cargo' => $_POST['cargo']
-        ],
-        $idFuncionario
-    );
+        App::get('database')->update(
+            'funcionario',
+            [
+                'nome'  => $_POST['nome'],
+                'email' => $_POST['email'],
+                'cargo' => $_POST['cargo']
+            ],
+            $idFuncionario
+        );
 
-    $dadosUsuario = [
-        'login' => $_POST['login']
-    ];
+        $dadosUsuario = [
+            'login' => $_POST['login']
+        ];
 
-    if (!empty($_POST['senha'])) {
-        $dadosUsuario['senha'] = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+        // Removido o password_hash: senha salva como texto puro
+        if (!empty($_POST['senha'])) {
+            $dadosUsuario['senha'] = $_POST['senha'];
+        }
+
+        App::get('database')->update('usuario', $dadosUsuario, $idUsuario);
+
+        header('Location: /admin/equipe');
+        exit;
     }
 
-    App::get('database')->update('usuario', $dadosUsuario, $idUsuario);
+    public function create()
+    {
+        // Removido o password_hash: senha salva como texto puro
+        $idUsuario = App::get('database')->insert('usuario', [
+            'login' => $_POST['login'],
+            'senha' => $_POST['senha']
+        ]);
 
-    header('Location: /admin/equipe');
-    exit;
-}
+        App::get('database')->insert('funcionario', [
+            'nome'       => $_POST['nome'],
+            'email'      => $_POST['email'],
+            'cargo'      => $_POST['cargo'],
+            'id_usuario' => $idUsuario
+        ]);
 
-public function create()
-{
-    $idUsuario = App::get('database')->insert('usuario', [
-        'login' => $_POST['login'],
-        'senha' => password_hash($_POST['senha'], PASSWORD_DEFAULT)
-    ]);
+        header('Location: /admin/equipe');
+    }
 
-    App::get('database')->insert('funcionario', [
-        'nome'       => $_POST['nome'],
-        'email'      => $_POST['email'],
-        'cargo'      => $_POST['cargo'],
-        'id_usuario' => $idUsuario
-    ]);
+    public function delete()
+    {
+        $idFuncionario = $_POST['id_funcionario'];
+        $idUsuario = $_POST['id_usuario'];
 
-    header('Location: /admin/equipe');
-}
+        App::get('database')->delete('funcionario', $idFuncionario);
+        App::get('database')->delete('usuario', $idUsuario);
 
-public function delete()
-{
-    $idFuncionario = $_POST['id_funcionario'];
-    $idUsuario = $_POST['id_usuario'];
-
-    App::get('database')->delete('funcionario', $idFuncionario);
-    
-    App::get('database')->delete('usuario', $idUsuario);
-
-    header('Location: /admin/equipe');
-    exit;
-}
-
+        header('Location: /admin/equipe');
+        exit;
+    }
 }
