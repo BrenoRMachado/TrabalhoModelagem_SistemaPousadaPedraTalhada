@@ -27,6 +27,7 @@ class EquipeController
                 'email' => $_POST['email'],
                 'cargo' => $_POST['cargo']
             ],
+            'id',
             $idFuncionario
         );
 
@@ -34,12 +35,11 @@ class EquipeController
             'login' => $_POST['login']
         ];
 
-        // Removido o password_hash: senha salva como texto puro
         if (!empty($_POST['senha'])) {
             $dadosUsuario['senha'] = $_POST['senha'];
         }
 
-        App::get('database')->update('usuario', $dadosUsuario, $idUsuario);
+        App::get('database')->update('usuario', $dadosUsuario, 'id', $idUsuario);
 
         header('Location: /admin/equipe');
         exit;
@@ -47,7 +47,6 @@ class EquipeController
 
     public function create()
     {
-        // Removido o password_hash: senha salva como texto puro
         $idUsuario = App::get('database')->insert('usuario', [
             'login' => $_POST['login'],
             'senha' => $_POST['senha']
@@ -68,8 +67,8 @@ class EquipeController
         $idFuncionario = $_POST['id_funcionario'];
         $idUsuario = $_POST['id_usuario'];
 
-        App::get('database')->delete('funcionario', $idFuncionario);
-        App::get('database')->delete('usuario', $idUsuario);
+        App::get('database')->delete('funcionario', 'id', $idFuncionario);
+        App::get('database')->delete('usuario', 'id', $idUsuario);
 
         header('Location: /admin/equipe');
         exit;
