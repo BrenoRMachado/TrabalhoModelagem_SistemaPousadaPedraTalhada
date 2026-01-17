@@ -32,7 +32,7 @@
                 <?php foreach ($funcionarios as $funcionario): ?>
                 <article class="card">
                     <div class="avatar">
-                        <img src="../../../public/Assets/icone_user.jpg" alt="">
+                        <img src="../../../public/Assets/user-icon.png" alt="">
                     </div>
                     <h3><?=htmlspecialchars($funcionario->nome)?></h3>
                     <span class="email"><?=htmlspecialchars($funcionario->email)?></span>
