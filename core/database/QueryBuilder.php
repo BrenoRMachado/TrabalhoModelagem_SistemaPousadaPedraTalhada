@@ -23,6 +23,26 @@ class QueryBuilder
 
     public function verificaLogin($login, $senha)
     {
+    // Busca direta na tabela 'usuario'
+    $sql = "SELECT * FROM usuario WHERE login = :login";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':login', $login);
+    $stmt->execute();
+
+    $dadosUsuario = $stmt->fetch(\PDO::FETCH_OBJ);
+
+    // Verifica se o usuário existe e se a senha bate
+    // O banco de dados mostra a senha como texto puro ('123')
+    if ($dadosUsuario && $dadosUsuario->senha == $senha) {
+        return $dadosUsuario;
+    }
+
+    return false;
+}
+
+    public function verificaLogin($login, $senha)
+    {
 
     $sql = "SELECT * FROM usuario WHERE login = :login";
 
@@ -52,6 +72,7 @@ class QueryBuilder
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
+            return $this->pdo->lastInsertId();
         } catch (Exception $e) {
             die('Erro ao inserir: ' . $e->getMessage());
         }
