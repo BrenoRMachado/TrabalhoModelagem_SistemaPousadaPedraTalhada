@@ -20,17 +20,14 @@
             <input type="hidden" name="status" id="inputStatusValue">
             
             <div class="btn-container-status">
-                <button type="submit" class="btn-disponivel" onclick="setStatus('disponivel')" style="background-color: #22c55e; color: white; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500;">
+                <button type="submit" class="btn-disponivel" onclick="setStatus('disponivel')">
                     Disponível
                 </button>
                 
-                <button type="submit" class="btn-manutencao" onclick="setStatus('manutencao') " style="background-color: #fbbf24; color: white; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500;">
+                <button type="submit" class="btn-manutencao" onclick="setStatus('manutencao') ">
                     Manutenção
                 </button>
-                
-                <button type="submit" class="btn-ocupado" onclick="setStatus('ocupado')" style="background-color: #ef4444; color: white; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 500;">
-                    Ocupado
-                </button>
+            
             </div>
         </form>
 
