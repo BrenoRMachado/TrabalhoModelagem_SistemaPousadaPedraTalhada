@@ -4,10 +4,16 @@ body{
 }
 /*! estilo do modal */
 /* conteiner do modal */
-.editar-reserva-container{
+.editar-reserva-container {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(3px);
-    display: flex; /*mudar aqui para o backend*/
     align-items: center;
     justify-content: center;
 }

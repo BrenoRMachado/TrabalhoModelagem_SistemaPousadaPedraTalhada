@@ -59,6 +59,13 @@ class QueryBuilder
         }
     }
 
+    public function selectWhere($table, $column, $value)
+{
+    $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE {$column} = :val");
+    $statement->execute(['val' => $value]);
+    return $statement->fetchAll(\PDO::FETCH_CLASS);
+}
+
     public function update($table, $parameters, $identifierColumn, $identifierValue)
     {
     $setClause = implode(', ', array_map(function ($column) {

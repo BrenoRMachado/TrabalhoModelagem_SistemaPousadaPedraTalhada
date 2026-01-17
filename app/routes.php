@@ -30,3 +30,9 @@ $router->get('admin/equipe', 'EquipeController@index');
 $router->post('admin/equipe/create', 'EquipeController@create');
 $router->post('admin/equipe/edit', 'EquipeController@edit');
 $router->post('admin/equipe/delete', 'EquipeController@delete');
+
+$router->get('admin/reservas', 'ReservasController@index');
+$router->post('admin/reservas/criar', 'ReservasController@criar');
+$router->post('admin/reservas/checkin', 'ReservasController@checkin');
+$router->post('admin/reservas/atualizar', 'ReservasController@atualizar');
+$router->post('admin/reservas/deletar', 'ReservasController@deletar');

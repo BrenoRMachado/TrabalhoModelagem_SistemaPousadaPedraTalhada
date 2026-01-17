@@ -1,16 +1,19 @@
-/*! fundo ilustrativo */
-body{
-    background-image: url(../../../assets/fundoIlustrativo.png);
-}
 /*! estilo do modal */
 /* conteiner do modal */
 .nova-reserva-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.4);
     height: 100vh;
     backdrop-filter: blur(3px);
-    display: flex; /*mudar aqui para o backend*/
-    align-items: center;
+    display: none;
     justify-content: center;
+    align-items: center;
 }
+
 /* estilo da caixa do modal */
 .modal-nova-reserva{
     max-height: 90%;
