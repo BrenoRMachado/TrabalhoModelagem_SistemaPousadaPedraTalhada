@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="../../../../../public/css/modal_editar_hospede.css">
-<link rel="stylesheet" href="../../../../../public/css/index.css">
+<link rel="stylesheet" href="/public/css/modal_editar_hospede.css">
+<link rel="stylesheet" href="/public/css/index.css">
 <link rel="stylesheet" href="/public/js/hospedes.js">
  
 <div class="editar-hospede-container" id="editModal" display="none">
@@ -33,8 +33,8 @@
             </div>
 
             <div class="editar-hospede-btn-container">
-                <button type="button" onclick="closeModal('editModal')">Cancelar</button>
-                <button type="submit">Salvar</button>
+                <button type="button" onclick="closeModal('editModal')" class="btn-cancelar-editar-hospede">Cancelar</button>
+                <button type="submit" class="btn-salvar-editar-hospede">Salvar</button>
             </div>
 
         </form>

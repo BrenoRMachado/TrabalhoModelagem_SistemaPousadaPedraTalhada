@@ -1,104 +1,128 @@
-/*! fundo ilustrativo */
-body{
-    background-image: url(../assets/fundoIlustrativo.png);
-}
-/*! estilo do modal */
-/* conteiner do modal */
-.novo-usuario-container{
+.novo-usuario-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(3px);
-    display: flex; /*mudar aqui para o backend*/
+    
+    display: none;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 }
-/* estilo da caixa do modal */
-.modal-novo-usuario{
-    height: 65%;
+
+
+.modal-novo-usuario {
+    background-color: var(--bg-light, #ffffff);
     width: 35%;
-    background-color: var(--bg-light);
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
+    min-width: 350px;
     padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
 }
-/* estilo do conteúdo do modal */
-/* título */
-.modal-novo-usuario h2{ 
-    border-bottom: 2px solid var(--color-border2);
+
+.modal-novo-usuario h2 { 
+    border-bottom: 2px solid var(--color-border2, #eee);
     padding-bottom: 1rem;
-    padding-top: 0.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
-/* container dos inputs */
-.novo-usuario-input-container{
-    padding-top: 1rem;
+.novo-usuario-input-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 80%;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 0.8rem;
 }
-.novo-usuario-input{
+
+.novo-usuario-input {
     display: flex;
     flex-direction: column;
     width: 100%;
-    justify-content: center;
 }
-.novo-usuario-input label{
-    margin-top: 1rem;
-    font-size: 20px;
-    font-weight: 500;
-}
-.required{
-    color: rgb(187, 27, 27);
-    font-size: 24px;
-}
-.novo-usuario-input input , select{
-    margin-top: 0.5rem;
-    height: 3rem;
-    width: 100%;
-    border: 1.5px solid var(--color-border3);
-    border-radius: 10px;
-    padding: 0.5rem;
+
+.novo-usuario-input label {
     font-size: 16px;
-    background-color: var(--bg-light);
+    font-weight: 500;
+    margin-bottom: 5px;
 }
 
-/* estilo dos botões */
-.novo-usuario-btn-container{
-    /* border: 1px solid orangered; */
-    display: flex;
-    align-items: end;
-    justify-content: center;
-    height: 20%;
+.required {
+    color: #bb1b1b;
+    margin-left: 3px;
 }
-.novo-usuario-btn-container button{
-    width: 44%;
-    padding: 0.9rem;
-    color: white;
+
+.novo-usuario-input input, .novo-usuario-input select {
+    height: 2.8rem;
+    border: 1.5px solid var(--color-border3, #ccc);
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-size: 15px;
+    background-color: white; /* Ou var(--bg-light) se quiser cinza claro */
+    color: var(--text-dark); /* Garante a cor do texto */
+    width: 100%;
+}
+
+.novo-usuario-input select {
+    appearance: none;          /* Remove a seta no Chrome, Firefox e Safari modernos */
+    -webkit-appearance: none;  /* Para Safari e Chrome mais antigos */
+    -moz-appearance: none;     /* Para Firefox antigo */
+    background-image: none;    /* Garante que nenhum background de imagem seja usado como seta */
+    cursor: pointer;
+}
+
+
+.novo-usuario-btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.novo-usuario-btn-container button {
+    width: 48%;
+    padding: 0.8rem;
     font-size: 16px;
     font-weight: 600;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 1rem;
 }
-.btn-cancelar-novo-usuario{
+
+.btn-cancelar-novo-usuario {
     background-color: var(--grey-btn);
-    margin-right: 1rem;
-}
-.btn-salvar-novo-usuario{
-    background-color: var(--stronger-green);
-    margin-left: 1rem;
+    color: white;
 }
 
 .btn-cancelar-novo-usuario:active{
     background-color: var(--grey-btn-active);
 }
+
+.btn-salvar-novo-usuario {
+    background-color: var(--stronger-green);
+    color: white;
+}
+
 .btn-salvar-novo-usuario:active{
     background-color: var(--green-card2);
+}
+
+
+.input-senha-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%; /* Adicionado para ocupar toda a largura */
+}
+
+.input-senha-wrapper input {
+    width: 100%; /* Garante que o input preencha o wrapper */
+}
+
+.input-senha-wrapper i {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    color: #666;
 }

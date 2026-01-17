@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../../../public/css/Modais/Reserva/modal_nova_reserva.css">
+    <link rel="stylesheet" href="../../../../../public/css/index.css">
+</head>
+<body>
+    <div class="nova-reserva-container">
+        <div class="modal-nova-reserva">
+            <h2>Seleção de Quarto</h2>
+            <div class="nova-reserva-input-container">
+                <div class="nova-reserva-input">
+                    <label>Data de Entrada <span class="required">*</span></label>
+                    <input type="date" required>
+                </div>
+                <div class="nova-reserva-input">
+                    <label>Data de Saída <span class="required">*</span></label>
+                    <input type="date" required>
+                </div>
+            </div>
+            <div class="nova-reserva-input-quarto">
+                <label>Quarto <span class="required">*</span></label>
+                <select name="quarto" id="quarto-select" required>
+                    <option value="" disabled selected>-- Selecione um quarto --</option>
+                    <option value="101">Quarto 101</option>
+                    <option value="102">Quarto 102</option>
+                    <option value="103">Quarto 103</option>
+                    <option value="104">Quarto 104</option>
+                    <option value="105">Quarto 105</option>
+                </select>
+            </div>
+
+            <h2>Dados do Hóspede</h2>
+
+            <div class="nova-reserva-input-container">
+                <div class="nova-reserva-input">
+                    <label>Nome Completo <span class="required">*</span></label>
+                    <input type="text" placeholder="Ex: João Silva" required>
+                </div>
+                <div class="nova-reserva-input">
+                    <label>CPF <span class="required">*</span></label>
+                    <input type="text" placeholder="Ex: 123.456.789-00" required>
+                </div>
+            </div>
+
+            <div class="nova-reserva-input-container">
+                <div class="nova-reserva-input">
+                    <label>E-mail <span class="required">*</span></label>
+                    <input type="email" placeholder="Ex: joao@email.com" required>
+                </div>
+                <div class="nova-reserva-input">
+                    <label>Telefone <span class="required">*</span></label>
+                    <input type="tel" placeholder="Ex: (11) 99999-9999" required>
+                </div>
+            </div>
+
+            <h2>Informações Adicionais</h2>
+
+            <div class="nova-reserva-input-quarto">
+                <label>Observações</label>
+                <textarea placeholder="Notas especiais, requisições, alergias, etc..."></textarea>
+            </div>
+
+            <div class="resumo-reserva-container">
+
+                <h3>Resumo da Reserva</h3>
+                
+                <div class="resumo-item">
+                    <span>Valor da Diária:</span>
+                    <span id="valor-diaria">R$ 0,00</span>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Quantidade de Diárias:</span>
+                    <span id="qtd-diarias">0</span>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Taxa de Serviço (10%):</span>
+                    <span id="taxa-servico">R$ 0,00</span>
+                </div>
+
+
+
+                <div class="resumo-item total">
+                    <strong>Total:</strong>
+                    <strong id="valor-total">R$ 0,00</strong>
+                </div>
+            </div>
+
+            <div class="nova-reserva-acoes">
+                <button type="button" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Reserva</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

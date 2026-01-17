@@ -1,46 +1,54 @@
-/*! fundo ilustrativo */
-body{
-    background-image: url(../assets/fundoIlustrativo.png);
-}
 /*! estilo do modal */
-/* conteiner do modal */
-.inativar-container{
+/* conteiner do modal (Overlay) */
+.inativar-container {
+    position: fixed; /* Fixa na tela toda */
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escurecido */
     backdrop-filter: blur(3px);
-    display: flex; /*mudar aqui para o backend*/
+    
+    display: none; /* Começa escondido, JS muda para flex */
     align-items: center;
     justify-content: center;
+    z-index: 9999; /* Garante que fique por cima de tudo */
 }
+
 /* estilo da caixa do modal */
-.modal-inativar{
-    height: 16%;
+.modal-inativar {
+    height: auto; /* Mudei para auto para o texto caber sem sobrar ou faltar espaço */
+    min-height: 200px;
     width: 35%;
+    min-width: 350px; /* Garante que não fique muito pequeno no celular */
     background-color: var(--bg-light);
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.349);
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
     border-radius: 30px;
     display: flex;
     flex-direction: column;
     padding: 2rem;
 }
+
 /* Estilo header */
-.modal-inativar h2{
+.modal-inativar h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center; /* Garante que o texto centralize se quebrar linha */
     border-bottom: 2px solid var(--color-border2);
     padding-top: 0.5rem;
     padding-bottom: 1rem;
-    margin-left: 1.3rem;
-    margin-right: 1.3rem;
+    margin: 0 1.3rem;
 }
+
 /* estilo dos botões */
-.inativar-btn-container{
+.inativar-btn-container {
     display: flex;
     justify-content: center;
-    padding-top: 1rem;
-    height: 100%;
+    padding-top: 2rem; /* Aumentei o espaço superior */
 }
-.inativar-btn-container button{
+
+.inativar-btn-container button {
     width: 44%;
     padding: 0.9rem;
     color: white;
@@ -49,20 +57,22 @@ body{
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 1rem;
 }
-.btn-cancelar-inativar{
+
+.btn-cancelar-inativar {
     background-color: var(--grey-btn);
     margin-right: 1rem;
 }
-.btn-salvar-inativar{
+
+.btn-salvar-inativar {
     background-color: var(--red-card);
     margin-left: 1rem;
 }
 
-.btn-cancelar-inativar:active{
+/* Efeitos de clique */
+.btn-cancelar-inativar:active {
     background-color: var(--grey-btn-active);
 }
-.btn-salvar-inativar:active{
+.btn-salvar-inativar:active {
     background-color: var(--red-card2);
 }

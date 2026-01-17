@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../../../public/css/Modais/Reserva/modal_editar_reserva.css">
+    <link rel="stylesheet" href="../../../../../public/css/index.css">
+</head>
+<body>
+    <div class="editar-reserva-container">
+        <div class="modal-editar-reserva">
+            <h2>Seleção de Quarto</h2>
+            <div class="editar-reserva-input-container">
+                <div class="editar-reserva-input">
+                    <label>Data de Entrada</label>
+                    <input type="text">
+                </div>
+                <div class="editar-reserva-input">
+                    <label>Data de Saída</label>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="editar-reserva-input-quarto">
+                <label>Quarto</label>
+                <select name="quarto" id="quarto-select">
+                    <option value="" disabled selected>-- Selecione um quarto --</option>
+                    <option value="101">Quarto 101</option>
+                    <option value="102">Quarto 102</option>
+                    <option value="103">Quarto 103</option>
+                    <option value="104">Quarto 104</option>
+                    <option value="105">Quarto 105</option>
+                </select>
+            </div>
+
+            <h2>Dados do Hóspede</h2>
+
+            <div class="editar-reserva-input-container">
+                <div class="editar-reserva-input">
+                    <label>Nome Completo</label>
+                    <input type="text">
+                </div>
+                <div class="editar-reserva-input">
+                    <label>CPF</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="editar-reserva-input-container">
+                <div class="editar-reserva-input">
+                    <label>E-mail</label>
+                    <input type="email">
+                </div>
+                <div class="editar-reserva-input">
+                    <label>Telefone</label>
+                    <input type="tel">
+                </div>
+            </div>
+
+            <h2>Informações Adicionais</h2>
+
+            <div class="editar-reserva-input-quarto">
+                <label>Observações</label>
+                <textarea></textarea>
+            </div>
+
+            <div class="resumo-reserva-container">
+
+                <h3>Resumo da Reserva</h3>
+                
+                <div class="resumo-item">
+                    <span>Valor da Diária:</span>
+                    <span id="valor-diaria">R$ 0,00</span>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Quantidade de Diárias:</span>
+                    <span id="qtd-diarias">0</span>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                
+                <div class="resumo-item">
+                    <span>Taxa de Serviço (10%):</span>
+                    <span id="taxa-servico">R$ 0,00</span>
+                </div>
+
+
+
+                <div class="resumo-item total">
+                    <strong>Total:</strong>
+                    <strong id="valor-total">R$ 0,00</strong>
+                </div>
+            </div>
+
+            <div class="editar-reserva-acoes">
+                <button type="button" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Reserva</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
