@@ -7,95 +7,125 @@ use Exception;
 
 class ReservasController
 {
-public function index()
+    public function index()
 {
-    $database = App::get('database');
-    
-    $quartosDisponiveis = $database->selectWhere('quarto', 'STATUS', 'DISPONIVEL');
+    $db = App::get('database');
 
-    $reservas = $database->selectAll('reserva');
+    $porPagina = 5;
+    $paginaAtual = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+    $offset = ($paginaAtual - 1) * $porPagina;
+
+    $totalReservas = $db->count('reserva');
+    $totalPaginas = ceil($totalReservas / $porPagina);
+
+    $reservas = $db->selectPaginated('reserva', $porPagina, $offset);
+
+    $reservasAtivas = [];
 
     foreach ($reservas as $reserva) {
-        $hospede = $database->selectWhere('hospede', 'id', $reserva->idHospede);
-        
+        $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede);
+
         if (!empty($hospede)) {
             $reserva->nome = $hospede[0]->nome;
-            $reserva->cpf = $hospede[0]->cpf;
+            $reserva->cpf  = $hospede[0]->cpf;
         } else {
             $reserva->nome = 'Não encontrado';
-            $reserva->cpf = '000.000.000-00';
+            $reserva->cpf  = '';
         }
+
+        $reservasAtivas[] = $reserva;
     }
 
     return view('admin/reservas', [
-        'reservas' => $reservas,
-        'quartos' => $quartosDisponiveis
+        'reservas'     => $reservasAtivas,
+        'paginaAtual'  => $paginaAtual,
+        'totalPaginas' => $totalPaginas
     ]);
 }
 
 
-public function criar()
+    public function criar()
+    {
+        $db = App::get('database');
+
+        $dataEntrada = $_POST['dataEntradaPrevista'] . ' 14:00:00';
+        $dataSaida   = $_POST['dataSaidaPrevista']   . ' 12:00:00';
+        $idQuarto    = $_POST['idQuarto'];
+
+        if ($dataEntrada >= $dataSaida) {
+            throw new Exception('Data de saída deve ser maior que a de entrada.');
+        }
+
+        if ($db->existeConflitoReserva($idQuarto, $dataEntrada, $dataSaida)) {
+            throw new Exception('Este quarto já está reservado nesse período.');
+        }
+
+        $hospedeExistente = $db->selectWhere('hospede', 'cpf', $_POST['cpf']);
+
+        if (!empty($hospedeExistente)) {
+            $idHospede = $hospedeExistente[0]->id;
+        } else {
+            $idHospede = $db->insert('hospede', [
+                'nome'        => $_POST['nome'],
+                'cpf'         => $_POST['cpf'],
+                'email'       => $_POST['email'],
+                'telefone'    => $_POST['telefone'],
+                'observacoes' => $_POST['observacoes'] ?? null
+            ]);
+        }
+
+        $idReserva = $db->insert('reserva', [
+            'dataEntradaPrevista' => $dataEntrada,
+            'dataSaidaPrevista'   => $dataSaida,
+            'idQuarto'            => $idQuarto,
+            'idHospede'           => $idHospede,
+            'STATUS'              => 'RESERVADA'
+        ]);
+
+        $db->insert('conta', [
+            'idReserva'  => $idReserva,
+            'valorTotal' => $_POST['valorTotal'] ?? 0,
+            'STATUS'     => 'ABERTA'
+        ]);
+
+        return redirect('admin/reservas');
+    }
+
+    public function checkin()
 {
-    $idHospede = App::get('database')->insert('hospede', [
-        'nome' => $_POST['nome'],
-        'cpf' => $_POST['cpf'],
-        'email' => $_POST['email'],
-        'telefone' => $_POST['telefone'],
-        'observacoes' => $_POST['observacoes']
-    ]);
+    $db = App::get('database');
 
-    $idReserva = App::get('database')->insert('reserva', [
-        'dataEntradaPrevista' => $_POST['dataEntradaPrevista'],
-        'dataSaidaPrevista' => $_POST['dataSaidaPrevista'],
-        'idQuarto' => $_POST['idQuarto'],
-        'idHospede' => $idHospede,
-        'STATUS' => 'RESERVADA'
-    ]);
+    $idReserva = $_POST['id'];
 
-    App::get('database')->insert('conta', [
-        'valorTotal' => $_POST['valorTotal'],
-        'STATUS' => 'ABERTA',
-        'idReserva' => $idReserva
-    ]);
+    $reserva = $db->selectWhere('reserva', 'id', $idReserva);
 
-    return redirect('admin/reservas');
-}
+    if (empty($reserva)) {
+        throw new Exception('Reserva não encontrada.');
+    }
 
-public function checkin()
-{
-    $id = $_POST['id'];
+    $idQuarto = $reserva[0]->idQuarto;
 
-    $dados = [
-        'STATUS' => 'HOSPEDADA',
+    $db->update('reserva', [
+        'STATUS'      => 'HOSPEDADA',
         'dataCheckin' => date('Y-m-d H:i:s')
-    ];
+    ], 'id', $idReserva);
 
-    App::get('database')->update('reserva', $dados, 'id', $id);
-
-    return redirect('admin/reservas');
-}
-
-public function atualizar()
-{
-    $id = $_POST['id'];
-
-    $dados = [
-        'dataEntradaPrevista' => $_POST['dataEntradaPrevista'],
-        'dataSaidaPrevista' => $_POST['dataSaidaPrevista'],
-        'idQuarto' => $_POST['idQuarto']
-    ];
-
-    App::get('database')->update('reserva', $dados, 'id', $id);
-    
-    return redirect('admin/reservas');
-}
-
-public function deletar()
-{
-    $id = $_POST['id'];
-    App::get('database')->delete('reserva', 'id', $id);
+    $db->update('quarto', [
+        'STATUS' => 'OCUPADO'
+    ], 'numero', $idQuarto);
 
     return redirect('admin/reservas');
 }
 
+
+    public function deletar()
+    {
+        $db = App::get('database');
+
+        $db->update('reserva', [
+            'STATUS' => 'CANCELADA'
+        ], 'id', $_POST['id']);
+
+        return redirect('admin/reservas');
+    }
 }

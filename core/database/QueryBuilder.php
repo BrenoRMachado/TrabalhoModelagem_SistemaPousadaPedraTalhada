@@ -99,4 +99,87 @@ class QueryBuilder
         die('Erro ao excluir: ' . $e->getMessage());
     }
 }
+
+public function existeConflitoReserva($idQuarto, $dataEntrada, $dataSaida)
+{
+    $sql = "
+        SELECT COUNT(*) AS total
+        FROM reserva
+        WHERE idQuarto = :idQuarto
+          AND STATUS IN ('RESERVADA', 'HOSPEDADA')
+          AND dataEntradaPrevista < :dataSaida
+          AND dataSaidaPrevista > :dataEntrada
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        'idQuarto'    => $idQuarto,
+        'dataEntrada' => $dataEntrada,
+        'dataSaida'   => $dataSaida
+    ]);
+
+    return $stmt->fetch(\PDO::FETCH_OBJ)->total > 0;
+}
+
+public function quartosDisponiveisPorPeriodo($dataEntrada, $dataSaida)
+{
+    $sql = "
+        SELECT *
+        FROM quarto
+        WHERE STATUS = 'DISPONIVEL'
+          AND numero NOT IN (
+              SELECT idQuarto
+              FROM reserva
+              WHERE STATUS IN ('RESERVADA', 'HOSPEDADA')
+                AND dataEntradaPrevista < :dataSaida
+                AND dataSaidaPrevista > :dataEntrada
+          )
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([
+        'dataEntrada' => $dataEntrada,
+        'dataSaida'   => $dataSaida
+    ]);
+
+    return $stmt->fetchAll(PDO::FETCH_CLASS);
+}
+
+public function selectWhereNot($table, $column, $value)
+{
+    $sql = "SELECT * FROM {$table} WHERE {$column} != :value";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['value' => $value]);
+
+    return $stmt->fetchAll(PDO::FETCH_CLASS);
+}
+
+public function count($table)
+{
+    $stmt = $this->pdo->prepare("SELECT COUNT(*) as total FROM {$table} WHERE STATUS != 'CANCELADA'");
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_OBJ)->total;
+}
+
+public function selectPaginated($table, $limit, $offset)
+{
+    $sql = "
+        SELECT *
+        FROM {$table}
+        WHERE STATUS != 'CANCELADA'
+        ORDER BY dataEntradaPrevista DESC
+        LIMIT :limit OFFSET :offset
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_CLASS);
+}
+
+
+
 }

@@ -63,4 +63,23 @@ class HospedesController
 
         return redirect('admin/hospedes');
     }
+
+      public function buscar()
+    {
+        header('Content-Type: application/json');
+
+        $cpf = $_GET['cpf'] ?? null;
+
+        if (!$cpf) {
+            echo json_encode(null);
+            return;
+        }
+
+        $db = App::get('database');
+
+        $hospede = $db->selectWhere('hospede', 'cpf', $cpf);
+
+        echo json_encode(!empty($hospede) ? $hospede[0] : null);
+    }
+
 }

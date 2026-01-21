@@ -25,6 +25,7 @@ $router->get('admin/reservas', 'ReservasController@index');
 $router->get('admin/index', 'IndexController@index');
 
 $router->post('admin/hospedes/delete', 'HospedesController@delete');
+$router->get('admin/hospedes/buscar', 'HospedesController@buscar');
 
 $router->get('admin/equipe', 'EquipeController@index');
 $router->post('admin/equipe/create', 'EquipeController@create');
