@@ -7,7 +7,7 @@ use Exception;
 
 class ReservasController
 {
-    public function index()
+public function index()
 {
     $db = App::get('database');
 
@@ -19,25 +19,30 @@ class ReservasController
     $totalPaginas = ceil($totalReservas / $porPagina);
 
     $reservas = $db->selectPaginated('reserva', $porPagina, $offset);
+    $quartos  = $db->selectAll('quarto');
 
     $reservasAtivas = [];
 
     foreach ($reservas as $reserva) {
-        $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede);
+    $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede);
 
-        if (!empty($hospede)) {
-            $reserva->nome = $hospede[0]->nome;
-            $reserva->cpf  = $hospede[0]->cpf;
-        } else {
-            $reserva->nome = 'Não encontrado';
-            $reserva->cpf  = '';
-        }
-
-        $reservasAtivas[] = $reserva;
+    if (!empty($hospede)) {
+        $reserva->nome        = $hospede[0]->nome;
+        $reserva->cpf         = $hospede[0]->cpf;
+        $reserva->observacoes = $hospede[0]->observacoes ?? '';
+    } else {
+        $reserva->nome        = 'Não encontrado';
+        $reserva->cpf         = '';
+        $reserva->observacoes = '';
     }
+
+    $reservasAtivas[] = $reserva;
+    }
+
 
     return view('admin/reservas', [
         'reservas'     => $reservasAtivas,
+        'quartos'      => $quartos,
         'paginaAtual'  => $paginaAtual,
         'totalPaginas' => $totalPaginas
     ]);
@@ -128,4 +133,41 @@ class ReservasController
 
         return redirect('admin/reservas');
     }
+
+public function atualizar()
+{
+    try {
+        $db = App::get('database');
+
+        $id          = $_POST['id'] ?? null;
+        $dataEntrada = $_POST['dataEntradaPrevista'] ?? null;
+        $dataSaida   = $_POST['dataSaidaPrevista'] ?? null;
+        $idQuarto    = $_POST['idQuarto'] ?? null;
+        $nome        = $_POST['nome'] ?? null;
+        $cpf         = $_POST['cpf'] ?? null;
+        $observacoes = $_POST['observacoes'] ?? null;
+
+        if (!$id || !$idQuarto || !$cpf) {
+            throw new Exception('Dados obrigatórios não informados.');
+        }
+
+        $db->update('reserva', [
+            'dataEntradaPrevista' => $dataEntrada,
+            'dataSaidaPrevista'   => $dataSaida,
+            'idQuarto'            => $idQuarto
+        ], 'id', $id);
+
+        $db->update('hospede', [
+            'nome'        => $nome,
+            'observacoes' => $observacoes
+        ], 'cpf', $cpf);
+
+        return redirect('admin/reservas');
+
+    } catch (Exception $e) {
+        dd($e->getMessage());
+    }
+}
+
+
 }

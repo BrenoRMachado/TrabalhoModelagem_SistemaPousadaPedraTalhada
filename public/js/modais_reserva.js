@@ -79,15 +79,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function abrirModalEditar(reserva) {
     const modal = document.getElementById('modalEditarReserva');
+
     document.getElementById('edit-id').value = reserva.id;
     document.getElementById('edit-dataEntrada').value = reserva.dataEntradaPrevista.split(' ')[0];
     document.getElementById('edit-dataSaida').value = reserva.dataSaidaPrevista.split(' ')[0];
     document.getElementById('edit-quarto-select').value = reserva.idQuarto;
-    document.getElementById('edit-nome').value = reserva.nome || ''; 
+    document.getElementById('edit-nome').value = reserva.nome || '';
     document.getElementById('edit-cpf').value = reserva.cpf || '';
-    
+    document.getElementById('edit-observacoes').value = reserva.observacoes || '';
+
     modal.style.display = 'flex';
 }
+
 
 function fecharModalEditar() {
     document.getElementById('modalEditarReserva').style.display = 'none';
