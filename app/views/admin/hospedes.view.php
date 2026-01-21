@@ -22,9 +22,9 @@
                 </div>
                 
                 <div class="page-header-actions">
-                   <button class="btn btn-blue" onclick="prepararNovoHospede()">
+                   <!--<button class="btn btn-blue" onclick="prepararNovoHospede()">
                      <span class="material-icons-round">add</span> Novo Hóspede
-                    </button>
+                    </button>-->
                 </div>
             </div>
 
@@ -62,12 +62,12 @@
                                         <span class="material-icons-round edit-color">edit</span>
                                     </button>
                                     
-                                    <form action="/admin/hospedes/delete" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza?');">
+                                    <!--<form action="/admin/hospedes/delete" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza?');">
                                         <input type="hidden" name="id" value="<?= $hospede->id ?>">
                                         <button type="submit" class="btn btn-small" title="Excluir">
                                             <span class="material-icons-round delete-color">delete</span>
                                         </button>
-                                    </form>
+                                    </form>-->
                                 </div>
                             </td>
                         </tr>
