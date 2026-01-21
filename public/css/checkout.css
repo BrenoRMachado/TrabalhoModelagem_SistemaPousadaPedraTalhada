@@ -233,3 +233,22 @@ header h1 {
 .checkout-text{
     color: var(--text-dark);
 }
+
+.checkout-btn-add-item {
+    padding: 12px 20px;
+    background: var(--stronger-green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.checkout-btn-add-item:hover {
+    background: var(--green-card2);
+}
+
+.checkout-btn-add-item:active {
+    background: var(--green-card2);
+}

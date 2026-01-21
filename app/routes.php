@@ -37,3 +37,7 @@ $router->post('admin/reservas/criar', 'ReservasController@criar');
 $router->post('admin/reservas/checkin', 'ReservasController@checkin');
 $router->post('admin/reservas/atualizar', 'ReservasController@atualizar');
 $router->post('admin/reservas/deletar', 'ReservasController@deletar');
+
+$router->get('admin/checkout', 'CheckoutController@index');
+$router->post('admin/checkout/confirmar', 'CheckoutController@confirmar');
+$router->post('admin/checkout/adicionar-consumo', 'CheckoutController@adicionarConsumo');

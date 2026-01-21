@@ -3,145 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Checkout</title>
     <link rel="stylesheet" href="../../../public/css/checkout.css">
     <link rel="stylesheet" href="../../../public/css/index.css">
 </head>
 <body>
-    <div class="checkout-app-container">
-        <header>
-            <div class="checkout-header-content">
-                <h1>Checkout</h1>
+<div class="checkout-app-container">
+    <header>
+        <div class="checkout-header-content">
+            <h1>Checkout</h1>
+        </div>
+    </header>
+
+    <main class="checkout-main-content">
+        <!-- Detalhes do Hóspede -->
+        <section class="checkout-details-section">
+            <div class="checkout-group-container">
+                <h2 class="checkout-section-title">Dados do Hóspede</h2>
+                <div class="checkout-info-grid">
+                    <div class="checkout-info-item">
+                        <label>NOME</label>
+                        <span><?= $hospede->nome ?? '' ?></span>
+                    </div>
+                    <div class="checkout-info-item">
+                        <label>CPF</label>
+                        <span><?= $hospede->cpf ?? '' ?></span>
+                    </div>
+                    <div class="checkout-info-item">
+                        <label>E-MAIL</label>
+                        <span><?= $hospede->email ?? '' ?></span>
+                    </div>
+                    <div class="checkout-info-item">
+                        <label>TELEFONE</label>
+                        <span><?= $hospede->telefone ?? '' ?></span>
+                    </div>
+                </div>
             </div>
-        </header>
-        <main class="checkout-main-content">
-            <section class="checkout-details-section">
 
-                <div class="checkout-group-container">
-                    <h2 class="checkout-section-title">Dados do Hóspede</h2>
-                    <div class="checkout-info-grid">
-                        <div class="checkout-info-item">
-                            <label>NOME</label>
-                            <span>Maria Santos</span>
-                        </div>
-                        <div class="checkout-info-item">
-                            <label>CPF</label>
-                            <span>123.456.789-00</span>
-                        </div>
-                        <div class="checkout-info-item">
-                            <label>E-MAIL</label>
-                            <span>maria@email.com</span>
-                        </div>
-                        <div class="checkout-info-item">
-                            <label>TELEFONE</label>
-                            <span>(11) 99999-9999</span>
-                        </div>
+            <!-- Detalhes da Hospedagem -->
+            <div class="checkout-group-container">
+                <h2 class="checkout-section-title">Detalhes da Hospedagem</h2>
+                <div class="checkout-info-grid">
+                    <div class="checkout-info-item">
+                        <label>QUARTO</label>
+                        <span><?= $quarto->numero ?? '' ?></span>
+                    </div>
+                    <div class="checkout-info-item">
+                        <label>TIPO DE QUARTO</label>
+                        <span><?= $quarto->tipo ?? '' ?></span>
+                    </div>
+                    <div class="checkout-info-item">
+                        <label>DATA DE ENTRADA</label>
+                        <span><?= date('d/m/Y', strtotime($reserva->dataEntradaPrevista)) ?></span>
+                    </div>
+                    <div class="checkout-info-item">
+                        <label>DATA DE SAÍDA</label>
+                        <span><?= date('d/m/Y', strtotime($reserva->dataSaidaPrevista)) ?></span>
                     </div>
                 </div>
+            </div>
 
-                <div class="checkout-group-container">
-                    <h2 class="checkout-section-title">Detalhes da Hospedagem</h2>
-                    <div class="checkout-info-grid">
-                        <div class="checkout-info-item">
-                            <label>QUARTO</label>
-                            <span>201</span>
-                        </div>
-                        <div class="checkout-info-item">
-                            <label>TIPO DE QUARTO</label>
-                            <span>Duplo</span>
-                        </div>
-                        <div class="checkout-info-item">
-                            <label>DATA DE ENTRADA</label>
-                            <span>04/01/2026</span>
-                        </div>
-                        <div class="checkout-info-item">
-                            <label>DATA DE SAÍDA</label>
-                            <span>07/01/2026</span>
-                        </div>
+            <!-- Consumos -->
+            <div class="checkout-group-container">
+                <h2 class="checkout-section-title">Consumos e Taxas Adicionais</h2>
+                <table class="checkout-table">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Quantidade</th>
+                            <th>Valor</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-consumos">
+                        <!-- Hospedagem e Taxas -->
+                        <?php
+                        $diarias = (new DateTime($reserva->dataSaidaPrevista))->diff(new DateTime($reserva->dataEntradaPrevista))->days;
+                        $valorDiaria = $reserva->valorDiaria ?? 0;
+                        $totalHospedagem = $diarias * $valorDiaria;
+                        ?>
+                        <tr>
+                            <td>Hospedagem (<?= $diarias ?> diárias)</td>
+                            <td><?= $diarias ?></td>
+                            <td>R$ <?= number_format($valorDiaria, 2, ',', '.') ?></td>
+                            <td><strong>R$ <?= number_format($totalHospedagem, 2, ',', '.') ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td>Taxa de Serviço (10%)</td>
+                            <td>1</td>
+                            <td>R$ <?= number_format($totalHospedagem * 0.1, 2, ',', '.') ?></td>
+                            <td><strong>R$ <?= number_format($totalHospedagem * 0.1, 2, ',', '.') ?></strong></td>
+                        </tr>
+
+                        <!-- Consumidos do banco -->
+                        <?php 
+                        $totalConsumos = 0;
+                        foreach ($consumos as $item): 
+                            $subtotal = $item->quantidade * $item->valorUnitario;
+                            $totalConsumos += $subtotal;
+                        ?>
+                        <tr>
+                            <td><?= $item->descricao ?></td>
+                            <td><?= $item->quantidade ?></td>
+                            <td>R$ <?= number_format($item->valorUnitario, 2, ',', '.') ?></td>
+                            <td><strong>R$ <?= number_format($subtotal, 2, ',', '.') ?></strong></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <!-- Adicionar novo consumo -->
+                <div class="checkout-add-item-row">
+                    <input type="text" placeholder="Descrição do item" class="checkout-input-small" id="inputDescricao">
+                    <input type="number" placeholder="Qtd" class="checkout-input-small" id="inputQuantidade">
+                    <input type="text" placeholder="Valor" class="checkout-input-small" id="inputValor">
+                    <button type="button" class="checkout-btn-add-item" id="btnAdicionarConsumo">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="checkout-group-container">
+                <h2 class="checkout-section-title">Observações e Avisos</h2>
+                <textarea class="checkout-textarea" placeholder="Adicione observações, danos, reclamações..." id="observacoes"><?= $reserva->observacoes ?? '' ?></textarea>
+            </div>
+        </section>
+
+        <!-- Resumo -->
+        <aside class="checkout-summary-aside">
+            <div class="checkout-summary-card">
+                <h2 class="checkout-summary-title">Resumo de Pagamento</h2>
+                <div class="checkout-summary-details">
+                    <div class="checkout-summary-line">
+                        <span>Hospedagem (<?= $diarias ?> dias):</span>
+                        <span>R$ <?= number_format($totalHospedagem, 2, ',', '.') ?></span>
+                    </div>
+                    <div class="checkout-summary-line">
+                        <span>Consumos:</span>
+                        <span id="total-consumos">R$ <?= number_format($totalConsumos, 2, ',', '.') ?></span>
+                    </div>
+                    <div class="checkout-summary-line">
+                        <span>Taxa de Serviço:</span>
+                        <span id="taxa-servico">R$ <?= number_format($totalHospedagem * 0.1, 2, ',', '.') ?></span>
+                    </div>
+                    <div class="checkout-summary-line">
+                        <span>Descontos:</span>
+                        <span>R$ 0,00</span>
+                    </div>
+                    <hr class="checkout-divider">
+                    <div class="checkout-summary-total">
+                        <span class="checkout-text">TOTAL A PAGAR:</span>
+                        <span id="total-pagar" class="checkout-total-value">
+                            R$ <?= number_format($totalHospedagem + ($totalHospedagem*0.1) + $totalConsumos, 2, ',', '.') ?>
+                        </span>
                     </div>
                 </div>
-
-                <div class="checkout-group-container">
-                    <h2 class="checkout-section-title">Consumos e Taxas Adicionais</h2>
-                    <table class="checkout-table">
-                        <thead>
-                            <tr>
-                                <th>Descrição</th>
-                                <th>Quantidade</th>
-                                <th>Valor</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Hospedagem (3 diárias)</td>
-                                <td>3</td>
-                                <td>R$ 250,00</td>
-                                <td><strong>R$ 750,00</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Taxa de Serviço (10%)</td>
-                                <td>1</td>
-                                <td>R$ 75,00</td>
-                                <td><strong>R$ 75,00</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Minibar - Cerveja</td>
-                                <td>2</td>
-                                <td>R$ 15,00</td>
-                                <td><strong>R$ 30,00</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="checkout-add-item-row">
-                        <select class="checkout-input-select">
-                            <option>-- Adicionar Consumo --</option>
-                        </select>
-                        <input type="number" placeholder="Qtd" class="checkout-input-small">
-                        <input type="text" placeholder="Valor" class="checkout-input-small">
-                    </div>
-                </div>
-
-                <div class="checkout-group-container">
-                    <h2 class="checkout-section-title">Observações e Avisos</h2>
-                    <textarea class="checkout-textarea" placeholder="Adicione observações, danos, reclamações..."></textarea>
-                </div>
-            </section>
-
-            <aside class="checkout-summary-aside">
-                <div class="checkout-summary-card">
-                    <h2 class="checkout-summary-title">Resumo de Pagamento</h2>
-                    <div class="checkout-summary-details">
-                        <div class="checkout-summary-line">
-                            <span>Hospedagem (3 dias):</span>
-                            <span>R$ 750,00</span>
-                        </div>
-                        <div class="checkout-summary-line">
-                            <span>Consumos:</span>
-                            <span>R$ 30,00</span>
-                        </div>
-                        <div class="checkout-summary-line">
-                            <span>Taxa de Serviço:</span>
-                            <span>R$ 75,00</span>
-                        </div>
-                        <div class="checkout-summary-line">
-                            <span>Descontos:</span>
-                            <span>R$ 0,00</span>
-                        </div>
-                        <hr class="checkout-divider">
-                        <div class="checkout-summary-total">
-                            <span class="checkout-text">TOTAL A PAGAR:</span>
-                            <span class="checkout-total-value">R$ 855,00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="checkout-actions">
-                    <button class="checkout-btn-cancel">Retornar</button>
-                    <button class="checkout-btn-confirm">Confirmar Pagamento e Liberar Quarto</button>
-                </div>
-            </aside>
-        </main>
-    </div>
-    
-</body>
-</html>
+            </div>
+            <div class="checkout-actions">
+                <button class="checkout-btn-cancel" onclick="history.back()">Retornar</button>
+                <form method="POST" action="/admin/checkout/confirmar">
+                    <input type="hidden" name="idReserva" value="<?= $reserva->id ?>">
+                    <button type="submit" class="checkout-btn-confirm">Confirmar Pagamento e Liberar Quarto</button>
+                </form>
+            </div>
+        </aside>
+    </main>
+</div>

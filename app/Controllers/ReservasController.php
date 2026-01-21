@@ -169,5 +169,20 @@ public function atualizar()
     }
 }
 
+public function checkout()
+{
+    $id = $_POST['id'];
+
+    App::get('database')->update(
+        'reserva',
+        ['STATUS' => 'FINALIZADA'],
+        ['id' => $id],
+        'id'
+    );
+
+    header('Location: /admin/checkout');
+    exit;
+}
+
 
 }

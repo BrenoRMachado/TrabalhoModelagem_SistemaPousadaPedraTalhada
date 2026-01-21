@@ -69,15 +69,13 @@
                                     </form>
                                 <?php endif; ?>
 
-                                <?php if ($reserva->STATUS === 'HOSPEDADA') : ?>
-                                    <form action="/admin/reservas/checkout" method="POST" style="display:inline;">
-                                        <input type="hidden" name="id" value="<?= $reserva->id ?>">
-                                        <button type="submit" class="btn btn-checkout btn-small">
-                                            <span class="material-icons-round" style="font-size:16px;">exit_to_app</span>
-                                            Checkout
-                                        </button>
-                                    </form>
+                               <?php if ($reserva->STATUS === 'HOSPEDADA') : ?>
+                                    <a href="/admin/checkout?id=<?= $reserva->id ?>" class="btn btn-checkout btn-small">
+                                        <span class="material-icons-round" style="font-size:16px;">exit_to_app</span>
+                                        Checkout
+                                    </a>
                                 <?php endif; ?>
+
 
                                 <?php if ($reserva->STATUS !== 'CANCELADA') : ?>
                                     <button class="btn btn-edit btn-small"
