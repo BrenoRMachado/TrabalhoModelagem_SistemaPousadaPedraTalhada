@@ -66,8 +66,11 @@ class LoginController
             session_start();
             $_SESSION['usuario'] = $usuario;
 
+            $_SESSION['cargo'] = $usuario->cargo ?? $usuario['cargo'];
+
             header('Location: admin/quartos');
             exit;
+            
         } else {
             echo "Login ou senha incorretos.";
         }
@@ -82,6 +85,7 @@ class LoginController
         session_unset();
         session_destroy();
         header(header: 'Location: /login');
+        exit();
     }
 }
 ?>

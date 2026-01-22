@@ -24,8 +24,17 @@ class QueryBuilder
     public function verificaLogin($login, $senha)
     {
     // Busca direta na tabela 'usuario'
-    $sql = "SELECT * FROM usuario WHERE login = :login";
-
+   $sql = "SELECT 
+                u.id as id_usuario,
+                u.senha,
+                f.id as id_funcionario,
+                f.nome,
+                f.cargo,
+                f.email
+            FROM usuario u
+            INNER JOIN funcionario f ON u.id = f.id_usuario
+            WHERE u.login = :login AND f.STATUS = 'ATIVO'";
+            
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':login', $login);
     $stmt->execute();

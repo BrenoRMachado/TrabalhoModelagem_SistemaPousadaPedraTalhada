@@ -1,3 +1,33 @@
+<?php 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+$session_user_id = $_SESSION['usuario'] ?? null;
+$cargo_usuario = $_SESSION['cargo'] ?? '';
+
+$isGerente = ($cargo_usuario === 'Gerente');
+
+
+
+if (!$session_user_id) {
+    header('Location: /login');
+    exit();
+}
+
+if (!$session_user_id) {
+    header('Location: /login');
+    exit();
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,12 +51,16 @@
                     <p>Gerencie os funcionários e suas permissões</p>
                 </div>
 
+                <?php if($isGerente): ?>
+
                 <button
     class="btn-adicionar"
     onclick="abrirModalNovoUsuario('modal_novo_usuario')">
     <i class="fa-solid fa-plus"></i>
     Cadastrar Funcionário
 </button>
+
+<?php endif; ?>
             </header>
             <section class="time">
                 <?php foreach ($funcionarios as $funcionario): ?>
@@ -45,7 +79,7 @@
 
                         <?=htmlspecialchars($funcionario->cargo)?>
                     </span>
-
+                    <?php if($isGerente): ?>
                     <div class="acoes">
     <button
         class="btn-editar"
@@ -59,6 +93,7 @@
         Inativar
     </button>
 </div>
+<?php endif; ?> 
 
                 </article>
             <?php endforeach;?>
@@ -68,8 +103,12 @@
                 <?php require 'app\views\admin\Modais\Equipe\modal_editar_usuario.view.php'; ?>
                 <?php require 'app\views\admin\Modais\Equipe\modal_inativar.view.php'; ?>
             <?php endforeach;?>
+
+            <?php if($isGerente): ?>
             <?php require 'app/views/admin/Modais/Equipe/modal_novo_usuario.view.php'; ?>
-        <div id="filtro" style="display:none;"></div>
+            <?php endif; ?>
+            
+            <div id="filtro" style="display:none;"></div>
         </main>
     </div>
 
