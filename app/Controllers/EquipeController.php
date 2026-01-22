@@ -45,22 +45,25 @@ class EquipeController
         exit;
     }
 
-    public function create()
-    {
-        $idUsuario = App::get('database')->insert('usuario', [
-            'login' => $_POST['login'],
-            'senha' => $_POST['senha']
-        ]);
+public function create()
+{
+    $idUsuario = App::get('database')->insert('usuario', [
+        'login' => $_POST['login'],
+        'senha' => $_POST['senha']
+    ]);
 
-        App::get('database')->insert('funcionario', [
-            'nome'       => $_POST['nome'],
-            'email'      => $_POST['email'],
-            'cargo'      => $_POST['cargo'],
-            'id_usuario' => $idUsuario
-        ]);
+    App::get('database')->insert('funcionario', [
+        'nome'       => $_POST['nome'],
+        'email'      => $_POST['email'],
+        'cargo'      => $_POST['cargo'],
+        'STATUS'     => 'ATIVO',  
+        'id_usuario' => $idUsuario
+    ]);
 
-        header('Location: /admin/equipe');
-    }
+    header('Location: /admin/equipe');
+    exit;
+}
+
 
     public function delete()
     {
