@@ -45,3 +45,6 @@ $router->post('admin/reservas/deletar', 'ReservasController@deletar');
 $router->get('admin/checkout', 'CheckoutController@index');
 $router->post('admin/checkout/confirmar', 'CheckoutController@confirmar');
 $router->post('admin/checkout/adicionar-consumo', 'CheckoutController@adicionarConsumo');
+$router->post('checkout/confirmar-json', 'CheckoutController@confirmarJson');
+
+

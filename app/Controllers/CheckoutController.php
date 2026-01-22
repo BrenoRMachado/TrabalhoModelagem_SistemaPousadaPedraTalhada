@@ -17,30 +17,45 @@ class CheckoutController
 
         $db = App::get('database');
 
-        $reserva = $db->selectWhere('reserva', 'id', $idReserva);
-        if (empty($reserva)) {
+        // Buscar reserva
+        $reserva = $db->selectWhere('reserva', 'id', $idReserva)[0] ?? null;
+        if (!$reserva) {
             throw new Exception("Reserva não encontrada.");
         }
-        $reserva = $reserva[0];
 
-        $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede);
-        $hospede = $hospede[0] ?? null;
+        // Buscar hóspede
+        $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede)[0] ?? null;
 
-        $quarto = $db->selectWhere('quarto', 'numero', $reserva->idQuarto);
-        $quarto = $quarto[0] ?? null;
+        // Buscar quarto
+        $quarto = $db->selectWhere('quarto', 'numero', $reserva->idQuarto)[0] ?? null;
 
-        $conta = $db->selectWhere('conta', 'idReserva', $reserva->id);
-        $conta = $conta[0] ?? null;
+        // Buscar conta
+        $conta = $db->selectWhere('conta', 'idReserva', $reserva->id)[0] ?? null;
 
-        // Buscar consumos relacionados à conta
+        // Buscar consumos da conta
         $consumos = $conta ? $db->selectWhere('itemconsumo', 'idConta', $conta->id) : [];
 
+        // Calcular diárias e valor da hospedagem
+        $dataEntrada = new \DateTime($reserva->dataEntradaPrevista);
+        $dataSaida = new \DateTime($reserva->dataSaidaPrevista);
+        $diarias = $dataSaida->diff($dataEntrada)->days;
+        $valorHospedagem = $quarto->precoDiaria ?? 0;
+
+        // Total consumos iniciais
+        $totalConsumos = 0;
+        foreach ($consumos as $item) {
+            $totalConsumos += $item->quantidade * $item->valorUnitario;
+        }
+
         return view('admin/checkout', [
-            'reserva'  => $reserva,
-            'hospede'  => $hospede,
-            'quarto'   => $quarto,
-            'conta'    => $conta,
-            'consumos' => $consumos
+            'reserva'        => $reserva,
+            'hospede'        => $hospede,
+            'quarto'         => $quarto,
+            'conta'          => $conta,
+            'consumos'       => $consumos,
+            'diarias'        => $diarias,
+            'valorHospedagem'=> $valorHospedagem,
+            'totalConsumos'  => $totalConsumos
         ]);
     }
 
@@ -54,21 +69,28 @@ class CheckoutController
 
         $db = App::get('database');
 
+        // Atualizar reserva como finalizada
+        $reserva = $db->selectWhere('reserva', 'id', $idReserva)[0];
         $db->update('reserva', [
             'STATUS'       => 'FINALIZADA',
             'dataCheckout' => date('Y-m-d H:i:s')
-        ], ['id' => $idReserva], 'id');
+        ], 'id', $idReserva);
 
+        // Atualizar conta como paga
         $db->update('conta', [
             'STATUS' => 'PAGA'
-        ], ['idReserva' => $idReserva], 'idReserva');
+        ], 'idReserva', $idReserva);
 
-        $reserva = $db->selectWhere('reserva', 'id', $idReserva)[0];
+        // Liberar quarto
         $db->update('quarto', [
             'STATUS' => 'DISPONIVEL'
-        ], ['numero' => $reserva->idQuarto], 'numero');
+        ], 'numero', $reserva->idQuarto);
 
-        return redirect('/admin/reservas');
+        // Redirecionar usando host completo dinamicamente
+        $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
+                    . "://{$_SERVER['HTTP_HOST']}";
+        header("Location: {$baseUrl}/admin/reservas");
+        exit;
     }
 
     // Adicionar item de consumo
@@ -85,7 +107,7 @@ class CheckoutController
 
         $db = App::get('database');
 
-        // Inserir no banco
+        // Inserir item no banco
         $db->insert('itemconsumo', [
             'descricao' => $descricao,
             'quantidade' => $quantidade,
@@ -93,7 +115,7 @@ class CheckoutController
             'idConta' => $idConta
         ]);
 
-        // Atualizar total da conta
+        // Buscar todos os consumos atualizados
         $itens = $db->selectWhere('itemconsumo', 'idConta', $idConta);
 
         $totalConsumos = 0;
@@ -101,9 +123,8 @@ class CheckoutController
             $totalConsumos += $item->quantidade * $item->valorUnitario;
         }
 
-        $db->update('conta', [
-            'valorTotal' => $totalConsumos
-        ], ['id' => $idConta], 'id');
+        // Atualizar valor total da conta
+        $db->update('conta', ['valorTotal' => $totalConsumos], 'id', $idConta);
 
         return json_encode([
             'status' => 'success',
