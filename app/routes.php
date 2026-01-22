@@ -7,7 +7,11 @@ $router->get('logout', 'LoginController@logout');
 
 $router->get('admin/index', 'IndexController@index');
 $router->get('admin/reservas', 'ReservasController@index');
+
 $router->get('admin/financeiro', 'FinanceiroController@index');
+$router->post('financeiro/abrir-caixa', 'FinanceiroController@abrirCaixa');
+
+
 $router->get('admin/quartos', 'QuartosController@index');
 
 $router->get('admin/hospedes', 'HospedesController@index');
