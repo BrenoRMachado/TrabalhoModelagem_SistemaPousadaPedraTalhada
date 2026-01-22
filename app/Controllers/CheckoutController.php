@@ -36,8 +36,8 @@ class CheckoutController
         if (!$conta) {
             $db->insert('conta', [
                 'valorTotal' => 0,
-                'STATUS' => 'ABERTA',
-                'idReserva' => $reserva->id
+                'STATUS'     => 'ABERTA',
+                'idReserva'  => $reserva->id
             ]);
             $conta = $db->selectWhere('conta', 'idReserva', $reserva->id)[0];
         }
@@ -87,9 +87,10 @@ class CheckoutController
             'dataCheckout' => date('Y-m-d H:i:s')
         ], 'id', $idReserva);
 
-        // Atualizar conta como paga
+        // Atualizar conta como paga E registrar data do pagamento
         $db->update('conta', [
-            'STATUS' => 'PAGA'
+            'STATUS'       => 'PAGA',
+            'dataPagamento'=> date('Y-m-d H:i:s')
         ], 'idReserva', $idReserva);
 
         // Liberar quarto
@@ -97,7 +98,7 @@ class CheckoutController
             'STATUS' => 'DISPONIVEL'
         ], 'numero', $reserva->idQuarto);
 
-        // Redirecionar
+        // Redirecionar para lista de reservas
         $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
                     . "://{$_SERVER['HTTP_HOST']}";
         header("Location: {$baseUrl}/admin/reservas");
@@ -107,13 +108,12 @@ class CheckoutController
     // Adicionar item de consumo
     public function adicionarConsumo()
     {
-        // Ler JSON enviado pelo JS
         $data = json_decode(file_get_contents('php://input'), true);
 
-        $descricao = $data['descricao'] ?? null;
-        $quantidade = isset($data['quantidade']) ? (int)$data['quantidade'] : 0;
+        $descricao     = $data['descricao'] ?? null;
+        $quantidade    = isset($data['quantidade']) ? (int)$data['quantidade'] : 0;
         $valorUnitario = isset($data['valorUnitario']) ? (float) str_replace(',', '.', $data['valorUnitario']) : 0;
-        $idConta = isset($data['idConta']) ? (int)$data['idConta'] : 0;
+        $idConta       = isset($data['idConta']) ? (int)$data['idConta'] : 0;
 
         if (!$descricao || $quantidade <= 0 || $valorUnitario <= 0 || !$idConta) {
             return json_encode(['status' => 'error', 'msg' => 'Dados incompletos ou inválidos']);
@@ -140,10 +140,8 @@ class CheckoutController
             $totalConsumos += $item->quantidade * $item->valorUnitario;
         }
 
-$db->update('conta', [
-    'STATUS' => 'PAGA',
-    'dataPagamento' => date('Y-m-d H:i:s')
-], 'idReserva', $idReserva);
+        // Atualizar valor total da conta
+        $db->update('conta', ['valorTotal' => $totalConsumos], 'id', $idConta);
 
         return json_encode([
             'status'   => 'success',
