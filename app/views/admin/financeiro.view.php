@@ -1,4 +1,5 @@
 <?php
+// Calcula entradas, saídas e saldo atual
 $entradasDia = 0;
 $saidasDia = 0;
 

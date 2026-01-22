@@ -7,47 +7,45 @@ use Exception;
 
 class ReservasController
 {
-public function index()
-{
-    $db = App::get('database');
+    public function index()
+    {
+        $db = App::get('database');
 
-    $porPagina = 5;
-    $paginaAtual = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-    $offset = ($paginaAtual - 1) * $porPagina;
+        $porPagina = 5;
+        $paginaAtual = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+        $offset = ($paginaAtual - 1) * $porPagina;
 
-    $totalReservas = $db->count('reserva');
-    $totalPaginas = ceil($totalReservas / $porPagina);
+        $totalReservas = $db->countReservasAtivas();
+        $totalPaginas = ceil($totalReservas / $porPagina);
 
-    $reservas = $db->selectPaginated('reserva', $porPagina, $offset);
-    $quartos  = $db->selectAll('quarto');
+        $reservas = $db->selectReservasAtivasPaginated($porPagina, $offset);
+        $quartos  = $db->selectAll('quarto');
 
-    $reservasAtivas = [];
+        $reservasAtivas = [];
 
-    foreach ($reservas as $reserva) {
-    $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede);
+        foreach ($reservas as $reserva) {
+            $hospede = $db->selectWhere('hospede', 'id', $reserva->idHospede);
 
-    if (!empty($hospede)) {
-        $reserva->nome        = $hospede[0]->nome;
-        $reserva->cpf         = $hospede[0]->cpf;
-        $reserva->observacoes = $hospede[0]->observacoes ?? '';
-    } else {
-        $reserva->nome        = 'Não encontrado';
-        $reserva->cpf         = '';
-        $reserva->observacoes = '';
+            if (!empty($hospede)) {
+                $reserva->nome        = $hospede[0]->nome;
+                $reserva->cpf         = $hospede[0]->cpf;
+                $reserva->observacoes = $hospede[0]->observacoes ?? '';
+            } else {
+                $reserva->nome        = 'Não encontrado';
+                $reserva->cpf         = '';
+                $reserva->observacoes = '';
+            }
+
+            $reservasAtivas[] = $reserva;
+        }
+
+        return view('admin/reservas', [
+            'reservas'     => $reservasAtivas,
+            'quartos'      => $quartos,
+            'paginaAtual'  => $paginaAtual,
+            'totalPaginas' => $totalPaginas
+        ]);
     }
-
-    $reservasAtivas[] = $reserva;
-    }
-
-
-    return view('admin/reservas', [
-        'reservas'     => $reservasAtivas,
-        'quartos'      => $quartos,
-        'paginaAtual'  => $paginaAtual,
-        'totalPaginas' => $totalPaginas
-    ]);
-}
-
 
     public function criar()
     {
@@ -97,31 +95,28 @@ public function index()
     }
 
     public function checkin()
-{
-    $db = App::get('database');
+    {
+        $db = App::get('database');
+        $idReserva = $_POST['id'];
+        $reserva = $db->selectWhere('reserva', 'id', $idReserva);
 
-    $idReserva = $_POST['id'];
+        if (empty($reserva)) {
+            throw new Exception('Reserva não encontrada.');
+        }
 
-    $reserva = $db->selectWhere('reserva', 'id', $idReserva);
+        $idQuarto = $reserva[0]->idQuarto;
 
-    if (empty($reserva)) {
-        throw new Exception('Reserva não encontrada.');
+        $db->update('reserva', [
+            'STATUS'      => 'HOSPEDADA',
+            'dataCheckin' => date('Y-m-d H:i:s')
+        ], 'id', $idReserva);
+
+        $db->update('quarto', [
+            'STATUS' => 'OCUPADO'
+        ], 'numero', $idQuarto);
+
+        return redirect('admin/reservas');
     }
-
-    $idQuarto = $reserva[0]->idQuarto;
-
-    $db->update('reserva', [
-        'STATUS'      => 'HOSPEDADA',
-        'dataCheckin' => date('Y-m-d H:i:s')
-    ], 'id', $idReserva);
-
-    $db->update('quarto', [
-        'STATUS' => 'OCUPADO'
-    ], 'numero', $idQuarto);
-
-    return redirect('admin/reservas');
-}
-
 
     public function deletar()
     {
@@ -134,55 +129,51 @@ public function index()
         return redirect('admin/reservas');
     }
 
-public function atualizar()
-{
-    try {
+    public function atualizar()
+    {
+        try {
+            $db = App::get('database');
+
+            $id          = $_POST['id'] ?? null;
+            $dataEntrada = $_POST['dataEntradaPrevista'] ?? null;
+            $dataSaida   = $_POST['dataSaidaPrevista'] ?? null;
+            $idQuarto    = $_POST['idQuarto'] ?? null;
+            $nome        = $_POST['nome'] ?? null;
+            $cpf         = $_POST['cpf'] ?? null;
+            $observacoes = $_POST['observacoes'] ?? null;
+
+            if (!$id || !$idQuarto || !$cpf) {
+                throw new Exception('Dados obrigatórios não informados.');
+            }
+
+            $db->update('reserva', [
+                'dataEntradaPrevista' => $dataEntrada,
+                'dataSaidaPrevista'   => $dataSaida,
+                'idQuarto'            => $idQuarto
+            ], 'id', $id);
+
+            $db->update('hospede', [
+                'nome'        => $nome,
+                'observacoes' => $observacoes
+            ], 'cpf', $cpf);
+
+            return redirect('admin/reservas');
+
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function checkout()
+    {
+        $id = $_POST['id'];
         $db = App::get('database');
 
-        $id          = $_POST['id'] ?? null;
-        $dataEntrada = $_POST['dataEntradaPrevista'] ?? null;
-        $dataSaida   = $_POST['dataSaidaPrevista'] ?? null;
-        $idQuarto    = $_POST['idQuarto'] ?? null;
-        $nome        = $_POST['nome'] ?? null;
-        $cpf         = $_POST['cpf'] ?? null;
-        $observacoes = $_POST['observacoes'] ?? null;
-
-        if (!$id || !$idQuarto || !$cpf) {
-            throw new Exception('Dados obrigatórios não informados.');
-        }
-
         $db->update('reserva', [
-            'dataEntradaPrevista' => $dataEntrada,
-            'dataSaidaPrevista'   => $dataSaida,
-            'idQuarto'            => $idQuarto
+            'STATUS' => 'FINALIZADA'
         ], 'id', $id);
 
-        $db->update('hospede', [
-            'nome'        => $nome,
-            'observacoes' => $observacoes
-        ], 'cpf', $cpf);
-
-        return redirect('admin/reservas');
-
-    } catch (Exception $e) {
-        dd($e->getMessage());
+        header('Location: /admin/checkout');
+        exit;
     }
-}
-
-public function checkout()
-{
-    $id = $_POST['id'];
-
-    App::get('database')->update(
-        'reserva',
-        ['STATUS' => 'FINALIZADA'],
-        ['id' => $id],
-        'id'
-    );
-
-    header('Location: /admin/checkout');
-    exit;
-}
-
-
 }
