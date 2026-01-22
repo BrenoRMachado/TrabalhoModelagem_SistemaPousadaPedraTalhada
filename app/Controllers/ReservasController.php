@@ -49,6 +49,13 @@ class ReservasController
 
     public function criar()
     {
+
+
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    try {
         $db = App::get('database');
 
         $dataEntrada = $_POST['dataEntradaPrevista'] . ' 14:00:00';
@@ -91,8 +98,24 @@ class ReservasController
             'STATUS'     => 'ABERTA'
         ]);
 
-        return redirect('admin/reservas');
+     
+        $_SESSION['mensagem-sucesso'] = "Reserva realizada com sucesso!";
+        header('Location: /admin/reservas');
+        exit;
+
+    } catch (Exception $e) {
+       
+        $_SESSION['mensagem-erro'] = $e->getMessage();
+        
+        header('Location: /admin/reservas');
+        exit;
     }
+
+    }
+
+
+
+
 
     public function checkin()
     {
