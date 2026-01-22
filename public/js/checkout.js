@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const valorHospedagem = parseFloat(resumo.dataset.valorHospedagem);
     let totalConsumos = parseFloat(resumo.dataset.totalConsumos);
 
+    // Função para atualizar o resumo de pagamento
     function atualizarResumo() {
         const taxaServico = valorHospedagem * diarias * 0.1;
         const total = valorHospedagem * diarias + taxaServico + totalConsumos;
@@ -38,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Inicializa resumo
+    // Inicializa o resumo
     atualizarResumo();
 
-    // Adicionar consumo
+    // Evento para adicionar consumo
     addItemBtn.addEventListener('click', () => {
         const descricao = descricaoInput.value.trim();
         const quantidade = parseInt(quantidadeInput.value) || 0;
@@ -52,43 +53,48 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Envia para o back-end via fetch JSON
         fetch('/admin/checkout/adicionarConsumo', {
             method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: `descricao=${encodeURIComponent(descricao)}&quantidade=${quantidade}&valorUnitario=${valorUnitario}&idConta=${idConta}`
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ descricao, quantidade, valorUnitario, idConta })
         })
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
+                // Limpa tabela antes de atualizar
                 tbody.innerHTML = '';
                 totalConsumos = 0;
 
+                // Adiciona cada item novo à tabela
                 data.consumos.forEach(item => {
                     const totalItem = item.quantidade * item.valorUnitario;
                     totalConsumos += totalItem;
 
-                    tbody.innerHTML += `
-                        <tr>
-                            <td>${item.descricao}</td>
-                            <td>${item.quantidade}</td>
-                            <td>R$ ${item.valorUnitario.toFixed(2).replace('.',',')}</td>
-                            <td><strong>R$ ${totalItem.toFixed(2).replace('.',',')}</strong></td>
-                        </tr>
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${item.descricao}</td>
+                        <td>${item.quantidade}</td>
+                        <td>R$ ${item.valorUnitario.toFixed(2).replace('.',',')}</td>
+                        <td><strong>R$ ${totalItem.toFixed(2).replace('.',',')}</strong></td>
                     `;
+                    tbody.appendChild(tr);
                 });
 
+                // Atualiza o resumo de pagamento
                 atualizarResumo();
 
+                // Limpa inputs
                 descricaoInput.value = '';
                 quantidadeInput.value = '';
                 valorUnitarioInput.value = '';
             } else {
-                alert('Erro ao adicionar consumo');
+                alert(data.msg || 'Erro ao adicionar consumo');
             }
         })
         .catch(err => {
             console.error(err);
-            alert('Erro na requisição');
+            //alert('Erro na requisição');
         });
     });
 

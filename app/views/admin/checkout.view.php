@@ -98,6 +98,7 @@
                 </div>
             </div>
 
+            <!-- Observações -->
             <div class="checkout-group-container">
                 <h2 class="checkout-section-title">Observações e Avisos</h2>
                 <textarea class="checkout-textarea" readonly><?= $hospede->observacoes ?></textarea>
@@ -112,7 +113,6 @@
                      data-diarias="<?= $diarias ?>"
                      data-valor-hospedagem="<?= $valorHospedagem ?>"
                      data-total-consumos="<?= $totalConsumos ?>">
-                    <!-- Conteúdo inicial preenchido pelo JS -->
                 </div>
             </div>
             <div class="checkout-actions">
@@ -128,6 +128,6 @@
     </main>
 </div>
 
-    <script src="../../../public/js/checkout.js"></script>
+<script src="../../../public/js/checkout.js"></script>
 </body>
 </html>

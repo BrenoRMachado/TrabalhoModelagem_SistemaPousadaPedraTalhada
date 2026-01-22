@@ -32,6 +32,16 @@ class CheckoutController
         // Buscar conta
         $conta = $db->selectWhere('conta', 'idReserva', $reserva->id)[0] ?? null;
 
+        // Se não existir conta, criar uma
+        if (!$conta) {
+            $db->insert('conta', [
+                'valorTotal' => 0,
+                'STATUS' => 'ABERTA',
+                'idReserva' => $reserva->id
+            ]);
+            $conta = $db->selectWhere('conta', 'idReserva', $reserva->id)[0];
+        }
+
         // Buscar consumos da conta
         $consumos = $conta ? $db->selectWhere('itemconsumo', 'idConta', $conta->id) : [];
 
@@ -48,14 +58,14 @@ class CheckoutController
         }
 
         return view('admin/checkout', [
-            'reserva'        => $reserva,
-            'hospede'        => $hospede,
-            'quarto'         => $quarto,
-            'conta'          => $conta,
-            'consumos'       => $consumos,
-            'diarias'        => $diarias,
-            'valorHospedagem'=> $valorHospedagem,
-            'totalConsumos'  => $totalConsumos
+            'reserva'         => $reserva,
+            'hospede'         => $hospede,
+            'quarto'          => $quarto,
+            'conta'           => $conta,
+            'consumos'        => $consumos,
+            'diarias'         => $diarias,
+            'valorHospedagem' => $valorHospedagem,
+            'totalConsumos'   => $totalConsumos
         ]);
     }
 
@@ -69,8 +79,9 @@ class CheckoutController
 
         $db = App::get('database');
 
-        // Atualizar reserva como finalizada
         $reserva = $db->selectWhere('reserva', 'id', $idReserva)[0];
+
+        // Atualizar reserva como finalizada
         $db->update('reserva', [
             'STATUS'       => 'FINALIZADA',
             'dataCheckout' => date('Y-m-d H:i:s')
@@ -86,7 +97,7 @@ class CheckoutController
             'STATUS' => 'DISPONIVEL'
         ], 'numero', $reserva->idQuarto);
 
-        // Redirecionar usando host completo dinamicamente
+        // Redirecionar
         $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")
                     . "://{$_SERVER['HTTP_HOST']}";
         header("Location: {$baseUrl}/admin/reservas");
@@ -96,26 +107,32 @@ class CheckoutController
     // Adicionar item de consumo
     public function adicionarConsumo()
     {
-        $descricao = $_POST['descricao'] ?? null;
-        $quantidade = $_POST['quantidade'] ?? null;
-        $valorUnitario = $_POST['valorUnitario'] ?? null;
-        $idConta = $_POST['idConta'] ?? null;
+        // Ler JSON enviado pelo JS
+        $data = json_decode(file_get_contents('php://input'), true);
 
-        if (!$descricao || !$quantidade || !$valorUnitario || !$idConta) {
-            return json_encode(['status' => 'error', 'msg' => 'Dados incompletos']);
+        $descricao = $data['descricao'] ?? null;
+        $quantidade = isset($data['quantidade']) ? (int)$data['quantidade'] : 0;
+        $valorUnitario = isset($data['valorUnitario']) ? (float) str_replace(',', '.', $data['valorUnitario']) : 0;
+        $idConta = isset($data['idConta']) ? (int)$data['idConta'] : 0;
+
+        if (!$descricao || $quantidade <= 0 || $valorUnitario <= 0 || !$idConta) {
+            return json_encode(['status' => 'error', 'msg' => 'Dados incompletos ou inválidos']);
         }
 
         $db = App::get('database');
 
-        // Inserir item no banco
-        $db->insert('itemconsumo', [
-            'descricao' => $descricao,
-            'quantidade' => $quantidade,
-            'valorUnitario' => $valorUnitario,
-            'idConta' => $idConta
-        ]);
+        try {
+            $db->insert('itemconsumo', [
+                'descricao'    => $descricao,
+                'quantidade'   => $quantidade,
+                'valorUnitario'=> $valorUnitario,
+                'idConta'      => $idConta
+            ]);
+        } catch (\Exception $e) {
+            return json_encode(['status' => 'error', 'msg' => $e->getMessage()]);
+        }
 
-        // Buscar todos os consumos atualizados
+        // Buscar consumos atualizados
         $itens = $db->selectWhere('itemconsumo', 'idConta', $idConta);
 
         $totalConsumos = 0;
@@ -127,9 +144,9 @@ class CheckoutController
         $db->update('conta', ['valorTotal' => $totalConsumos], 'id', $idConta);
 
         return json_encode([
-            'status' => 'success',
+            'status'   => 'success',
             'consumos' => $itens,
-            'total' => $totalConsumos
+            'total'    => $totalConsumos
         ]);
     }
 }
