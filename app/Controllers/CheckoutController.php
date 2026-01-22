@@ -140,8 +140,10 @@ class CheckoutController
             $totalConsumos += $item->quantidade * $item->valorUnitario;
         }
 
-        // Atualizar valor total da conta
-        $db->update('conta', ['valorTotal' => $totalConsumos], 'id', $idConta);
+$db->update('conta', [
+    'STATUS' => 'PAGA',
+    'dataPagamento' => date('Y-m-d H:i:s')
+], 'idReserva', $idReserva);
 
         return json_encode([
             'status'   => 'success',

@@ -9,7 +9,10 @@ $router->get('admin/index', 'IndexController@index');
 $router->get('admin/reservas', 'ReservasController@index');
 
 $router->get('admin/financeiro', 'FinanceiroController@index');
-$router->post('financeiro/abrir-caixa', 'FinanceiroController@abrirCaixa');
+$router->post('admin/financeiro/abrir-caixa', 'FinanceiroController@abrirCaixa'); 
+$router->post('admin/financeiro/sangria', 'FinanceiroController@sangria');
+$router->post('admin/financeiro/fechar-caixa', 'FinanceiroController@fecharCaixa');
+
 
 
 $router->get('admin/quartos', 'QuartosController@index');
