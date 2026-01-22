@@ -7,7 +7,14 @@ $router->get('logout', 'LoginController@logout');
 
 $router->get('admin/index', 'IndexController@index');
 $router->get('admin/reservas', 'ReservasController@index');
+
 $router->get('admin/financeiro', 'FinanceiroController@index');
+$router->post('admin/financeiro/abrir-caixa', 'FinanceiroController@abrirCaixa'); 
+$router->post('admin/financeiro/sangria', 'FinanceiroController@sangria');
+$router->post('admin/financeiro/fechar-caixa', 'FinanceiroController@fecharCaixa');
+
+
+
 $router->get('admin/quartos', 'QuartosController@index');
 
 $router->get('admin/hospedes', 'HospedesController@index');
@@ -40,4 +47,7 @@ $router->post('admin/reservas/deletar', 'ReservasController@deletar');
 
 $router->get('admin/checkout', 'CheckoutController@index');
 $router->post('admin/checkout/confirmar', 'CheckoutController@confirmar');
-$router->post('admin/checkout/adicionar-consumo', 'CheckoutController@adicionarConsumo');
+$router->post('admin/checkout/adicionarConsumo', 'CheckoutController@adicionarConsumo');
+$router->post('checkout/confirmar-json', 'CheckoutController@confirmarJson');
+
+

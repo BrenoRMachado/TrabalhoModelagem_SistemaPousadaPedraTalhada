@@ -1,3 +1,10 @@
+<?php
+// ADICIONE ISTO NA PRIMEIRA LINHA DO ARQUIVO
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -28,6 +35,23 @@
                 </button>
             </div>
         </div>
+
+
+        <?php if (isset($_SESSION['mensagem-erro'])): ?>
+            <div class="alert alert-danger">
+                <span class="material-icons-round" style="margin-right: 8px;">error</span>
+                <?= $_SESSION['mensagem-erro']; ?>
+            </div>
+            <?php unset($_SESSION['mensagem-erro']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['mensagem-sucesso'])): ?>
+            <div class="alert alert-success">
+                <span class="material-icons-round" style="margin-right: 8px;">check_circle</span>
+                <?= $_SESSION['mensagem-sucesso']; ?>
+            </div>
+            <?php unset($_SESSION['mensagem-sucesso']); ?>
+        <?php endif; ?>
 
         <div class="table-container">
             <table id="reservasTable">
